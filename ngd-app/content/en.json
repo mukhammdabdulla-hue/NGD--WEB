@@ -1,0 +1,918 @@
+{
+  "ui": {
+    "nav": {
+      "home": "Home",
+      "services": "Services",
+      "process": "Process",
+      "training": "Training",
+      "portfolio": "Portfolio",
+      "news": "News",
+      "about": "About us",
+      "contact": "Contact"
+    },
+    "cta": "Get a consultation",
+    "ourServices": "Our services",
+    "more": "Learn more",
+    "view": "View",
+    "apply": "Submit a request",
+    "back": "Back",
+    "allProjects": "All projects",
+    "allServices": "All services",
+    "telegram": "Our Telegram channel",
+    "toTop": "Back to top ↑",
+    "rights": "All rights reserved.",
+    "menuOpen": "Open menu",
+    "footerTag": "Company development · Process optimization · Loss reduction",
+    "footerServices": "Services",
+    "footerCompany": "Company",
+    "footerContact": "Contact",
+    "consulting": "Consulting",
+    "digital": "Digitalization",
+    "ctaBand": {
+      "title": "Ready to put your processes in order?",
+      "text": "In a free consultation, we will identify the main losses in your business together."
+    },
+    "hero": {
+      "badge": "In Uzbekistan since 2020",
+      "title1": "From chaos",
+      "accent1": "to system",
+      "title2": "From waste",
+      "accent2": "to profit",
+      "lead": "We help reduce losses, increase profit, optimize business processes, and build quality control and structured systems.",
+      "tags": [
+        "Company development",
+        "Process optimization",
+        "Loss reduction"
+      ],
+      "flow": [
+        "Chaos",
+        "Analysis",
+        "Optimization",
+        "Result"
+      ],
+      "waste": "Waste",
+      "wasteDown": "↓ decreases",
+      "efficiency": "Efficiency",
+      "efficiencyUp": "↑ increases"
+    },
+    "stats": [
+      {
+        "value": 2020,
+        "suffix": "",
+        "label": "Year founded"
+      },
+      {
+        "value": 8,
+        "suffix": "+",
+        "label": "Consulting areas"
+      },
+      {
+        "value": 5,
+        "suffix": "",
+        "label": "ISO standards"
+      },
+      {
+        "value": 20,
+        "suffix": "+",
+        "label": "Partners"
+      }
+    ],
+    "order": {
+      "eyebrow": "Lean: 7 wastes",
+      "chaos": "Today: chaos.",
+      "system": "Tomorrow: a system.",
+      "text": "Every company has invisible waste. We find it, name it, and put it in its place. Scroll down and see how a process falls into order.",
+      "legendChaos": "Chaos",
+      "legendSystem": "System",
+      "tiles": [
+        [
+          "Waiting",
+          "Idle time"
+        ],
+        [
+          "Transport",
+          "Excess hauling"
+        ],
+        [
+          "Excess inventory",
+          "Frozen cash"
+        ],
+        [
+          "Excess motion",
+          "Unnecessary steps"
+        ],
+        [
+          "Defects",
+          "Rework"
+        ],
+        [
+          "Over-processing",
+          "Work the customer won't pay for"
+        ],
+        [
+          "Overproduction",
+          "Ahead of demand"
+        ]
+      ],
+      "result": [
+        "System",
+        "Steady flow"
+      ]
+    },
+    "hub": {
+      "eyebrow": "With NGD",
+      "title": "Where do we start?",
+      "text": "Detailed information on each area is on its own page.",
+      "items": {
+        "services": "8 consulting areas and ISO standards",
+        "process": "5 stages, from diagnostics to Kaizen",
+        "training": "Training in Lean, Six Sigma and green finance",
+        "portfolio": "UNIDO, FMO, Uzbekiston Pochtasi and more",
+        "about": "The company, the green economy and the team",
+        "contact": "Submit a request for a free consultation"
+      }
+    },
+    "pages": {
+      "services": {
+        "eyebrow": "Services",
+        "title": "Consulting services",
+        "lead": "Business processes, energy, strategy, green finance and ISO: 8 areas that take your company from chaos to a system."
+      },
+      "process": {
+        "eyebrow": "How we work",
+        "title": "Our process",
+        "lead": "From diagnostics to Kaizen: every project is a single continuous flow that ends in a measurable result."
+      },
+      "training": {
+        "eyebrow": "Training",
+        "title": "Training and digitalization",
+        "lead": "We train your team and move your processes onto a digital system."
+      },
+      "portfolio": {
+        "eyebrow": "Portfolio",
+        "title": "Completed projects",
+        "lead": "Work delivered for state-owned enterprises, manufacturers, banks and international organizations."
+      },
+      "news": {
+        "eyebrow": "News",
+        "title": "News",
+        "lead": "The latest updates on events, partnerships and our team."
+      },
+      "about": {
+        "eyebrow": "Company",
+        "title": "About us",
+        "lead": "Since 2020, we have been bringing order, efficiency and sustainable growth to businesses in Uzbekistan."
+      },
+      "contact": {
+        "eyebrow": "Contact",
+        "title": "Get in touch",
+        "lead": "Submit a request or visit our office: our specialist will propose the right solution for your business."
+      }
+    },
+    "methods": {
+      "eyebrow": "Methodology",
+      "title": "Operational excellence is our core focus",
+      "text": "Combining multi-industry experience with deep expertise, we develop and implement innovative solutions that meet high quality standards. We take a comprehensive approach to projects, delivering them on schedule and with maximum efficiency.",
+      "chips": [
+        "Kaizen",
+        "Lean Manufacturing",
+        "Six Sigma",
+        "Theory of Constraints"
+      ]
+    },
+    "process": {
+      "eyebrow": "Our process",
+      "title": "Every project is a single continuous flow",
+      "text": "We don't hand over advice and walk away: we study the process on site, find the bottlenecks, implement changes together with your team, and measure the result.",
+      "loop": "↺ back to 01"
+    },
+    "service": {
+      "what": "What we do",
+      "deliverables": "What you get",
+      "methods": "Methods we use",
+      "related": "Other services"
+    },
+    "portfolio": {
+      "all": "All",
+      "search": "Search by project or client",
+      "empty": "Nothing found. Try a different search term.",
+      "client": "Client",
+      "industry": "Industry",
+      "date": "Date",
+      "direction": "Area",
+      "cats": {
+        "opt": "Optimization",
+        "strat": "Strategy",
+        "green": "Green economy"
+      }
+    },
+    "about": {
+      "greenTitle": "In the green economy",
+      "teamTitle": "Our team",
+      "valuesTitle": "Our values"
+    },
+    "contact": {
+      "title": "Get a free consultation",
+      "text": "Submit a request and our specialist will contact you and propose the right solution for your business.",
+      "address": "100084, Tashkent, 32 Injobod Street",
+      "mapTitle": "NGD office on the map"
+    },
+    "form": {
+      "title": "Submit a request",
+      "name": "Your name",
+      "namePh": "First and last name",
+      "phone": "Phone number",
+      "company": "Company",
+      "companyPh": "Company name",
+      "service": "Service of interest",
+      "other": "Other",
+      "message": "Message",
+      "messagePh": "Briefly describe your task",
+      "submit": "Send",
+      "sending": "Sending...",
+      "ok": "Thank you! Your request has been received and we will contact you shortly.",
+      "errRequired": "Please enter your name and phone number.",
+      "errPhone": "Please enter the full phone number.",
+      "errServer": "Something went wrong. Please try again or give us a call."
+    },
+    "home": {
+      "kicker": "Business consulting · Tashkent · since 2020",
+      "title": [
+        "From chaos",
+        "to system."
+      ],
+      "lead": "We find the hidden waste in your processes, build it into a system and turn it into measurable growth.",
+      "scroll": "Scroll down",
+      "phases": [
+        [
+          "01",
+          "Chaos",
+          "Scattered processes, hidden waste"
+        ],
+        [
+          "02",
+          "Analysis",
+          "Every waste is found and named"
+        ],
+        [
+          "03",
+          "System",
+          "Waste disappears, the flow falls into place"
+        ],
+        [
+          "04",
+          "Growth",
+          "Sustainable, measurable results"
+        ]
+      ],
+      "partners": "Trusted by",
+      "impact": {
+        "eyebrow": "Results",
+        "title": "When Lean and Kaizen are done right",
+        "note": "based on ngd.uz data",
+        "items": [
+          {
+            "value": 2,
+            "prefix": "",
+            "label": "Processes",
+            "text": "can run up to 2 times faster",
+            "suffix": "×"
+          },
+          {
+            "value": 50,
+            "prefix": "−",
+            "label": "Defects",
+            "text": "can be cut by half or more",
+            "suffix": "%"
+          },
+          {
+            "value": 30,
+            "prefix": "+",
+            "suffix": "%",
+            "label": "Output",
+            "text": "can grow by 30% and more"
+          },
+          {
+            "value": 50,
+            "prefix": "−",
+            "label": "Work in progress",
+            "text": "can be cut by up to half",
+            "suffix": "%"
+          }
+        ]
+      },
+      "services": {
+        "eyebrow": "Services",
+        "title": "Eight practices. One goal: a system.",
+        "all": "All services"
+      },
+      "approach": {
+        "eyebrow": "Approach",
+        "title": "We work where the process happens, not in an office",
+        "text": "The gemba principle: every conclusion is drawn on the shop floor from real data. Then we implement the solution together with your team.",
+        "tags": [
+          "Gemba",
+          "VSM",
+          "KPI",
+          "PDCA"
+        ],
+        "link": "See how we work"
+      },
+      "cases": {
+        "eyebrow": "Cases",
+        "title": "Selected projects",
+        "all": "All projects"
+      },
+      "news": {
+        "eyebrow": "News",
+        "title": "Press and events"
+      },
+      "final": {
+        "title": [
+          "Let's build",
+          "a system."
+        ],
+        "text": "In a free consultation we'll pinpoint the main sources of waste in your business together."
+      },
+      "manifesto": {
+        "kicker": "Our approach",
+        "text": "Every company has hidden waste: waiting, unnecessary motion, defects, frozen inventory. We make it visible, measure it and turn it into a system. The result shows up on the shop floor, not in a report."
+      },
+      "finder": {
+        "eyebrow": "Navigator",
+        "title": "Two questions. One clear direction.",
+        "q1": "Your sector?",
+        "q2": "Main challenge?",
+        "result": "Recommended practice",
+        "caseLabel": "Similar project",
+        "go": "More about the service",
+        "sectors": [
+          [
+            "mfg",
+            "Manufacturing"
+          ],
+          [
+            "fin",
+            "Banking & finance"
+          ],
+          [
+            "ind",
+            "Industry & energy"
+          ],
+          [
+            "svc",
+            "Services & logistics"
+          ],
+          [
+            "it",
+            "IT & data"
+          ]
+        ],
+        "challenges": [
+          [
+            "waste",
+            "High costs and waste"
+          ],
+          [
+            "quality",
+            "Quality and standards"
+          ],
+          [
+            "energy",
+            "Energy costs"
+          ],
+          [
+            "growth",
+            "Unclear growth path"
+          ],
+          [
+            "green",
+            "Green finance & ESG"
+          ],
+          [
+            "data",
+            "Scattered data"
+          ]
+        ]
+      },
+      "hero": {
+        "kicker": "Operations consulting · Tashkent · since 2020",
+        "lead": "We find the hidden waste in your operations, build your processes into a system with Lean, Kaizen and ISO, and measure the result in numbers.",
+        "cta": "Free diagnostic",
+        "secondary": "See case studies",
+        "clients": "Clients and partners"
+      },
+      "sim": {
+        "title": "Production line",
+        "live": "live model",
+        "before": "Before",
+        "after": "With NGD",
+        "stations": [
+          "Intake",
+          "Cutting",
+          "Assembly",
+          "Inspection",
+          "Shipping"
+        ],
+        "wip": "Work in progress",
+        "defect": "Defects",
+        "out": "Output, pcs/min",
+        "cycle": "Average cycle",
+        "stop": "Stoppage",
+        "rework": "Scrap",
+        "methods": [
+          "5S",
+          "SMED",
+          "Kanban",
+          "Poka-Yoke",
+          "Kaizen"
+        ],
+        "note": "Illustrative model: metrics are computed live from the simulation."
+      },
+      "how": {
+        "eyebrow": "How we work",
+        "title": "Five stages, from diagnostic to continuous improvement",
+        "link": "Details"
+      },
+      "contactBand": {
+        "title": "Let's find the waste in your business together",
+        "text": "Free diagnostic call: 30 minutes, no commitment.",
+        "phone": "Phone",
+        "email": "E-mail",
+        "address": "Address"
+      }
+    },
+    "menuServices": "All services",
+    "menuCta": "Free consultation",
+    "scenes": {
+      "orbitKicker": "Service network",
+      "orbitTitle": "Eight practices, one system",
+      "sphereKicker": "Methods",
+      "sphereTitle": "Methods we teach and apply",
+      "sphereText": "From Kaizen and Lean to ISO standards: every training is hands-on and built around your own operations.",
+      "sphereCore": "NGD",
+      "mapKicker": "Geography",
+      "mapTitle": "Our projects on the map",
+      "mapNote": "From our Tashkent office we work across Uzbekistan. Hover over a city.",
+      "officeKicker": "Office",
+      "officeTitle": "Tashkent, 32 Injobod street",
+      "tlKicker": "History",
+      "tlTitle": "From 2020 to today",
+      "founded": "Next Generation Development founded",
+      "foundedTag": "Company",
+      "cities": {
+        "tas": "Tashkent",
+        "sam": "Samarkand",
+        "fer": "Fergana",
+        "chi": "Chirchiq"
+      },
+      "drag": "Drag to rotate"
+    },
+    "skip": "Skip to content"
+  },
+  "services": [
+    {
+      "slug": "biznes-jarayonlari",
+      "icon": "flow",
+      "title": "Business process optimization",
+      "short": "Increase efficiency and cut costs with Kaizen, Lean manufacturing, Six Sigma and the Theory of Constraints.",
+      "body": "We study your processes on site, map the value stream and identify waste. Then, together with your team, we implement an improvement plan and measure the result through KPIs.",
+      "deliverables": [
+        "Value stream map (VSM)",
+        "List of wastes and bottlenecks",
+        "Improvement plan with KPIs",
+        "Support during implementation"
+      ],
+      "methods": [
+        "Kaizen",
+        "Lean",
+        "Six Sigma",
+        "TOC"
+      ],
+      "problem": "Do you know where time and money leak from your processes?"
+    },
+    {
+      "slug": "energoaudit",
+      "icon": "bolt",
+      "title": "Energy audit and energy efficiency",
+      "short": "Analyze energy consumption and identify losses: systems audit, process optimization and lower energy costs.",
+      "body": "We measure and analyze the energy flows at your facility, pinpoint where losses occur, and provide an economic justification for savings measures.",
+      "deliverables": [
+        "Energy balance",
+        "Loss map",
+        "Savings measures and their payback period",
+        "ISO 50001 readiness"
+      ],
+      "methods": [
+        "ISO 50001",
+        "Energy balance",
+        "Benchmarking"
+      ],
+      "problem": "Paying more for energy than you should?"
+    },
+    {
+      "slug": "strategiya",
+      "icon": "compass",
+      "title": "Strategy development",
+      "short": "Strategy, business planning and product development management to achieve business goals, competitiveness and sustainable growth.",
+      "body": "We analyze the market and competitors, identify the company's strengths, and build a development strategy and business plan with measurable goals.",
+      "deliverables": [
+        "Market and competitor analysis",
+        "Development strategy",
+        "Business plan and financial model",
+        "Roadmap and KPIs"
+      ],
+      "methods": [
+        "SWOT",
+        "PESTEL",
+        "Balanced Scorecard"
+      ],
+      "problem": "Do you know exactly where the company will be in 3 years?"
+    },
+    {
+      "slug": "yashil-moliya",
+      "icon": "leaf",
+      "title": "Green finance",
+      "short": "Developing and implementing green financial products and green lending programs for financial institutions.",
+      "body": "We help banks and financial institutions create green lending programs, project assessment criteria and a climate risk management system.",
+      "deliverables": [
+        "Green finance roadmap",
+        "Green project taxonomy",
+        "Assessment and monitoring procedure",
+        "Staff training"
+      ],
+      "methods": [
+        "Green taxonomy",
+        "Climate risk",
+        "ESG"
+      ],
+      "problem": "Is your bank ready for green lending?"
+    },
+    {
+      "slug": "iso-sertifikatlash",
+      "icon": "check",
+      "title": "Certification readiness",
+      "short": "Implementing management systems and supporting the certification process for ISO 9001, ISO 22000, ISO 14001, ISO 45001 and ISO 50001.",
+      "body": "We build a management system from scratch or align your existing one with the standard's requirements: documentation, processes, internal audit and preparation for the certification audit.",
+      "deliverables": [
+        "Gap analysis",
+        "System documentation",
+        "Internal audit",
+        "Support during the certification audit"
+      ],
+      "methods": [
+        "ISO 9001",
+        "ISO 22000",
+        "ISO 14001",
+        "ISO 45001",
+        "ISO 50001"
+      ],
+      "problem": "Are international clients asking for ISO certification?"
+    },
+    {
+      "slug": "bazaviy-daraja",
+      "icon": "chart",
+      "title": "Project baseline",
+      "short": "Setting the baseline for green projects: data collection, benchmarking and defining control points for measuring impact.",
+      "body": "We record the pre-project situation in precise figures, so that later results and impact can be measured reliably.",
+      "deliverables": [
+        "Baseline indicators",
+        "Benchmarking report",
+        "Monitoring plan"
+      ],
+      "methods": [
+        "Baseline",
+        "Benchmarking",
+        "MRV"
+      ],
+      "problem": "How will you prove the impact of your green project?"
+    },
+    {
+      "slug": "malumotlar",
+      "icon": "db",
+      "title": "Data management",
+      "short": "Implementing systems for collecting, storing, analyzing and managing data to support decision-making and operational efficiency.",
+      "body": "We put in order where data comes from, how it is stored and who uses it and how, and we build reports and dashboards for management.",
+      "deliverables": [
+        "Data architecture",
+        "Quality and governance rules",
+        "Reports and dashboards"
+      ],
+      "methods": [
+        "Data governance",
+        "BI",
+        "Data quality"
+      ],
+      "problem": "Are your decisions driven by data?"
+    },
+    {
+      "slug": "issiqxona-gazlari",
+      "icon": "cloud",
+      "title": "Greenhouse gas accounting",
+      "short": "Data collection, calculation of greenhouse gas (CO₂) emissions and reporting based on international standards.",
+      "body": "We calculate a company's or project's CO₂ emissions using international methodologies and propose measures to reduce them.",
+      "deliverables": [
+        "Emissions inventory",
+        "Report",
+        "Reduction measures"
+      ],
+      "methods": [
+        "GHG Protocol",
+        "ISO 14064",
+        "Scope 1-2-3"
+      ],
+      "problem": "Do you know how much CO₂ your plant emits?"
+    }
+  ],
+  "process": [
+    {
+      "num": "01",
+      "title": "Diagnostics",
+      "text": "Gemba: we observe processes on site, collect data and set the baseline."
+    },
+    {
+      "num": "02",
+      "title": "Analysis",
+      "text": "We identify waste, losses and bottlenecks using Lean, Six Sigma and the Theory of Constraints."
+    },
+    {
+      "num": "03",
+      "title": "Solution",
+      "text": "We build a clear action plan with a strategy, a roadmap and measurable KPIs."
+    },
+    {
+      "num": "04",
+      "title": "Implementation",
+      "text": "We implement changes together with your team, train staff and, where needed, digitalize."
+    },
+    {
+      "num": "05",
+      "title": "Kaizen",
+      "text": "We measure the result and move into a cycle of continuous improvement: the process never stops."
+    }
+  ],
+  "trainings": [
+    {
+      "tag": "Training",
+      "title": "Business process optimization training",
+      "text": "Builds the skills and knowledge teams need to simplify operations and raise the organization's overall efficiency.",
+      "points": [
+        "Kaizen and Lean principles",
+        "Six Sigma fundamentals",
+        "Theory of Constraints"
+      ]
+    },
+    {
+      "tag": "Training",
+      "title": "Green financing training",
+      "text": "Covers financial initiatives that support environmentally sustainable projects and solutions to climate challenges.",
+      "points": [
+        "Green lending programs",
+        "Assessing green projects",
+        "Climate risks"
+      ]
+    },
+    {
+      "tag": "Digitalization",
+      "dark": true,
+      "title": "Business digitalization",
+      "text": "Implementing digital technologies to transform business processes, automate tasks and integrate with existing systems.",
+      "points": [
+        "Process automation",
+        "Integration with existing systems",
+        "Cloud solutions (with Hippo.uz and Devops.uz)"
+      ]
+    }
+  ],
+  "iso": [
+    {
+      "code": "ISO 9001",
+      "name": "Quality management"
+    },
+    {
+      "code": "ISO 22000",
+      "name": "Food safety"
+    },
+    {
+      "code": "ISO 14001",
+      "name": "Environmental management"
+    },
+    {
+      "code": "ISO 45001",
+      "name": "Occupational safety"
+    },
+    {
+      "code": "ISO 50001",
+      "name": "Energy management"
+    },
+    {
+      "code": "Green economy",
+      "name": "CO₂ reduction",
+      "green": true
+    }
+  ],
+  "projects": [
+    {
+      "slug": "ipak-yoli-yashil-moliya",
+      "cat": "green",
+      "date": "2025-09-30",
+      "wide": true,
+      "label": "Green finance",
+      "title": "Green finance roadmap for Ipak Yuli Bank",
+      "client": "Climate Risk Services / FMO",
+      "industry": "Banking and finance",
+      "text": "A roadmap for developing green financing was prepared for the bank: stages for identifying and assessing green projects and managing the portfolio.",
+      "image": "https://cdn.ngd.uz/2025/02/15/15/11/Fym9LB47JW6XkEjYVVTqoKsnNjdtnM9u_low.jpg"
+    },
+    {
+      "slug": "malumotlar-kompaniyasi-strategiyasi",
+      "cat": "strat",
+      "date": "2025-04-30",
+      "image": "https://cdn.ngd.uz/2025/02/25/11/12/cvQ7b5oWi3i050UKsAaJOR9TwqNL46KU_low.jpg",
+      "title": "Development strategy for a data processing company",
+      "client": "NDA, Tashkent",
+      "industry": "Data, fintech, innovation",
+      "text": "A development strategy was prepared for a data processing company, including market analysis and growth directions."
+    },
+    {
+      "slug": "unido-co2",
+      "cat": "green",
+      "date": "2025-02-28",
+      "wide": true,
+      "label": "CO₂ reduction",
+      "title": "CO₂ reduction measures in two industrial zones in Samarkand and Fergana",
+      "client": "UNIDO",
+      "industry": "Industrial zones",
+      "text": "Measures to reduce greenhouse gas emissions were developed for enterprises in two industrial zones.",
+      "image": "https://cdn.ngd.uz/2025/02/15/13/29/zk5kRf4rqyynawQmvIFl1fIMLMJzE63L_low.webp"
+    },
+    {
+      "slug": "hippo-strategiya",
+      "cat": "strat",
+      "date": "2024-06-16",
+      "image": "https://cdn.ngd.uz/2025/02/17/11/31/rObglbm2IQ5pYgoTnuJMVIh4rQJauNCl_low.webp",
+      "title": "Development strategy for Hippo™",
+      "client": "LLC \"Art of the Business Assistance\", Tashkent",
+      "industry": "IT and cloud services",
+      "text": "A development strategy and go-to-market plan were created for a cloud services company."
+    },
+    {
+      "slug": "orzu-teks-kaizen",
+      "cat": "opt",
+      "date": "2024-05-01",
+      "image": "https://cdn.ngd.uz/2025/02/12/14/43/62zMTfMcGaa99JHpF8AyqX3TDBItaf7h_low.jpg",
+      "title": "Training in Lean manufacturing and Kaizen methods",
+      "client": "LLC \"Orzu-Teks\", Chirchiq",
+      "industry": "Textiles",
+      "text": "The company's staff were trained in Lean manufacturing and Kaizen methods."
+    },
+    {
+      "slug": "index-consulting-ibt",
+      "cat": "opt",
+      "date": "2023-10-20",
+      "image": "https://cdn.ngd.uz/2025/02/12/14/18/2evL3s8A2jbpk8mLRksJFyKf9QkDYRVH_low.png",
+      "title": "Development and implementation of an integrated management system",
+      "client": "LLC \"Index Consulting Company\"",
+      "industry": "Energy and water supply",
+      "text": "An integrated management system combining the requirements of several ISO standards was developed and implemented."
+    },
+    {
+      "slug": "sabfatek-optimallashtirish",
+      "cat": "opt",
+      "date": "2023-05-22",
+      "image": "https://cdn.ngd.uz/2025/02/12/13/20/y24HB6CADNX7f6uRgu3OLcfg5KKloyKM_low.jpg",
+      "title": "Production process optimization",
+      "client": "LLC \"SABFATEK\"",
+      "industry": "Cracker and biscuit manufacturing",
+      "text": "Processes on the food production lines were analyzed and optimization measures were implemented."
+    },
+    {
+      "slug": "uzbekiston-pochtasi",
+      "cat": "opt",
+      "date": "2023-01-12",
+      "image": "https://cdn.ngd.uz/2025/02/11/15/38/RxK2AtCudS7OSIz2WMuBXrKebgFC6tKf_low.jpg",
+      "title": "Business process optimization",
+      "client": "JSC \"Uzbekiston Pochtasi\"",
+      "industry": "Postal services and logistics",
+      "text": "The business processes of postal services were analyzed and recommendations for optimizing them were developed."
+    },
+    {
+      "slug": "geo-prof-ekologiya",
+      "cat": "green",
+      "date": "2022-10-15",
+      "image": "https://cdn.ngd.uz/2025/02/11/14/58/n16cD58SPAL6FyMW8f24qFFaOljB8RpV_low.jpg",
+      "title": "Development of environmental projects",
+      "client": "LLC \"Geo Prof Project\", Tashkent",
+      "industry": "Ecology",
+      "text": "Documentation for environmental projects was developed for the client."
+    },
+    {
+      "slug": "etiqod-mebel",
+      "cat": "opt",
+      "date": "2022-07-10",
+      "image": "https://cdn.ngd.uz/2025/02/11/12/42/MziggACNF9t7n0UbpPoJKJauP36Kq4RA_low.jpg",
+      "title": "Production process optimization",
+      "client": "LLC \"E'tiqod Mebel\"",
+      "industry": "Furniture manufacturing",
+      "text": "Furniture production processes were analyzed and waste reduction measures were implemented."
+    }
+  ],
+  "news": [
+    {
+      "cat": "Event",
+      "title": "Next Generation Development co-organizes the National Conference on the Green Economy",
+      "url": "https://ngd.uz/ru/posts/novosti/next-generation-development-soorganizator-nacionalnoi-konferencii-po-zelyonoi-ekonomike",
+      "image": "https://cdn.ngd.uz/2025/04/22/21/18/5ebQzuRLRe03QSQcDnBYvmnRQK9yiNHR_low.jpg"
+    },
+    {
+      "cat": "Partnership",
+      "title": "Devops.uz, Hippo.uz and NGD: cloud solutions for small and medium businesses",
+      "url": "https://ngd.uz/ru/posts/novosti/devopsuz-hippouz-i-ngd-oblacnye-reseniya-dlya-podderzki-malogo-i-srednego-biznesa",
+      "image": "https://cdn.ngd.uz/2025/02/25/14/29/IT0GdnzLqUztKXI8NpLkCwa4lx6qmFQY_low.jpg"
+    },
+    {
+      "cat": "Team",
+      "title": "The NGD team completes a training course on analyzing industrial investment projects",
+      "url": "https://ngd.uz/ru/posts/novosti/komanda-ngd-prosla-obucenie-po-analizu-investicionnyx-proektov-v-industrii",
+      "image": "https://cdn.ngd.uz/2025/02/25/14/39/SDDsZPF12E1qKDGymMjBrkuR5JOT5O46_low.jpg"
+    },
+    {
+      "cat": "Article",
+      "title": "Green financing opportunities in Uzbekistan",
+      "url": "https://ngd.uz/posts",
+      "image": "https://cdn.ngd.uz/2025/03/13/06/02/dhgR8KKlZo4zsCTUHegLRkPKwKDCCRwb_low.webp"
+    }
+  ],
+  "about": {
+    "title": "Next Generation Development",
+    "paragraphs": [
+      "Next Generation Development LLC (NGD) was founded in 2020 and is a young, flexible company in Uzbekistan's consulting market. We strive for dynamic growth and diversification across the key sectors of the national economy, and we plan to enter international markets in the future.",
+      "Our competitive strengths let us adapt quickly to changing market conditions and master new areas of consulting."
+    ],
+    "green": [
+      "Developing \"green\" projects for financial institutions",
+      "Analysis of policies that support the adoption of green technologies",
+      "Analysis of industrial CO₂ emissions and reduction strategies",
+      "Developing human capital in energy efficiency and renewable energy"
+    ],
+    "values": [
+      {
+        "title": "We study on site",
+        "text": "We draw conclusions not in the office, but where the process actually happens."
+      },
+      {
+        "title": "We speak in numbers",
+        "text": "Every recommendation is tied to a measurable indicator."
+      },
+      {
+        "title": "We implement together",
+        "text": "We don't just hand over a report: we carry out the change together with your team."
+      }
+    ]
+  },
+  "team": [
+    {
+      "initials": "AM",
+      "name": "Abdulaziz Muxamedov",
+      "role": "Managing Partner"
+    },
+    {
+      "initials": "AX",
+      "name": "Abror Xoshimov",
+      "role": "Senior Consultant, Strategy and Operations"
+    },
+    {
+      "initials": "YK",
+      "name": "Yevgeniy Kasikov",
+      "role": "Senior Consultant, Data Management"
+    },
+    {
+      "initials": "JA",
+      "name": "Javohir Adilov",
+      "role": "Business Analyst"
+    }
+  ],
+  "partners": [
+    "https://cdn.ngd.uz/2025/02/25/15/10/ecDq6l7TfqnuRpw46Bhe0qmwwFoHDpIw_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/15/55/N8KMnk5LKOA42LxQEef77SdBVXiicGXr_low.png",
+    "https://cdn.ngd.uz/2025/02/25/15/55/q0748uzjl2PZmJfrVvpF65Am16THnFBM_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/16/15/pfKJQu3htnmwpooyBvc8chEPUg1FYpPF_low.png",
+    "https://cdn.ngd.uz/2025/02/25/15/55/Rk2TJyRMA1xZEejXvl325AeyWaYXRdrT_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/16/10/cJwzYYyENguaj97X9Xe2iOBIOe9ap08r_low.png",
+    "https://cdn.ngd.uz/2025/02/25/15/55/ExRy9afXACZng7lC4bXMS3prGenVSBYF_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/16/52/NJkY8Byu9m9TQt0OeWKuj5ge2dglcu7X_low.svg",
+    "https://cdn.ngd.uz/2025/02/25/15/27/DvPjb73sbx886P0Lc2EKsE9C5jUhmjwk_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/15/55/PfO7kN52WXrVumc7RJ5nwpafUYOJqwWv_low.jpeg",
+    "https://cdn.ngd.uz/2026/09/13/17/54/XUswuxdNSPlMSiDaneL7eNKaQdnwIcC2_low.png",
+    "https://cdn.ngd.uz/2026/09/13/17/58/7d6KPm9m1babvoI7zb4QFuoKW3cBPX1Y_low.png",
+    "https://cdn.ngd.uz/2026/09/13/18/00/G103rvneEcuQAFtgcvEnr36VBHCj8KZQ_low.webp",
+    "https://cdn.ngd.uz/2026/09/13/18/01/SZnt3h2xXDFKc4dQECyQrY7Lk82OKEhz_low.png",
+    "https://cdn.ngd.uz/2026/09/13/18/03/KTybcs2xaYJ5Ah4DdVDHxE9zlKxLheBU_low.jpg",
+    "https://cdn.ngd.uz/2026/09/13/18/07/9VIqGsdcthZy6oIh2hg8mPY8j0Jm7ed7_low.jpg",
+    "https://cdn.ngd.uz/2026/09/13/18/10/sP1qmnvXe1XKIwTB45x1V87zYR5CJzbM_low.png",
+    "https://cdn.ngd.uz/2026/09/13/18/15/sId776ElmZFZAFal8dUsAlfhrrAZO25V_low.jpg",
+    "https://cdn.ngd.uz/2026/09/13/18/17/ybnbSXomaKyBftlLxPbThG5PoefTr8yY_low.png",
+    "https://cdn.ngd.uz/2026/09/15/08/57/qTsoH4kLKY7noedStSOA966Z4thiAapB_low.png"
+  ],
+  "heroImage": "https://cdn.ngd.uz/2025/02/10/11/36/Y0aslUlMCZqUucz9zU5YMINCCWNhMwWt_low.jpg"
+}

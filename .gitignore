@@ -1,0 +1,7 @@
+node_modules
+.next
+.next-prod
+.env*
+.claude
+*.tsbuildinfo
+ngd-app/data/arizalar.json

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NGD — Next Generation Development | Biznes konsalting</title>
+  <meta name="description" content="Next Generation Development (NGD) — O'zbekistondagi konsalting kompaniyasi: biznes jarayonlarini optimallashtirish, yashil moliya, ISO sertifikatlash, energoaudit, trening va raqamlashtirish.">
+  <meta property="og:title" content="NGD — Next Generation Development">
+  <meta property="og:description" content="Kompaniyalarni rivojlantirish | Jarayonlarni optimallashtirish | Yo'qotishlarni kamaytirish">
+  <meta property="og:image" content="https://ngd.uz/frontend/main.png">
+  <link rel="icon" href="https://ngd.uz/frontend/images/icon/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="NGD bosh sahifa">
+      <img class="logo__img logo__img--blue" src="img/logo.svg" alt="NGD" width="73" height="32">
+      <img class="logo__img logo__img--white" src="img/logo-white.svg" alt="" width="73" height="32">
+      <span class="logo__text">Next Generation<br>Development</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Asosiy menyu">
+      <a href="xizmatlar.html">Xizmatlar</a>
+      <a href="jarayon.html">Jarayon</a>
+      <a href="trening.html">Trening</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="yangiliklar.html">Yangiliklar</a>
+      <a href="biz-haqimizda.html">Biz haqimizda</a>
+      <a href="aloqa.html">Aloqa</a>
+      <div class="lang">
+        <a href="#" class="active">UZ</a>
+        <a href="https://ngd.uz/ru" target="_blank" rel="noopener">RU</a>
+        <a href="https://ngd.uz/en" target="_blank" rel="noopener">EN</a>
+      </div>
+    </nav>
+
+    <a href="aloqa.html" class="btn btn--primary header__cta">Konsultatsiya olish</a>
+    <button class="burger" id="burger" aria-label="Menyuni ochish" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+<!-- ===== HERO ===== -->
+<section class="hero" id="bosh">
+  <div class="hero__bg"></div>
+  <div class="container hero__inner">
+    <div class="hero__content reveal">
+      <span class="badge">2020-yildan buyon O'zbekistonda</span>
+      <h1>Xaosdan <span class="accent">tizimga</span>.<br>Isrofdan <span class="accent accent--lime">foydaga</span>.</h1>
+      <p class="hero__lead">Yo'qotishlarni kamaytirish, foydani oshirish, biznes jarayonlarini optimallashtirish, sifat nazorati va tizimlashtirishda yordam beramiz.</p>
+      <div class="hero__tags">
+        <span>Kompaniyalarni rivojlantirish</span>
+        <span>Jarayonlarni optimallashtirish</span>
+        <span>Yo'qotishlarni kamaytirish</span>
+      </div>
+      <div class="hero__actions">
+        <a href="aloqa.html" class="btn btn--primary btn--lg">Konsultatsiya olish</a>
+        <a href="xizmatlar.html" class="btn btn--ghost btn--lg">Xizmatlarimiz</a>
+      </div>
+    </div>
+    <div class="hero__visual reveal" aria-hidden="true">
+      <!-- Xaosdan tizimga: tartibsiz jarayonlar NGD orqali bitta samarali oqimga aylanadi -->
+      <svg class="flow" viewBox="0 0 480 520">
+        <defs>
+          <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse"><path d="M32 0H0V32" class="flow__grid"/></pattern>
+          <linearGradient id="flowGrad" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stop-color="#3b82f6"/><stop offset=".55" stop-color="#22d3ee"/><stop offset="1" stop-color="#7cc4ff"/>
+          </linearGradient>
+        </defs>
+        <rect width="480" height="520" fill="url(#grid)"/>
+
+        <!-- Xaos: tartibsiz kirish chiziqlari -->
+        <g class="flow__chaos">
+          <path d="M-10 300 C 40 260, 20 420, 70 380 S 40 470, 70 455"/>
+          <path d="M-10 520 C 30 470, 90 520, 60 470 S 20 430, 70 455"/>
+          <path d="M-10 410 C 60 400, 0 500, 50 480 S 90 440, 70 455"/>
+          <path d="M20 330 C 90 360, -10 420, 60 430 S 100 470, 70 455"/>
+        </g>
+
+        <path id="flowPath" d="M70 455 C 120 455, 150 400, 170 340 S 230 250, 280 230 S 380 170, 420 70" class="flow__track"/>
+        <path d="M70 455 C 120 455, 150 400, 170 340 S 230 250, 280 230 S 380 170, 420 70" class="flow__line" stroke="url(#flowGrad)"/>
+
+        <g class="flow__dots">
+          <circle r="5"><animateMotion dur="4s" repeatCount="indefinite"><mpath href="#flowPath"/></animateMotion></circle>
+          <circle r="5"><animateMotion dur="4s" begin="-1s" repeatCount="indefinite"><mpath href="#flowPath"/></animateMotion></circle>
+          <circle r="5"><animateMotion dur="4s" begin="-2s" repeatCount="indefinite"><mpath href="#flowPath"/></animateMotion></circle>
+          <circle r="5"><animateMotion dur="4s" begin="-3s" repeatCount="indefinite"><mpath href="#flowPath"/></animateMotion></circle>
+        </g>
+
+        <g class="flow__node"><circle cx="70" cy="455" r="12"/><circle cx="70" cy="455" r="22" class="flow__pulse"/></g>
+        <g class="flow__node"><circle cx="170" cy="340" r="10"/></g>
+        <g class="flow__node"><circle cx="280" cy="230" r="10"/></g>
+        <g class="flow__node flow__node--end"><circle cx="420" cy="70" r="14"/><circle cx="420" cy="70" r="26" class="flow__pulse"/></g>
+
+        <g class="flow__label"><rect x="92" y="470" width="96" height="30" rx="8"/><text x="140" y="490">Xaos</text></g>
+        <g class="flow__label"><rect x="186" y="326" width="96" height="30" rx="8"/><text x="234" y="346">Tahlil</text></g>
+        <g class="flow__label"><rect x="296" y="216" width="150" height="30" rx="8"/><text x="371" y="236">Optimallashtirish</text></g>
+        <g class="flow__label flow__label--end"><rect x="300" y="100" width="120" height="30" rx="8"/><text x="360" y="120">Natija</text></g>
+      </svg>
+      <div class="hero__float hero__float--1">
+        <small>Isrof</small><strong class="down">↓ kamayadi</strong>
+      </div>
+      <div class="hero__float hero__float--2">
+        <small>Samaradorlik</small><strong class="up">↑ oshadi</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MARQUEE ===== -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    <span>Kaizen</span><span>Lean Manufacturing</span><span>Six Sigma</span><span>Theory of Constraints</span><span>ISO 9001</span><span>ISO 14001</span><span>ISO 50001</span><span>Yashil moliya</span><span>CO₂ hisobi</span><span>Energoaudit</span>
+    <span>Kaizen</span><span>Lean Manufacturing</span><span>Six Sigma</span><span>Theory of Constraints</span><span>ISO 9001</span><span>ISO 14001</span><span>ISO 50001</span><span>Yashil moliya</span><span>CO₂ hisobi</span><span>Energoaudit</span>
+  </div>
+</div>
+
+<!-- ===== STATS ===== -->
+<section class="stats">
+  <div class="container stats__grid">
+    <div class="stat reveal"><strong data-count="2020">2020</strong><span>Tashkil topgan yil</span></div>
+    <div class="stat reveal"><strong data-count="8" data-suffix="+">8+</strong><span>Konsalting yo'nalishi</span></div>
+    <div class="stat reveal"><strong data-count="5">5</strong><span>ISO standartlari</span></div>
+    <div class="stat reveal"><strong data-count="20" data-suffix="+">20+</strong><span>Hamkorlar</span></div>
+  </div>
+</section>
+
+<!-- ===== XAOSDAN TIZIMGA (scroll bilan tartiblanadi) ===== -->
+<section class="order" id="order" aria-label="Xaosdan tizimga">
+  <div class="order__sticky">
+    <div class="container order__inner">
+      <div class="order__text">
+        <span class="eyebrow">Lean: 7 isrof</span>
+        <h2><span class="order__state order__state--chaos">Bugun: xaos.</span><span class="order__state order__state--system">Ertaga: tizim.</span></h2>
+        <p>Har bir korxonada ko'rinmas isroflar bor. Biz ularni topamiz, nomlaymiz va o'z joyiga qo'yamiz. Sahifani pastga suring va jarayon qanday tartibga tushishini ko'ring.</p>
+        <div class="order__bar" aria-hidden="true"><span></span></div>
+        <div class="order__legend" aria-hidden="true"><span>Xaos</span><span>Tizim</span></div>
+      </div>
+      <ul class="order__grid">
+        <li class="tile"><b>01</b>Kutish<small>Bekor turgan vaqt</small></li>
+        <li class="tile"><b>02</b>Transport<small>Ortiqcha tashish</small></li>
+        <li class="tile"><b>03</b>Ortiqcha zaxira<small>Muzlagan pul</small></li>
+        <li class="tile"><b>04</b>Ortiqcha harakat<small>Keraksiz qadamlar</small></li>
+        <li class="tile"><b>05</b>Nuqson<small>Qayta ishlash</small></li>
+        <li class="tile"><b>06</b>Ortiqcha ishlov<small>Mijoz to'lamaydigan ish</small></li>
+        <li class="tile"><b>07</b>Ortiqcha ishlab chiqarish<small>Talabdan oldin</small></li>
+        <li class="tile tile--result"><b>✓</b>Tizim<small>Barqaror oqim</small></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SAHIFALAR ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="eyebrow">NGD bilan</span>
+      <h2>Qayerdan boshlaymiz?</h2>
+      <p>Har bir yo'nalish bo'yicha batafsil ma'lumot alohida sahifada.</p>
+    </div>
+    <div class="hub">
+      <a class="hub__card reveal" href="xizmatlar.html"><span class="hub__num">01</span><h3>Xizmatlar</h3><p>8 ta konsalting yo'nalishi va ISO standartlari</p><span class="link-arrow">Ko'rish</span></a>
+      <a class="hub__card reveal" href="jarayon.html"><span class="hub__num">02</span><h3>Ish jarayoni</h3><p>Diagnostikadan Kaizen'gacha 5 bosqich</p><span class="link-arrow">Ko'rish</span></a>
+      <a class="hub__card reveal" href="trening.html"><span class="hub__num">03</span><h3>Trening</h3><p>Lean, Six Sigma va yashil moliya bo'yicha o'quv</p><span class="link-arrow">Ko'rish</span></a>
+      <a class="hub__card reveal" href="portfolio.html"><span class="hub__num">04</span><h3>Portfolio</h3><p>UNIDO, FMO, O'zbekiston pochtasi va boshqalar</p><span class="link-arrow">Ko'rish</span></a>
+      <a class="hub__card reveal" href="biz-haqimizda.html"><span class="hub__num">05</span><h3>Biz haqimizda</h3><p>Kompaniya, yashil iqtisodiyot va jamoa</p><span class="link-arrow">Ko'rish</span></a>
+      <a class="hub__card hub__card--dark reveal" href="aloqa.html"><span class="hub__num">06</span><h3>Aloqa</h3><p>Bepul konsultatsiya uchun ariza qoldiring</p><span class="link-arrow">Ariza qoldirish</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BAND ===== -->
+<section class="cta-band">
+  <div class="container cta-band__inner reveal">
+    <div>
+      <h2>Jarayonlaringizni tizimga solamizmi?</h2>
+      <p>Bepul konsultatsiyada biznesingizdagi asosiy isroflarni birga aniqlaymiz.</p>
+    </div>
+    <a href="aloqa.html" class="btn btn--primary btn--lg">Konsultatsiya olish</a>
+  </div>
+</section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <a href="index.html" class="logo logo--light"><img class="logo__img" src="img/logo-white.svg" alt="NGD" width="73" height="32"><span class="logo__text">Next Generation<br>Development</span></a>
+      <p class="footer__tag">Kompaniyalarni rivojlantirish · Jarayonlarni optimallashtirish · Yo'qotishlarni kamaytirish</p>
+    </div>
+    <div class="footer__cols">
+      <div>
+        <h4>Xizmatlar</h4>
+        <a href="xizmatlar.html">Konsalting</a>
+        <a href="trening.html">Trening</a>
+        <a href="trening.html">Raqamlashtirish</a>
+      </div>
+      <div>
+        <h4>Kompaniya</h4>
+        <a href="biz-haqimizda.html">Biz haqimizda</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="yangiliklar.html">Yangiliklar</a>
+      </div>
+      <div>
+        <h4>Aloqa</h4>
+        <a href="tel:+998977075040">+998 (97) 707-50-40</a>
+        <a href="mailto:info@ngd.uz">info@ngd.uz</a>
+        <a href="https://t.me/ngdevelopment" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <span>© <span id="year">2026</span> NGD. Barcha huquqlar himoyalangan.</span>
+    <a href="index.html">Yuqoriga ↑</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

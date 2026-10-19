@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ish jarayonimiz | NGD</title>
+  <meta name="description" content="Next Generation Development (NGD) — O'zbekistondagi konsalting kompaniyasi: biznes jarayonlarini optimallashtirish, yashil moliya, ISO sertifikatlash, energoaudit, trening va raqamlashtirish.">
+  <meta property="og:title" content="NGD — Next Generation Development">
+  <meta property="og:description" content="Kompaniyalarni rivojlantirish | Jarayonlarni optimallashtirish | Yo'qotishlarni kamaytirish">
+  <meta property="og:image" content="https://ngd.uz/frontend/main.png">
+  <link rel="icon" href="https://ngd.uz/frontend/images/icon/logo.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="header" id="header">
+  <div class="container header__inner">
+    <a href="index.html" class="logo" aria-label="NGD bosh sahifa">
+      <img class="logo__img logo__img--blue" src="img/logo.svg" alt="NGD" width="73" height="32">
+      <img class="logo__img logo__img--white" src="img/logo-white.svg" alt="" width="73" height="32">
+      <span class="logo__text">Next Generation<br>Development</span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Asosiy menyu">
+      <a href="xizmatlar.html">Xizmatlar</a>
+      <a href="jarayon.html" class="active" aria-current="page">Jarayon</a>
+      <a href="trening.html">Trening</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="yangiliklar.html">Yangiliklar</a>
+      <a href="biz-haqimizda.html">Biz haqimizda</a>
+      <a href="aloqa.html">Aloqa</a>
+      <div class="lang">
+        <a href="#" class="active">UZ</a>
+        <a href="https://ngd.uz/ru" target="_blank" rel="noopener">RU</a>
+        <a href="https://ngd.uz/en" target="_blank" rel="noopener">EN</a>
+      </div>
+    </nav>
+
+    <a href="aloqa.html" class="btn btn--primary header__cta">Konsultatsiya olish</a>
+    <button class="burger" id="burger" aria-label="Menyuni ochish" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+  <div class="hero__bg"></div>
+  <div class="container page-hero__inner">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Bosh sahifa</a><span>/</span><span>Qanday ishlaymiz</span></nav>
+    <h1>Ish jarayonimiz</h1>
+    <p>Diagnostikadan Kaizen'gacha: har bir loyiha o'lchanadigan natija bilan tugaydigan bitta uzluksiz oqim.</p>
+  </div>
+  <svg class="page-hero__flow" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 90 C 150 30, 260 120, 400 70 S 650 20, 800 60 S 1050 100, 1200 20"/></svg>
+</section>
+
+<!-- ===== PROCESS ===== -->
+<section class="section process" id="jarayon">
+  <div class="container">
+    <div class="section__head reveal">
+      <span class="eyebrow eyebrow--light">Ish jarayonimiz</span>
+      <h2>Har bir loyiha — bitta uzluksiz oqim</h2>
+      <p>Biz tavsiya berib ketmaymiz: jarayonni joyida o'rganamiz, "tor joy"larni topamiz, jamoangiz bilan birga joriy etamiz va natijani o'lchaymiz.</p>
+    </div>
+    <ol class="steps" id="steps">
+      <li class="step reveal">
+        <span class="step__num">01</span>
+        <h3>Diagnostika</h3>
+        <p>Gemba: jarayonlarni ish joyida kuzatamiz, ma'lumot yig'amiz va bazaviy darajani belgilaymiz.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__num">02</span>
+        <h3>Tahlil</h3>
+        <p>Isroflar, yo'qotishlar va "tor joy"larni Lean, Six Sigma va Cheklovlar nazariyasi bilan aniqlaymiz.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__num">03</span>
+        <h3>Yechim</h3>
+        <p>Strategiya, yo'l xaritasi va o'lchanadigan KPI'lar bilan aniq harakat rejasini tuzamiz.</p>
+      </li>
+      <li class="step reveal">
+        <span class="step__num">04</span>
+        <h3>Joriy etish</h3>
+        <p>O'zgarishlarni jamoangiz bilan birga joriy qilamiz, xodimlarni o'qitamiz, kerak bo'lsa raqamlashtiramiz.</p>
+      </li>
+      <li class="step step--loop reveal">
+        <span class="step__num">05</span>
+        <h3>Kaizen</h3>
+        <p>Natijani o'lchaymiz va doimiy takomillashtirish sikliga o'tamiz — jarayon to'xtamaydi.</p>
+        <span class="step__loop">↺ yana 01 ga</span>
+      </li>
+    </ol>
+  </div>
+</section>
+<!-- ===== XAOSDAN TIZIMGA (scroll bilan tartiblanadi) ===== -->
+<section class="order" id="order" aria-label="Xaosdan tizimga">
+  <div class="order__sticky">
+    <div class="container order__inner">
+      <div class="order__text">
+        <span class="eyebrow">Lean: 7 isrof</span>
+        <h2><span class="order__state order__state--chaos">Bugun: xaos.</span><span class="order__state order__state--system">Ertaga: tizim.</span></h2>
+        <p>Har bir korxonada ko'rinmas isroflar bor. Biz ularni topamiz, nomlaymiz va o'z joyiga qo'yamiz. Sahifani pastga suring va jarayon qanday tartibga tushishini ko'ring.</p>
+        <div class="order__bar" aria-hidden="true"><span></span></div>
+        <div class="order__legend" aria-hidden="true"><span>Xaos</span><span>Tizim</span></div>
+      </div>
+      <ul class="order__grid">
+        <li class="tile"><b>01</b>Kutish<small>Bekor turgan vaqt</small></li>
+        <li class="tile"><b>02</b>Transport<small>Ortiqcha tashish</small></li>
+        <li class="tile"><b>03</b>Ortiqcha zaxira<small>Muzlagan pul</small></li>
+        <li class="tile"><b>04</b>Ortiqcha harakat<small>Keraksiz qadamlar</small></li>
+        <li class="tile"><b>05</b>Nuqson<small>Qayta ishlash</small></li>
+        <li class="tile"><b>06</b>Ortiqcha ishlov<small>Mijoz to'lamaydigan ish</small></li>
+        <li class="tile"><b>07</b>Ortiqcha ishlab chiqarish<small>Talabdan oldin</small></li>
+        <li class="tile tile--result"><b>✓</b>Tizim<small>Barqaror oqim</small></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA BAND ===== -->
+<section class="cta-band">
+  <div class="container cta-band__inner reveal">
+    <div>
+      <h2>Jarayonlaringizni tizimga solamizmi?</h2>
+      <p>Bepul konsultatsiyada biznesingizdagi asosiy isroflarni birga aniqlaymiz.</p>
+    </div>
+    <a href="aloqa.html" class="btn btn--primary btn--lg">Konsultatsiya olish</a>
+  </div>
+</section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <div>
+      <a href="index.html" class="logo logo--light"><img class="logo__img" src="img/logo-white.svg" alt="NGD" width="73" height="32"><span class="logo__text">Next Generation<br>Development</span></a>
+      <p class="footer__tag">Kompaniyalarni rivojlantirish · Jarayonlarni optimallashtirish · Yo'qotishlarni kamaytirish</p>
+    </div>
+    <div class="footer__cols">
+      <div>
+        <h4>Xizmatlar</h4>
+        <a href="xizmatlar.html">Konsalting</a>
+        <a href="trening.html">Trening</a>
+        <a href="trening.html">Raqamlashtirish</a>
+      </div>
+      <div>
+        <h4>Kompaniya</h4>
+        <a href="biz-haqimizda.html">Biz haqimizda</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="yangiliklar.html">Yangiliklar</a>
+      </div>
+      <div>
+        <h4>Aloqa</h4>
+        <a href="tel:+998977075040">+998 (97) 707-50-40</a>
+        <a href="mailto:info@ngd.uz">info@ngd.uz</a>
+        <a href="https://t.me/ngdevelopment" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer__bottom">
+    <span>© <span id="year">2026</span> NGD. Barcha huquqlar himoyalangan.</span>
+    <a href="index.html">Yuqoriga ↑</a>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
