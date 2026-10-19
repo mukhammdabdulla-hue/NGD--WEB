@@ -8,3 +8,6 @@ ngd-app/data/arizalar.json
 
 # Yangi sayt yig'ilmasi
 web/dist/
+
+# Prototip yig'ilmasi
+web/dist-proto/
