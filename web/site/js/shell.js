@@ -244,6 +244,9 @@ const loaders = {
   process: () => import('./pages/process.js'),
   results: () => import('./pages/results.js'),
   project: () => import('./pages/project.js'),
+  company: () => import('./pages/company.js'),
+  contact: () => import('./pages/contact.js'),
+  notfound: () => import('./pages/notfound.js'),
   generic: () => import('./pages/generic.js'),
 };
 
@@ -278,6 +281,14 @@ export async function boot() {
   if (page?.enter) tl.add(page.enter(), at);
   window.__ngdOK = true;
   document.fonts?.ready.then(() => ScrollTrigger.refresh());
+  // sahifa balandligi o'zgarsa (kech yuklangan rasm, olib tashlangan logotip) tetiklagichlar qayta hisoblanadi
+  if (window.ResizeObserver) {
+    let h = document.documentElement.scrollHeight, tm = 0;
+    new ResizeObserver(() => {
+      clearTimeout(tm);
+      tm = setTimeout(() => { const n = document.documentElement.scrollHeight; if (Math.abs(n - h) > 2) { h = n; ScrollTrigger.refresh(); } }, 200);
+    }).observe(document.body);
+  }
   window.__ngd = { lenis, ScrollTrigger, gsap, get page() { return page; } };
   if (reduce) { root.classList.remove('pre-on', 'nav-in'); pre?.remove(); gsap.set(hdr, { opacity: 1 }); }
 }

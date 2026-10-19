@@ -10,10 +10,12 @@ import { D } from './data.mjs';
 import { makeCtx } from './ui.mjs';
 import { renderPage } from './layout.mjs';
 import { render as home } from './pages/home.mjs';
-import { stub } from './pages/stub.mjs';
+import { render as notFound } from './pages/notfound.mjs';
 import { render as jarayon } from './pages/process.mjs';
 import { render as natijalar } from './pages/results.mjs';
 import { render as loyiha } from './pages/project.mjs';
+import { render as kompaniya } from './pages/company.mjs';
+import { render as aloqa } from './pages/contact.mjs';
 import { render as services } from './pages/services.mjs';
 import { render as service } from './pages/service.mjs';
 
@@ -52,8 +54,8 @@ const routes = [
   { route: 'natijalar', mod: natijalar },
   ...D.projects.map((p) => ({ route: `natijalar/${p.slug}`, mod: (c) => loyiha(c, p.slug) })),
   { route: 'jarayon', mod: jarayon },
-  { route: 'kompaniya', mod: (c) => stub(c, { page: 'company', active: 'kompaniya', title: 'Kompaniya', kicker: 'Kompaniya', h1: ['Biz haqimizda'], num: '04' }) },
-  { route: 'aloqa', mod: (c) => stub(c, { page: 'contact', active: 'aloqa', title: 'Aloqa', kicker: 'Aloqa', h1: ["Biz bilan bog'laning"], num: '05' }) },
+  { route: 'kompaniya', mod: kompaniya },
+  { route: 'aloqa', mod: aloqa },
 ];
 
 const write = (rel, html) => { const p = join(OUT, rel); mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, html); };
@@ -68,7 +70,7 @@ for (const { route, mod } of routes) {
 // 404: mutlaq yo'llar (istalgan chuqurlikdan ochiladi)
 {
   const ctx = { route: '404', depth: 0, up: BASE, href: (to = '') => BASE + (to ? to.replace(/\/?$/, '/') : ''), asset: (f) => BASE + f };
-  const r = stub(ctx, { page: 'notfound', active: '', title: 'Sahifa topilmadi', kicker: '404', h1: ['Sahifa', 'topilmadi.'] });
+  const r = notFound(ctx);
   write('404.html', renderPage({ ctx, ...r, ...opts({ noindex: true }) }));
 }
 
