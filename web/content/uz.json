@@ -1,0 +1,918 @@
+{
+  "ui": {
+    "nav": {
+      "home": "Bosh sahifa",
+      "services": "Xizmatlar",
+      "process": "Jarayon",
+      "training": "Trening",
+      "portfolio": "Portfolio",
+      "news": "Yangiliklar",
+      "about": "Biz haqimizda",
+      "contact": "Aloqa"
+    },
+    "cta": "Konsultatsiya olish",
+    "ourServices": "Xizmatlarimiz",
+    "more": "Batafsil",
+    "view": "Ko'rish",
+    "apply": "Ariza qoldirish",
+    "back": "Orqaga",
+    "allProjects": "Barcha loyihalar",
+    "allServices": "Barcha xizmatlar",
+    "telegram": "Telegram kanalimiz",
+    "toTop": "Yuqoriga ↑",
+    "rights": "Barcha huquqlar himoyalangan.",
+    "menuOpen": "Menyuni ochish",
+    "footerTag": "Kompaniyalarni rivojlantirish · Jarayonlarni optimallashtirish · Yo'qotishlarni kamaytirish",
+    "footerServices": "Xizmatlar",
+    "footerCompany": "Kompaniya",
+    "footerContact": "Aloqa",
+    "consulting": "Konsalting",
+    "digital": "Raqamlashtirish",
+    "ctaBand": {
+      "title": "Jarayonlaringizni tizimga solamizmi?",
+      "text": "Bepul konsultatsiyada biznesingizdagi asosiy isroflarni birga aniqlaymiz."
+    },
+    "hero": {
+      "badge": "2020-yildan buyon O'zbekistonda",
+      "title1": "Xaosdan",
+      "accent1": "tizimga",
+      "title2": "Isrofdan",
+      "accent2": "foydaga",
+      "lead": "Yo'qotishlarni kamaytirish, foydani oshirish, biznes jarayonlarini optimallashtirish, sifat nazorati va tizimlashtirishda yordam beramiz.",
+      "tags": [
+        "Kompaniyalarni rivojlantirish",
+        "Jarayonlarni optimallashtirish",
+        "Yo'qotishlarni kamaytirish"
+      ],
+      "flow": [
+        "Xaos",
+        "Tahlil",
+        "Optimallashtirish",
+        "Natija"
+      ],
+      "waste": "Isrof",
+      "wasteDown": "↓ kamayadi",
+      "efficiency": "Samaradorlik",
+      "efficiencyUp": "↑ oshadi"
+    },
+    "stats": [
+      {
+        "value": 2020,
+        "suffix": "",
+        "label": "Tashkil topgan yil"
+      },
+      {
+        "value": 8,
+        "suffix": "+",
+        "label": "Konsalting yo'nalishi"
+      },
+      {
+        "value": 5,
+        "suffix": "",
+        "label": "ISO standartlari"
+      },
+      {
+        "value": 20,
+        "suffix": "+",
+        "label": "Hamkorlar"
+      }
+    ],
+    "order": {
+      "eyebrow": "Lean: 7 isrof",
+      "chaos": "Bugun: xaos.",
+      "system": "Ertaga: tizim.",
+      "text": "Har bir korxonada ko'rinmas isroflar bor. Biz ularni topamiz, nomlaymiz va o'z joyiga qo'yamiz. Sahifani pastga suring va jarayon qanday tartibga tushishini ko'ring.",
+      "legendChaos": "Xaos",
+      "legendSystem": "Tizim",
+      "tiles": [
+        [
+          "Kutish",
+          "Bekor turgan vaqt"
+        ],
+        [
+          "Transport",
+          "Ortiqcha tashish"
+        ],
+        [
+          "Ortiqcha zaxira",
+          "Muzlagan pul"
+        ],
+        [
+          "Ortiqcha harakat",
+          "Keraksiz qadamlar"
+        ],
+        [
+          "Nuqson",
+          "Qayta ishlash"
+        ],
+        [
+          "Ortiqcha ishlov",
+          "Mijoz to'lamaydigan ish"
+        ],
+        [
+          "Ortiqcha ishlab chiqarish",
+          "Talabdan oldin"
+        ]
+      ],
+      "result": [
+        "Tizim",
+        "Barqaror oqim"
+      ]
+    },
+    "hub": {
+      "eyebrow": "NGD bilan",
+      "title": "Qayerdan boshlaymiz?",
+      "text": "Har bir yo'nalish bo'yicha batafsil ma'lumot alohida sahifada.",
+      "items": {
+        "services": "8 ta konsalting yo'nalishi va ISO standartlari",
+        "process": "Diagnostikadan Kaizen'gacha 5 bosqich",
+        "training": "Lean, Six Sigma va yashil moliya bo'yicha o'quv",
+        "portfolio": "UNIDO, FMO, O'zbekiston pochtasi va boshqalar",
+        "about": "Kompaniya, yashil iqtisodiyot va jamoa",
+        "contact": "Bepul konsultatsiya uchun ariza qoldiring"
+      }
+    },
+    "pages": {
+      "services": {
+        "eyebrow": "Xizmatlar",
+        "title": "Konsalting xizmatlari",
+        "lead": "Biznes jarayonlari, energiya, strategiya, yashil moliya va ISO: kompaniyangizni xaosdan tizimga olib o'tadigan 8 yo'nalish."
+      },
+      "process": {
+        "eyebrow": "Qanday ishlaymiz",
+        "title": "Ish jarayonimiz",
+        "lead": "Diagnostikadan Kaizen'gacha: har bir loyiha o'lchanadigan natija bilan tugaydigan bitta uzluksiz oqim."
+      },
+      "training": {
+        "eyebrow": "Trening",
+        "title": "Trening va raqamlashtirish",
+        "lead": "Jamoangizni o'qitamiz va jarayonlaringizni raqamli tizimga o'tkazamiz."
+      },
+      "portfolio": {
+        "eyebrow": "Portfolio",
+        "title": "Amalga oshirilgan loyihalar",
+        "lead": "Davlat korxonalari, ishlab chiqaruvchilar, banklar va xalqaro tashkilotlar uchun bajarilgan ishlar."
+      },
+      "news": {
+        "eyebrow": "Yangiliklar",
+        "title": "Yangiliklar",
+        "lead": "Tadbirlar, hamkorliklar va jamoamiz hayotidan so'nggi xabarlar."
+      },
+      "about": {
+        "eyebrow": "Kompaniya",
+        "title": "Biz haqimizda",
+        "lead": "2020-yildan beri O'zbekiston bizneslariga tartib, samaradorlik va barqaror o'sish olib kelamiz."
+      },
+      "contact": {
+        "eyebrow": "Aloqa",
+        "title": "Biz bilan bog'laning",
+        "lead": "Ariza qoldiring yoki ofisimizga keling: mutaxassisimiz biznesingiz uchun eng to'g'ri yechimni taklif qiladi."
+      }
+    },
+    "methods": {
+      "eyebrow": "Metodologiya",
+      "title": "Operatsion mukammallik — bizning asosiy yo'nalishimiz",
+      "text": "Ko'p tarmoqli tajriba va chuqur ekspertizani birlashtirib, yuqori sifat standartlariga mos innovatsion yechimlarni ishlab chiqamiz va joriy etamiz. Loyihalarga kompleks yondashamiz, belgilangan muddatda va maksimal samaradorlik bilan bajaramiz.",
+      "chips": [
+        "Kaizen",
+        "Lean Manufacturing",
+        "Six Sigma",
+        "Theory of Constraints"
+      ]
+    },
+    "process": {
+      "eyebrow": "Ish jarayonimiz",
+      "title": "Har bir loyiha — bitta uzluksiz oqim",
+      "text": "Biz tavsiya berib ketmaymiz: jarayonni joyida o'rganamiz, \"tor joy\"larni topamiz, jamoangiz bilan birga joriy etamiz va natijani o'lchaymiz.",
+      "loop": "↺ yana 01 ga"
+    },
+    "service": {
+      "what": "Nima qilamiz",
+      "deliverables": "Natijada siz olasiz",
+      "methods": "Qo'llaniladigan usullar",
+      "related": "Boshqa xizmatlar"
+    },
+    "portfolio": {
+      "all": "Barchasi",
+      "search": "Loyiha yoki mijozni qidiring",
+      "empty": "Hech narsa topilmadi. Boshqa so'z bilan qidirib ko'ring.",
+      "client": "Mijoz",
+      "industry": "Soha",
+      "date": "Sana",
+      "direction": "Yo'nalish",
+      "cats": {
+        "opt": "Optimallashtirish",
+        "strat": "Strategiya",
+        "green": "Yashil iqtisodiyot"
+      }
+    },
+    "about": {
+      "greenTitle": "Yashil iqtisodiyot yo'nalishida",
+      "teamTitle": "Jamoamiz",
+      "valuesTitle": "Qadriyatlarimiz"
+    },
+    "contact": {
+      "title": "Bepul konsultatsiya oling",
+      "text": "Ariza qoldiring — mutaxassisimiz siz bilan bog'lanib, biznesingiz uchun eng to'g'ri yechimni taklif qiladi.",
+      "address": "100084, Toshkent sh., Injobod ko'chasi, 32-uy",
+      "mapTitle": "NGD ofisi xaritada"
+    },
+    "form": {
+      "title": "Ariza qoldirish",
+      "name": "Ismingiz",
+      "namePh": "Ism Familiya",
+      "phone": "Telefon raqam",
+      "company": "Kompaniya",
+      "companyPh": "Kompaniya nomi",
+      "service": "Qiziqtirgan xizmat",
+      "other": "Boshqa",
+      "message": "Xabar",
+      "messagePh": "Qisqacha vazifangizni yozing",
+      "submit": "Yuborish",
+      "sending": "Yuborilmoqda...",
+      "ok": "Rahmat! Arizangiz qabul qilindi, tez orada siz bilan bog'lanamiz.",
+      "errRequired": "Iltimos, ism va telefon raqamingizni kiriting.",
+      "errPhone": "Telefon raqamni to'liq kiriting.",
+      "errServer": "Xatolik yuz berdi. Iltimos, qayta urinib ko'ring yoki qo'ng'iroq qiling."
+    },
+    "home": {
+      "kicker": "Biznes konsalting · Toshkent · 2020-yildan",
+      "title": [
+        "Xaosdan",
+        "tizimga."
+      ],
+      "lead": "Jarayonlaringizdagi yashirin isroflarni topamiz, ularni tizimga solamiz va o'lchanadigan o'sishga aylantiramiz.",
+      "scroll": "Pastga suring",
+      "phases": [
+        [
+          "01",
+          "Xaos",
+          "Tarqoq jarayonlar, yashirin isroflar"
+        ],
+        [
+          "02",
+          "Tahlil",
+          "Har bir isrof topiladi va nomlanadi"
+        ],
+        [
+          "03",
+          "Tizim",
+          "Isroflar yo'qoladi, oqim tartibga tushadi"
+        ],
+        [
+          "04",
+          "O'sish",
+          "Barqaror va o'lchanadigan natija"
+        ]
+      ],
+      "partners": "Bizga ishonch bildirgan tashkilotlar",
+      "impact": {
+        "eyebrow": "Natijalar",
+        "title": "Lean va Kaizen to'g'ri joriy etilganda",
+        "note": "ngd.uz ma'lumotlari asosida",
+        "items": [
+          {
+            "value": 2,
+            "prefix": "",
+            "label": "Jarayonlar",
+            "text": "2 barobargacha tezroq kechishi mumkin",
+            "suffix": "×"
+          },
+          {
+            "value": 50,
+            "prefix": "−",
+            "label": "Nuqsonlar",
+            "text": "2 barobar va undan ko'proq kamayishi mumkin",
+            "suffix": "%"
+          },
+          {
+            "value": 30,
+            "prefix": "+",
+            "suffix": "%",
+            "label": "Unumdorlik",
+            "text": "30% va undan yuqori oshishi mumkin"
+          },
+          {
+            "value": 50,
+            "prefix": "−",
+            "label": "Tugallanmagan ish",
+            "text": "2 barobargacha qisqarishi mumkin",
+            "suffix": "%"
+          }
+        ]
+      },
+      "services": {
+        "eyebrow": "Xizmatlar",
+        "title": "Sakkiz yo'nalish. Bitta maqsad: tizim.",
+        "all": "Barcha xizmatlar"
+      },
+      "approach": {
+        "eyebrow": "Yondashuv",
+        "title": "Biz ofisda emas, jarayon sodir bo'ladigan joyda ishlaymiz",
+        "text": "Gemba tamoyili: har bir xulosa ishlab chiqarish maydonida, real ma'lumotlar asosida chiqariladi. Keyin yechimni jamoangiz bilan birga joriy etamiz.",
+        "tags": [
+          "Gemba",
+          "VSM",
+          "KPI",
+          "PDCA"
+        ],
+        "link": "Ish jarayonimiz bilan tanishing"
+      },
+      "cases": {
+        "eyebrow": "Keyslar",
+        "title": "Tanlangan loyihalar",
+        "all": "Barcha loyihalar"
+      },
+      "news": {
+        "eyebrow": "Yangiliklar",
+        "title": "Matbuot va tadbirlar"
+      },
+      "final": {
+        "title": [
+          "Keling,",
+          "tizim quramiz."
+        ],
+        "text": "Bepul konsultatsiyada biznesingizdagi asosiy isroflarni birga aniqlaymiz."
+      },
+      "manifesto": {
+        "kicker": "Bizning yondashuv",
+        "text": "Har bir korxonada yashirin isroflar bor: kutish, ortiqcha harakat, nuqsonlar, muzlagan zaxira. Biz ularni ko'rinadigan qilamiz, o'lchaymiz va tizimga aylantiramiz. Natija hisobotda emas, ishlab chiqarish maydonida ko'rinadi."
+      },
+      "finder": {
+        "eyebrow": "Yo'l topuvchi",
+        "title": "Ikki savol. Bitta aniq yo'nalish.",
+        "q1": "Sohangiz qaysi?",
+        "q2": "Asosiy muammo nima?",
+        "result": "Sizga mos yo'nalish",
+        "caseLabel": "O'xshash loyiha",
+        "go": "Xizmat haqida batafsil",
+        "sectors": [
+          [
+            "mfg",
+            "Ishlab chiqarish"
+          ],
+          [
+            "fin",
+            "Bank va moliya"
+          ],
+          [
+            "ind",
+            "Sanoat va energetika"
+          ],
+          [
+            "svc",
+            "Xizmatlar va logistika"
+          ],
+          [
+            "it",
+            "IT va ma'lumotlar"
+          ]
+        ],
+        "challenges": [
+          [
+            "waste",
+            "Xarajat va isroflar yuqori"
+          ],
+          [
+            "quality",
+            "Sifat va standartlar"
+          ],
+          [
+            "energy",
+            "Energiya xarajatlari"
+          ],
+          [
+            "growth",
+            "O'sish yo'nalishi noaniq"
+          ],
+          [
+            "green",
+            "Yashil moliya va ESG"
+          ],
+          [
+            "data",
+            "Ma'lumotlar tarqoq"
+          ]
+        ]
+      },
+      "hero": {
+        "kicker": "Operatsion konsalting · Toshkent · 2020-yildan",
+        "lead": "Korxonangizdagi yashirin isroflarni topamiz, jarayonlarni Lean, Kaizen va ISO asosida tizimga solamiz va natijani raqamlarda o'lchaymiz.",
+        "cta": "Bepul diagnostika",
+        "secondary": "Keyslarni ko'rish",
+        "clients": "Mijozlar va hamkorlar"
+      },
+      "sim": {
+        "title": "Ishlab chiqarish liniyasi",
+        "live": "jonli model",
+        "before": "Oldin",
+        "after": "NGD bilan",
+        "stations": [
+          "Qabul",
+          "Kesish",
+          "Yig'ish",
+          "Nazorat",
+          "Jo'natish"
+        ],
+        "wip": "Tugallanmagan ish",
+        "defect": "Nuqson",
+        "out": "Chiqish, dona/daq",
+        "cycle": "O'rtacha sikl",
+        "stop": "To'xtash",
+        "rework": "Brak",
+        "methods": [
+          "5S",
+          "SMED",
+          "Kanban",
+          "Poka-Yoke",
+          "Kaizen"
+        ],
+        "note": "Tushuntirish uchun model: ko'rsatkichlar simulyatsiyadan real vaqtda hisoblanadi."
+      },
+      "how": {
+        "eyebrow": "Qanday ishlaymiz",
+        "title": "Besh bosqich: diagnostikadan doimiy takomillashtirishgacha",
+        "link": "Batafsil"
+      },
+      "contactBand": {
+        "title": "Biznesingizdagi isroflarni birga topamiz",
+        "text": "Bepul diagnostika suhbati: 30 daqiqa, majburiyatsiz.",
+        "phone": "Telefon",
+        "email": "E-mail",
+        "address": "Manzil"
+      }
+    },
+    "menuServices": "Barcha xizmatlar",
+    "menuCta": "Bepul konsultatsiya",
+    "scenes": {
+      "orbitKicker": "Xizmatlar tarmog'i",
+      "orbitTitle": "Sakkiz yo'nalish, bitta tizim",
+      "sphereKicker": "Metodlar",
+      "sphereTitle": "Biz o'rgatadigan va qo'llaydigan metodlar",
+      "sphereText": "Kaizen va Lean'dan ISO standartlarigacha: har bir trening amaliy mashg'ulot va korxonangiz misolida o'tadi.",
+      "sphereCore": "NGD",
+      "mapKicker": "Geografiya",
+      "mapTitle": "Loyihalarimiz xaritada",
+      "mapNote": "Toshkentdagi ofisimizdan butun O'zbekiston bo'ylab ishlaymiz. Shahar ustiga boring.",
+      "officeKicker": "Ofis",
+      "officeTitle": "Toshkent, Injobod ko'chasi, 32",
+      "tlKicker": "Tarix",
+      "tlTitle": "2020-yildan bugungacha",
+      "founded": "Next Generation Development tashkil topdi",
+      "foundedTag": "Kompaniya",
+      "cities": {
+        "tas": "Toshkent",
+        "sam": "Samarqand",
+        "fer": "Farg'ona",
+        "chi": "Chirchiq"
+      },
+      "drag": "Aylantiring"
+    },
+    "skip": "Asosiy mazmunga o'tish"
+  },
+  "services": [
+    {
+      "slug": "biznes-jarayonlari",
+      "icon": "flow",
+      "title": "Biznes jarayonlarini optimallashtirish",
+      "short": "Kaizen, Lean (tejamkor ishlab chiqarish), Six Sigma va Cheklovlar nazariyasi yordamida samaradorlikni oshirish va xarajatlarni kamaytirish.",
+      "body": "Jarayonlaringizni ish joyida o'rganamiz, qiymat oqimini xaritaga tushiramiz va isroflarni aniqlaymiz. Keyin jamoangiz bilan birga takomillashtirish rejasini joriy etamiz va natijani KPI'lar orqali o'lchaymiz.",
+      "deliverables": [
+        "Qiymat oqimi xaritasi (VSM)",
+        "Isroflar va \"tor joy\"lar ro'yxati",
+        "KPI'lar bilan takomillashtirish rejasi",
+        "Joriy etishda hamrohlik"
+      ],
+      "methods": [
+        "Kaizen",
+        "Lean",
+        "Six Sigma",
+        "TOC"
+      ],
+      "problem": "Jarayonlaringizda vaqt va pul qayerga ketayotganini bilasizmi?"
+    },
+    {
+      "slug": "energoaudit",
+      "icon": "bolt",
+      "title": "Energoaudit va energiya samaradorligi",
+      "short": "Energiya iste'molini tahlil qilib, yo'qotishlarni aniqlash: tizimlar auditi, jarayonlarni optimallashtirish va energiya xarajatlarini kamaytirish.",
+      "body": "Korxonangizdagi energiya oqimlarini o'lchaymiz va tahlil qilamiz, yo'qotishlar qayerda ekanini aniqlaymiz hamda tejash choralarini iqtisodiy asoslab beramiz.",
+      "deliverables": [
+        "Energiya balansi",
+        "Yo'qotishlar xaritasi",
+        "Tejash choralari va ularning qoplanish muddati",
+        "ISO 50001 ga tayyorgarlik"
+      ],
+      "methods": [
+        "ISO 50001",
+        "Energiya balansi",
+        "Benchmarking"
+      ],
+      "problem": "Energiya uchun keragidan ortiq to'layapsizmi?"
+    },
+    {
+      "slug": "strategiya",
+      "icon": "compass",
+      "title": "Strategiya ishlab chiqish",
+      "short": "Strategiya, biznes-reja va mahsulotni rivojlantirishni boshqarish — biznes maqsadlariga erishish, raqobatbardoshlik va barqaror o'sish uchun.",
+      "body": "Bozor va raqobatchilarni tahlil qilamiz, kompaniyaning kuchli tomonlarini aniqlaymiz va o'lchanadigan maqsadlarga ega rivojlanish strategiyasi hamda biznes-rejani tuzamiz.",
+      "deliverables": [
+        "Bozor va raqobat tahlili",
+        "Rivojlanish strategiyasi",
+        "Biznes-reja va moliyaviy model",
+        "Yo'l xaritasi va KPI'lar"
+      ],
+      "methods": [
+        "SWOT",
+        "PESTEL",
+        "Balanced Scorecard"
+      ],
+      "problem": "Kompaniya 3 yildan keyin qayerda bo'lishini aniq bilasizmi?"
+    },
+    {
+      "slug": "yashil-moliya",
+      "icon": "leaf",
+      "title": "Yashil moliya",
+      "short": "Moliya institutlari uchun yashil moliyaviy mahsulotlar va yashil kreditlash dasturlarini ishlab chiqish hamda joriy etish.",
+      "body": "Banklar va moliya institutlariga yashil kreditlash dasturlari, loyihalarni baholash mezonlari va iqlim risklarini boshqarish tizimini yaratishda yordam beramiz.",
+      "deliverables": [
+        "Yashil moliya yo'l xaritasi",
+        "Yashil loyihalar taksonomiyasi",
+        "Baholash va monitoring tartibi",
+        "Xodimlar uchun trening"
+      ],
+      "methods": [
+        "Green taxonomy",
+        "Climate risk",
+        "ESG"
+      ],
+      "problem": "Bankingiz yashil kreditlashga tayyormi?"
+    },
+    {
+      "slug": "iso-sertifikatlash",
+      "icon": "check",
+      "title": "Sertifikatlashga tayyorlash",
+      "short": "Boshqaruv tizimlarini joriy etish va ISO 9001, ISO 22000, ISO 14001, ISO 45001, ISO 50001 bo'yicha sertifikatlash jarayonini qo'llab-quvvatlash.",
+      "body": "Boshqaruv tizimini noldan quramiz yoki mavjudini standart talablariga moslashtiramiz: hujjatlar, jarayonlar, ichki audit va sertifikatlash auditiga tayyorgarlik.",
+      "deliverables": [
+        "Bo'shliqlar tahlili (gap analysis)",
+        "Tizim hujjatlari",
+        "Ichki audit",
+        "Sertifikatlash auditida hamrohlik"
+      ],
+      "methods": [
+        "ISO 9001",
+        "ISO 22000",
+        "ISO 14001",
+        "ISO 45001",
+        "ISO 50001"
+      ],
+      "problem": "Xalqaro mijozlar sizdan ISO sertifikatini so'rayaptimi?"
+    },
+    {
+      "slug": "bazaviy-daraja",
+      "icon": "chart",
+      "title": "Loyihaning bazaviy darajasi",
+      "short": "Yashil loyihalar uchun bazaviy darajani belgilash: ma'lumot yig'ish, benchmarking va ta'sirni o'lchash nazorat nuqtalarini aniqlash.",
+      "body": "Loyiha boshlanishidan oldingi holatni aniq raqamlarda qayd etamiz, shunda keyingi natijalar va ta'sirni ishonchli o'lchash mumkin bo'ladi.",
+      "deliverables": [
+        "Bazaviy ko'rsatkichlar",
+        "Benchmarking hisoboti",
+        "Monitoring rejasi"
+      ],
+      "methods": [
+        "Baseline",
+        "Benchmarking",
+        "MRV"
+      ],
+      "problem": "Yashil loyihangiz ta'sirini qanday isbotlaysiz?"
+    },
+    {
+      "slug": "malumotlar",
+      "icon": "db",
+      "title": "Ma'lumotlarni boshqarish",
+      "short": "Ma'lumotlarni yig'ish, saqlash, tahlil qilish va boshqarish tizimlarini joriy etish — qaror qabul qilish va operatsion samaradorlik uchun.",
+      "body": "Ma'lumotlar qayerdan kelishi, qanday saqlanishi va kim qanday foydalanishini tartibga solamiz hamda boshqaruv uchun hisobot va dashboardlar quramiz.",
+      "deliverables": [
+        "Ma'lumotlar arxitekturasi",
+        "Sifat va boshqaruv qoidalari",
+        "Hisobot va dashboardlar"
+      ],
+      "methods": [
+        "Data governance",
+        "BI",
+        "Data quality"
+      ],
+      "problem": "Qarorlaringiz ma'lumotga asoslanganmi?"
+    },
+    {
+      "slug": "issiqxona-gazlari",
+      "icon": "cloud",
+      "title": "Issiqxona gazlarini hisobga olish",
+      "short": "Ma'lumot yig'ish, issiqxona gazlari (CO₂) chiqindilarini hisoblash va xalqaro standartlar asosida hisobot tayyorlash.",
+      "body": "Korxona yoki loyiha bo'yicha CO₂ chiqindilarini xalqaro metodikalar asosida hisoblaymiz va ularni kamaytirish choralarini taklif qilamiz.",
+      "deliverables": [
+        "Chiqindilar inventarizatsiyasi",
+        "Hisobot",
+        "Kamaytirish choralari"
+      ],
+      "methods": [
+        "GHG Protocol",
+        "ISO 14064",
+        "Scope 1-2-3"
+      ],
+      "problem": "Korxonangiz qancha CO₂ chiqarishini bilasizmi?"
+    }
+  ],
+  "process": [
+    {
+      "num": "01",
+      "title": "Diagnostika",
+      "text": "Gemba: jarayonlarni ish joyida kuzatamiz, ma'lumot yig'amiz va bazaviy darajani belgilaymiz."
+    },
+    {
+      "num": "02",
+      "title": "Tahlil",
+      "text": "Isroflar, yo'qotishlar va \"tor joy\"larni Lean, Six Sigma va Cheklovlar nazariyasi bilan aniqlaymiz."
+    },
+    {
+      "num": "03",
+      "title": "Yechim",
+      "text": "Strategiya, yo'l xaritasi va o'lchanadigan KPI'lar bilan aniq harakat rejasini tuzamiz."
+    },
+    {
+      "num": "04",
+      "title": "Joriy etish",
+      "text": "O'zgarishlarni jamoangiz bilan birga joriy qilamiz, xodimlarni o'qitamiz, kerak bo'lsa raqamlashtiramiz."
+    },
+    {
+      "num": "05",
+      "title": "Kaizen",
+      "text": "Natijani o'lchaymiz va doimiy takomillashtirish sikliga o'tamiz — jarayon to'xtamaydi."
+    }
+  ],
+  "trainings": [
+    {
+      "tag": "Trening",
+      "title": "Biznes jarayonlarini optimallashtirish bo'yicha trening",
+      "text": "Jamoalarda operatsiyalarni soddalashtirish va tashkilotning umumiy samaradorligini oshirish uchun ko'nikma va bilimlarni rivojlantiradi.",
+      "points": [
+        "Kaizen va Lean tamoyillari",
+        "Six Sigma asoslari",
+        "Cheklovlar nazariyasi"
+      ]
+    },
+    {
+      "tag": "Trening",
+      "title": "Yashil moliyalashtirish bo'yicha trening",
+      "text": "Ekologik barqaror loyihalarni va iqlim muammolariga yechimlarni qo'llab-quvvatlaydigan moliyaviy tashabbuslarni o'rgatadi.",
+      "points": [
+        "Yashil kreditlash dasturlari",
+        "Yashil loyihalarni baholash",
+        "Iqlim risklari"
+      ]
+    },
+    {
+      "tag": "Raqamlashtirish",
+      "dark": true,
+      "title": "Biznesni raqamlashtirish",
+      "text": "Biznes jarayonlarini transformatsiya qilish, vazifalarni avtomatlashtirish va mavjud tizimlar bilan integratsiya qilish uchun raqamli texnologiyalarni joriy etish.",
+      "points": [
+        "Jarayonlarni avtomatlashtirish",
+        "Mavjud tizimlar bilan integratsiya",
+        "Bulutli yechimlar (Hippo.uz, Devops.uz bilan)"
+      ]
+    }
+  ],
+  "iso": [
+    {
+      "code": "ISO 9001",
+      "name": "Sifat menejmenti"
+    },
+    {
+      "code": "ISO 22000",
+      "name": "Oziq-ovqat xavfsizligi"
+    },
+    {
+      "code": "ISO 14001",
+      "name": "Ekologik menejment"
+    },
+    {
+      "code": "ISO 45001",
+      "name": "Mehnat xavfsizligi"
+    },
+    {
+      "code": "ISO 50001",
+      "name": "Energiya menejmenti"
+    },
+    {
+      "code": "Yashil iqtisodiyot",
+      "name": "CO₂ kamaytirish",
+      "green": true
+    }
+  ],
+  "projects": [
+    {
+      "slug": "ipak-yoli-yashil-moliya",
+      "cat": "green",
+      "date": "2025-09-30",
+      "wide": true,
+      "label": "Yashil moliya",
+      "title": "Ipak Yo'li banki uchun yashil moliya yo'l xaritasi",
+      "client": "Climate Risk Services / FMO",
+      "industry": "Bank va moliya",
+      "text": "Bank uchun yashil moliyalashtirishni rivojlantirish yo'l xaritasi ishlab chiqildi: yashil loyihalarni aniqlash, baholash va portfelni boshqarish bosqichlari.",
+      "image": "https://cdn.ngd.uz/2025/02/15/15/11/Fym9LB47JW6XkEjYVVTqoKsnNjdtnM9u_low.jpg"
+    },
+    {
+      "slug": "malumotlar-kompaniyasi-strategiyasi",
+      "cat": "strat",
+      "date": "2025-04-30",
+      "image": "https://cdn.ngd.uz/2025/02/25/11/12/cvQ7b5oWi3i050UKsAaJOR9TwqNL46KU_low.jpg",
+      "title": "Ma'lumotlarni qayta ishlash kompaniyasining rivojlanish strategiyasi",
+      "client": "NDA, Toshkent",
+      "industry": "Ma'lumotlar, fintex, innovatsiya",
+      "text": "Ma'lumotlarni qayta ishlash kompaniyasi uchun bozor tahlili va o'sish yo'nalishlarini belgilovchi rivojlanish strategiyasi tayyorlandi."
+    },
+    {
+      "slug": "unido-co2",
+      "cat": "green",
+      "date": "2025-02-28",
+      "wide": true,
+      "label": "CO₂ kamaytirish",
+      "title": "Samarqand va Farg'onadagi ikki sanoat zonasida CO₂ ni kamaytirish choralari",
+      "client": "UNIDO",
+      "industry": "Sanoat zonalari",
+      "text": "Ikki sanoat zonasidagi korxonalar uchun issiqxona gazlari chiqindilarini kamaytirish choralari ishlab chiqildi.",
+      "image": "https://cdn.ngd.uz/2025/02/15/13/29/zk5kRf4rqyynawQmvIFl1fIMLMJzE63L_low.webp"
+    },
+    {
+      "slug": "hippo-strategiya",
+      "cat": "strat",
+      "date": "2024-06-16",
+      "image": "https://cdn.ngd.uz/2025/02/17/11/31/rObglbm2IQ5pYgoTnuJMVIh4rQJauNCl_low.webp",
+      "title": "Hippo™ kompaniyasi uchun rivojlanish strategiyasi",
+      "client": "\"Art of the Business Assistance\" MChJ, Toshkent",
+      "industry": "IT va bulutli xizmatlar",
+      "text": "Bulutli xizmatlar kompaniyasi uchun rivojlanish strategiyasi va bozorga chiqish rejasi tuzildi."
+    },
+    {
+      "slug": "orzu-teks-kaizen",
+      "cat": "opt",
+      "date": "2024-05-01",
+      "image": "https://cdn.ngd.uz/2025/02/12/14/43/62zMTfMcGaa99JHpF8AyqX3TDBItaf7h_low.jpg",
+      "title": "Tejamkor ishlab chiqarish va Kaizen usullariga o'qitish",
+      "client": "\"Orzu-Teks\" MChJ, Chirchiq",
+      "industry": "To'qimachilik",
+      "text": "Korxona xodimlari tejamkor ishlab chiqarish va Kaizen usullari bo'yicha o'qitildi."
+    },
+    {
+      "slug": "index-consulting-ibt",
+      "cat": "opt",
+      "date": "2023-10-20",
+      "image": "https://cdn.ngd.uz/2025/02/12/14/18/2evL3s8A2jbpk8mLRksJFyKf9QkDYRVH_low.png",
+      "title": "Integratsiyalashgan boshqaruv tizimini ishlab chiqish va joriy etish",
+      "client": "\"Index Consulting Company\" MChJ",
+      "industry": "Energiya va suv ta'minoti",
+      "text": "Bir nechta ISO standartlari talablarini birlashtirgan integratsiyalashgan boshqaruv tizimi ishlab chiqildi va joriy etildi."
+    },
+    {
+      "slug": "sabfatek-optimallashtirish",
+      "cat": "opt",
+      "date": "2023-05-22",
+      "image": "https://cdn.ngd.uz/2025/02/12/13/20/y24HB6CADNX7f6uRgu3OLcfg5KKloyKM_low.jpg",
+      "title": "Ishlab chiqarish jarayonlarini optimallashtirish",
+      "client": "\"SABFATEK\" MChJ",
+      "industry": "Kraker va pechenye ishlab chiqarish",
+      "text": "Oziq-ovqat ishlab chiqarish liniyalaridagi jarayonlar tahlil qilinib, optimallashtirish choralari joriy etildi."
+    },
+    {
+      "slug": "uzbekiston-pochtasi",
+      "cat": "opt",
+      "date": "2023-01-12",
+      "image": "https://cdn.ngd.uz/2025/02/11/15/38/RxK2AtCudS7OSIz2WMuBXrKebgFC6tKf_low.jpg",
+      "title": "Biznes jarayonlarini optimallashtirish",
+      "client": "\"O'zbekiston pochtasi\" AJ",
+      "industry": "Pochta va logistika",
+      "text": "Pochta xizmatlari biznes jarayonlari tahlil qilinib, ularni optimallashtirish bo'yicha tavsiyalar ishlab chiqildi."
+    },
+    {
+      "slug": "geo-prof-ekologiya",
+      "cat": "green",
+      "date": "2022-10-15",
+      "image": "https://cdn.ngd.uz/2025/02/11/14/58/n16cD58SPAL6FyMW8f24qFFaOljB8RpV_low.jpg",
+      "title": "Ekologik loyihalarni ishlab chiqish",
+      "client": "\"Geo Prof Project\" MChJ, Toshkent",
+      "industry": "Ekologiya",
+      "text": "Mijoz uchun ekologik loyihalar hujjatlari ishlab chiqildi."
+    },
+    {
+      "slug": "etiqod-mebel",
+      "cat": "opt",
+      "date": "2022-07-10",
+      "image": "https://cdn.ngd.uz/2025/02/11/12/42/MziggACNF9t7n0UbpPoJKJauP36Kq4RA_low.jpg",
+      "title": "Ishlab chiqarish jarayonlarini optimallashtirish",
+      "client": "\"E'tiqod Mebel\" MChJ",
+      "industry": "Mebel ishlab chiqarish",
+      "text": "Mebel ishlab chiqarish jarayonlari tahlil qilinib, isroflarni kamaytirish choralari joriy etildi."
+    }
+  ],
+  "news": [
+    {
+      "cat": "Tadbir",
+      "title": "Next Generation Development — yashil iqtisodiyot bo'yicha Milliy konferensiya hammuassisi",
+      "url": "https://ngd.uz/ru/posts/novosti/next-generation-development-soorganizator-nacionalnoi-konferencii-po-zelyonoi-ekonomike",
+      "image": "https://cdn.ngd.uz/2025/04/22/21/18/5ebQzuRLRe03QSQcDnBYvmnRQK9yiNHR_low.jpg"
+    },
+    {
+      "cat": "Hamkorlik",
+      "title": "Devops.uz, Hippo.uz va NGD: kichik va o'rta biznes uchun bulutli yechimlar",
+      "url": "https://ngd.uz/ru/posts/novosti/devopsuz-hippouz-i-ngd-oblacnye-reseniya-dlya-podderzki-malogo-i-srednego-biznesa",
+      "image": "https://cdn.ngd.uz/2025/02/25/14/29/IT0GdnzLqUztKXI8NpLkCwa4lx6qmFQY_low.jpg"
+    },
+    {
+      "cat": "Jamoa",
+      "title": "NGD jamoasi sanoatdagi investitsiya loyihalarini tahlil qilish bo'yicha o'quv kursida",
+      "url": "https://ngd.uz/ru/posts/novosti/komanda-ngd-prosla-obucenie-po-analizu-investicionnyx-proektov-v-industrii",
+      "image": "https://cdn.ngd.uz/2025/02/25/14/39/SDDsZPF12E1qKDGymMjBrkuR5JOT5O46_low.jpg"
+    },
+    {
+      "cat": "Maqola",
+      "title": "O'zbekistonda yashil moliyalashtirish imkoniyatlari",
+      "url": "https://ngd.uz/posts",
+      "image": "https://cdn.ngd.uz/2025/03/13/06/02/dhgR8KKlZo4zsCTUHegLRkPKwKDCCRwb_low.webp"
+    }
+  ],
+  "about": {
+    "title": "Next Generation Development",
+    "paragraphs": [
+      "\"Next Generation Development\" MChJ (NGD) 2020-yilda tashkil topgan, O'zbekiston konsalting bozoridagi yosh va moslashuvchan kompaniya. Biz milliy iqtisodiyotning asosiy tarmoqlarida dinamik o'sish va diversifikatsiyaga intilamiz, kelajakda xalqaro bozorlarga chiqishni rejalashtirganmiz.",
+      "Raqobat ustunliklarimiz bozor sharoitlari o'zgarishiga tez moslashish va konsaltingning yangi yo'nalishlarini o'zlashtirishga yordam beradi."
+    ],
+    "green": [
+      "Moliya institutlari uchun \"yashil\" loyihalarni ishlab chiqish",
+      "Yashil texnologiyalarni joriy etishni qo'llab-quvvatlovchi siyosat tahlili",
+      "Sanoatdagi CO₂ chiqindilarini tahlil qilish va kamaytirish strategiyalari",
+      "Energiya samaradorligi va qayta tiklanuvchi energetika bo'yicha inson kapitalini rivojlantirish"
+    ],
+    "values": [
+      {
+        "title": "Joyida o'rganamiz",
+        "text": "Xulosani ofisda emas, jarayon sodir bo'ladigan joyda chiqaramiz."
+      },
+      {
+        "title": "Raqam bilan gapiramiz",
+        "text": "Har bir tavsiya o'lchanadigan ko'rsatkichga bog'langan."
+      },
+      {
+        "title": "Birga joriy etamiz",
+        "text": "Hisobot topshirib ketmaymiz, o'zgarishni jamoangiz bilan birga amalga oshiramiz."
+      }
+    ]
+  },
+  "team": [
+    {
+      "initials": "AM",
+      "name": "Abdulaziz Muxamedov",
+      "role": "Boshqaruvchi hamkor"
+    },
+    {
+      "initials": "AX",
+      "name": "Abror Xoshimov",
+      "role": "Katta konsultant, strategiya va operatsiyalar"
+    },
+    {
+      "initials": "YK",
+      "name": "Yevgeniy Kasikov",
+      "role": "Katta konsultant, ma'lumotlarni boshqarish"
+    },
+    {
+      "initials": "JA",
+      "name": "Javohir Adilov",
+      "role": "Biznes tahlilchi"
+    }
+  ],
+  "partners": [
+    "https://cdn.ngd.uz/2025/02/25/15/10/ecDq6l7TfqnuRpw46Bhe0qmwwFoHDpIw_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/15/55/N8KMnk5LKOA42LxQEef77SdBVXiicGXr_low.png",
+    "https://cdn.ngd.uz/2025/02/25/15/55/q0748uzjl2PZmJfrVvpF65Am16THnFBM_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/16/15/pfKJQu3htnmwpooyBvc8chEPUg1FYpPF_low.png",
+    "https://cdn.ngd.uz/2025/02/25/15/55/Rk2TJyRMA1xZEejXvl325AeyWaYXRdrT_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/16/10/cJwzYYyENguaj97X9Xe2iOBIOe9ap08r_low.png",
+    "https://cdn.ngd.uz/2025/02/25/15/55/ExRy9afXACZng7lC4bXMS3prGenVSBYF_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/16/52/NJkY8Byu9m9TQt0OeWKuj5ge2dglcu7X_low.svg",
+    "https://cdn.ngd.uz/2025/02/25/15/27/DvPjb73sbx886P0Lc2EKsE9C5jUhmjwk_low.jpg",
+    "https://cdn.ngd.uz/2025/02/25/15/55/PfO7kN52WXrVumc7RJ5nwpafUYOJqwWv_low.jpeg",
+    "https://cdn.ngd.uz/2026/09/13/17/54/XUswuxdNSPlMSiDaneL7eNKaQdnwIcC2_low.png",
+    "https://cdn.ngd.uz/2026/09/13/17/58/7d6KPm9m1babvoI7zb4QFuoKW3cBPX1Y_low.png",
+    "https://cdn.ngd.uz/2026/09/13/18/00/G103rvneEcuQAFtgcvEnr36VBHCj8KZQ_low.webp",
+    "https://cdn.ngd.uz/2026/09/13/18/01/SZnt3h2xXDFKc4dQECyQrY7Lk82OKEhz_low.png",
+    "https://cdn.ngd.uz/2026/09/13/18/03/KTybcs2xaYJ5Ah4DdVDHxE9zlKxLheBU_low.jpg",
+    "https://cdn.ngd.uz/2026/09/13/18/07/9VIqGsdcthZy6oIh2hg8mPY8j0Jm7ed7_low.jpg",
+    "https://cdn.ngd.uz/2026/09/13/18/10/sP1qmnvXe1XKIwTB45x1V87zYR5CJzbM_low.png",
+    "https://cdn.ngd.uz/2026/09/13/18/15/sId776ElmZFZAFal8dUsAlfhrrAZO25V_low.jpg",
+    "https://cdn.ngd.uz/2026/09/13/18/17/ybnbSXomaKyBftlLxPbThG5PoefTr8yY_low.png",
+    "https://cdn.ngd.uz/2026/09/15/08/57/qTsoH4kLKY7noedStSOA966Z4thiAapB_low.png"
+  ],
+  "heroImage": "https://cdn.ngd.uz/2025/02/10/11/36/Y0aslUlMCZqUucz9zU5YMINCCWNhMwWt_low.jpg"
+}
