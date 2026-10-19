@@ -30,6 +30,13 @@ jobs:
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
         run: node build.mjs
+      - name: Prototipni yig'ish (/proto/)
+        working-directory: web
+        env:
+          PROTO_OUT: dist/proto
+        run: |
+          npm ci
+          node build-proto.mjs
       - uses: actions/upload-pages-artifact@v3
         with:
           path: web/dist
