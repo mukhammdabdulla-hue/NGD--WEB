@@ -1,0 +1,13 @@
+{
+  "name": "ngd-web",
+  "version": "3.0.0",
+  "private": true,
+  "type": "module",
+  "description": "NGD (ngd.uz) sayti: statik, tez, kutubxonasiz",
+  "scripts": {
+    "build": "node build.mjs",
+    "preview": "node build.mjs --preview",
+    "serve": "node serve.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

@@ -5,3 +5,6 @@ node_modules
 .claude
 *.tsbuildinfo
 ngd-app/data/arizalar.json
+
+# Yangi sayt yig'ilmasi
+web/dist/
