@@ -11,6 +11,9 @@ import { makeCtx } from './ui.mjs';
 import { renderPage } from './layout.mjs';
 import { render as home } from './pages/home.mjs';
 import { stub } from './pages/stub.mjs';
+import { render as jarayon } from './pages/process.mjs';
+import { render as natijalar } from './pages/results.mjs';
+import { render as loyiha } from './pages/project.mjs';
 import { render as services } from './pages/services.mjs';
 import { render as service } from './pages/service.mjs';
 
@@ -46,9 +49,9 @@ const routes = [
   { route: '', mod: home },
   { route: 'xizmatlar', mod: services },
   ...D.services.map((s) => ({ route: `xizmatlar/${s.slug}`, mod: (c) => service(c, s.slug) })),
-  { route: 'natijalar', mod: (c) => stub(c, { page: 'results', active: 'natijalar', title: 'Natijalar', kicker: 'Natijalar', h1: ['Bajarilgan loyihalar'], num: '02' }) },
-  ...D.projects.map((p) => ({ route: `natijalar/${p.slug}`, mod: (c) => stub(c, { page: 'project', active: 'natijalar', title: p.client, kicker: 'Loyiha', h1: [p.title] }) })),
-  { route: 'jarayon', mod: (c) => stub(c, { page: 'process', active: 'jarayon', title: 'Jarayon', kicker: 'Jarayon', h1: ['Ish jarayonimiz'], num: '03' }) },
+  { route: 'natijalar', mod: natijalar },
+  ...D.projects.map((p) => ({ route: `natijalar/${p.slug}`, mod: (c) => loyiha(c, p.slug) })),
+  { route: 'jarayon', mod: jarayon },
   { route: 'kompaniya', mod: (c) => stub(c, { page: 'company', active: 'kompaniya', title: 'Kompaniya', kicker: 'Kompaniya', h1: ['Biz haqimizda'], num: '04' }) },
   { route: 'aloqa', mod: (c) => stub(c, { page: 'contact', active: 'aloqa', title: 'Aloqa', kicker: 'Aloqa', h1: ["Biz bilan bog'laning"], num: '05' }) },
 ];

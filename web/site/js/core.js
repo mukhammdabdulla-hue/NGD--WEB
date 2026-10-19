@@ -71,6 +71,7 @@ export function initReveals(scope = document) {
   if (reduce) {
     $$('.ln > .in', scope).forEach((e) => (e.style.visibility = 'visible'));
     $$('[data-rv]', scope).forEach((e) => (e.style.opacity = 1));
+    $$('.od', scope).forEach((od) => gsap.set($('.od-col', od), { yPercent: -(+od.dataset.d) * 10 }));
     return;
   }
   $$('[data-lines]', scope).forEach((el) => { if (!el.closest('[data-manual]')) linesIn(el); });

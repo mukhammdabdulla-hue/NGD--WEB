@@ -241,6 +241,9 @@ const loaders = {
   home: () => import('./pages/home.js'),
   services: () => import('./pages/services.js'),
   service: () => import('./pages/service.js'),
+  process: () => import('./pages/process.js'),
+  results: () => import('./pages/results.js'),
+  project: () => import('./pages/project.js'),
   generic: () => import('./pages/generic.js'),
 };
 
