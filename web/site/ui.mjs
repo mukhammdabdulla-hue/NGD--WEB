@@ -58,3 +58,7 @@ export function coverArt(p) {
 export function cover(p, cls = '') {
   return `<div class="cv cv-${p.cat} ${cls}">${coverArt(p)}${p.image ? `<img src="${esc(p.image)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onload="this.classList.add('on')" onerror="this.remove()">` : ''}</div>`;
 }
+
+export const TICK = '<svg class="ic tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" pathLength="1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+export const chips = (list) => `<ul class="chips">${list.map((m) => `<li class="mono">${esc(m)}</li>`).join('')}</ul>`;
+export const pad2 = (n) => String(n).padStart(2, '0');

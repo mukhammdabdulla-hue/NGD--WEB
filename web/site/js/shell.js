@@ -98,7 +98,8 @@ function leave(url, label) {
   store.set('ngd-nav', JSON.stringify({ n: label[0], t: label[1] }));
   $('.cv-n', curtain).textContent = label[0]; $('.cv-t', curtain).textContent = label[1];
   lenis?.stop();
-  const go = () => { location.href = url; };
+  // Brauzer o'tishga ruxsat bermasa (masalan, ko'rinish oynasida), parda yopilib qolmasin
+  const go = () => { location.href = url; setTimeout(() => { navBusy = false; store.del('ngd-nav'); gsap.set(curtain, { visibility: 'hidden' }); gsap.set($('main'), { clearProps: 'transform' }); lenis?.start(); }, 4000); };
   if (reduce) return go();
   gsap.set(curtain, { visibility: 'visible', clipPath: 'inset(100% 0% 0% 0%)' });
   gsap.set($('.cv-lb', curtain), { yPercent: 30, opacity: 0 });
@@ -238,6 +239,8 @@ function initFooter() {
 // ---------------------------------------------------------------- Ishga tushirish
 const loaders = {
   home: () => import('./pages/home.js'),
+  services: () => import('./pages/services.js'),
+  service: () => import('./pages/service.js'),
   generic: () => import('./pages/generic.js'),
 };
 

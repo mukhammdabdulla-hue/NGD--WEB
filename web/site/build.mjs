@@ -11,6 +11,8 @@ import { makeCtx } from './ui.mjs';
 import { renderPage } from './layout.mjs';
 import { render as home } from './pages/home.mjs';
 import { stub } from './pages/stub.mjs';
+import { render as services } from './pages/services.mjs';
+import { render as service } from './pages/service.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const WEB = join(HERE, '..');
@@ -42,8 +44,8 @@ cpSync(join(HERE, 'favicon.svg'), join(OUT, 'favicon.svg'));
 // ---- Sahifalar
 const routes = [
   { route: '', mod: home },
-  { route: 'xizmatlar', mod: (c) => stub(c, { page: 'services', active: 'xizmatlar', title: 'Xizmatlar', kicker: 'Xizmatlar', h1: ["Sakkiz yo'nalish."], num: '01' }) },
-  ...D.services.map((s) => ({ route: `xizmatlar/${s.slug}`, mod: (c) => stub(c, { page: 'service', active: 'xizmatlar', title: s.title, kicker: 'Xizmat', h1: [s.title] }) })),
+  { route: 'xizmatlar', mod: services },
+  ...D.services.map((s) => ({ route: `xizmatlar/${s.slug}`, mod: (c) => service(c, s.slug) })),
   { route: 'natijalar', mod: (c) => stub(c, { page: 'results', active: 'natijalar', title: 'Natijalar', kicker: 'Natijalar', h1: ['Bajarilgan loyihalar'], num: '02' }) },
   ...D.projects.map((p) => ({ route: `natijalar/${p.slug}`, mod: (c) => stub(c, { page: 'project', active: 'natijalar', title: p.client, kicker: 'Loyiha', h1: [p.title] }) })),
   { route: 'jarayon', mod: (c) => stub(c, { page: 'process', active: 'jarayon', title: 'Jarayon', kicker: 'Jarayon', h1: ['Ish jarayonimiz'], num: '03' }) },
@@ -58,7 +60,7 @@ for (const { route, mod } of routes) {
   const ctx = makeCtx(route, LINK_INDEX);
   const r = mod(ctx);
   write(join(route, 'index.html'), renderPage({ ctx, ...r, ...opts() }));
-  if (route === '') write('artifact.html', renderPage({ ctx, ...r, ...opts({ fragment: true }) }));
+  if (route === '') write('artifact.html', renderPage({ ctx, ...r, ...opts({ fragment: true }), title: 'NGD prototipi' }));
 }
 // 404: mutlaq yo'llar (istalgan chuqurlikdan ochiladi)
 {

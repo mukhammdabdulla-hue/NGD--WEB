@@ -2,6 +2,8 @@
 import {
   gsap, ScrollTrigger, SplitText, $, $$, root, reduce, fine, mobile, clamp, lerp, mask, marquee, registerPin, scrollToY, scroller,
 } from '../core.js';
+import { setupProc } from '../parts/proc.js';
+import { setupSvcList } from '../parts/svclist.js';
 
 export default function init() {
   const hero = $('.hero'), heroIn = $('.hero-in'), canvas = $('.hero-gl');
@@ -185,54 +187,7 @@ export default function init() {
     });
   }
 
-  // ---------------------------------------------------------------- Xizmatlar: kursorga ergashuvchi chizma
-  function setupServices() {
-    const sec = $('.svc'), pv = $('.svc-pv'), inn = $('.svc-pv-in');
-    if (!fine || reduce) return;
-    const xTo = gsap.quickTo(pv, 'x', { duration: 0.7, ease: 'q' }), yTo = gsap.quickTo(pv, 'y', { duration: 0.7, ease: 'q' });
-    const place = (e) => {
-      const w = pv.offsetWidth, h = pv.offsetHeight;
-      xTo(clamp(e.clientX + 36, 12, innerWidth - w - 12)); yTo(clamp(e.clientY - h / 2, 12, innerHeight - h - 12));
-    };
-    let shown = false;
-    $$('.svc-row a', sec).forEach((a) => {
-      a.addEventListener('pointerenter', (e) => {
-        const src = $('.sr-draw', a); if (!src) return;
-        const s = src.cloneNode(true); s.classList.remove('sr-draw'); s.removeAttribute('style');
-        inn.replaceChildren(s);
-        const paths = $$('.d', s);
-        gsap.fromTo(paths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'qio', stagger: 0.05, overwrite: true });
-        gsap.fromTo($$('.lb', s), { opacity: 0 }, { opacity: 1, duration: 0.6, delay: 0.5 });
-        if (!shown) { gsap.set(pv, { x: clamp(e.clientX + 36, 12, innerWidth - 400), y: e.clientY - 120 }); }
-        shown = true;
-        gsap.set(pv, { visibility: 'visible' });
-        gsap.to(pv, { opacity: 1, scale: 1, duration: 0.5, ease: 'q', overwrite: 'auto' });
-      });
-      a.addEventListener('pointermove', place);
-      a.addEventListener('pointerleave', () => { gsap.to(pv, { opacity: 0, scale: 0.94, duration: 0.4, ease: 'q', onComplete: () => { if (!+gsap.getProperty(pv, 'opacity')) { gsap.set(pv, { visibility: 'hidden' }); shown = false; } } }); });
-    });
-    gsap.set(pv, { scale: 0.94, transformOrigin: '0 50%' });
-  }
-
-  // ---------------------------------------------------------------- Jarayon: besh bosqich chizig'i
-  function setupProc() {
-    const steps = $$('.ps'), track = $('.proc-track i'), wrap = $('.proc-steps');
-    if (reduce) { steps.forEach((s) => s.classList.add('on')); gsap.set(track, { scaleX: 1, scaleY: 1 }); return; }
-    const mm = gsap.matchMedia();
-    mm.add({ v: '(max-width: 760px)', h: '(min-width: 761px)' }, (c) => {
-      const vert = c.conditions.v;
-      gsap.fromTo(track, vert ? { scaleY: 0, scaleX: 1 } : { scaleX: 0, scaleY: 1 }, {
-        [vert ? 'scaleY' : 'scaleX']: 1, ease: 'none',
-        scrollTrigger: {
-          trigger: wrap, start: vert ? 'top 70%' : 'top 72%', end: vert ? 'bottom 70%' : 'top 30%', scrub: true,
-          onUpdate: (s) => steps.forEach((el, i) => el.classList.toggle('on', s.progress >= i / (steps.length - 1) - 0.001)),
-        },
-      });
-    });
-    gsap.from($$('.ps-t, .ps-x, .ps-n'), { opacity: 0, y: 28, duration: 1.3, ease: 'q', stagger: 0.04, scrollTrigger: { trigger: wrap, start: 'top 85%', once: true } });
-  }
-
-  setupHero(); setupAbout(); setupWaste(); setupModel(); setupServices(); setupProc();
+  setupHero(); setupAbout(); setupWaste(); setupModel(); setupSvcList($('.svc')); setupProc();
 
   if (reduce) {
     gsap.set(titleLines, { yPercent: 0 });

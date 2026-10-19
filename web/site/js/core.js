@@ -59,6 +59,7 @@ const IN = { duration: 1.5, ease: 'q' };
 export function linesIn(el, { start = 'top 88%', delay = 0, stagger = 0.1, manual = false } = {}) {
   const inn = $$('.ln > .in', el);
   if (!inn.length) return null;
+  if (reduce) { gsap.set(inn, { visibility: 'visible' }); return () => gsap.timeline(); }
   gsap.set(inn, { yPercent: 115, visibility: 'visible' });
   const play = () => gsap.to(inn, { yPercent: 0, ...IN, stagger, delay });
   if (manual) return play;
