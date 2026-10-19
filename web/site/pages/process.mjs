@@ -59,7 +59,7 @@ export function render(ctx) {
   const cards = proc.map((p, i) => `<article class="pc${i ? '' : ' is-on'}" data-i="${i}" aria-label="${esc(p.title)}">
         <div class="pc-txt">
           <p class="pc-n" data-p>${p.num}<i> / ${pad2(proc.length)}</i></p>
-          <h3 class="pc-t" data-p>${esc(p.title)}</h3>
+          <h2 class="pc-t" data-p>${esc(p.title)}</h2>
           <p class="pc-x" data-p>${esc(p.text)}</p>
           <div class="pc-o" data-p><p class="mono">${esc(D.ui.service.deliverables)}</p><p class="pc-ot">${TICK}<span>${esc(STAGE[i].out)}</span></p></div>
           <div data-p>${chips(STAGE[i].tags)}</div>
@@ -69,10 +69,10 @@ export function render(ctx) {
   const stages = `<section class="pr-st sec-light" id="bosqichlar" data-theme="light" aria-label="${esc(pr.title)}">
   <div class="pr-pin">
     <div class="wrap pr-grid">
-      <aside class="pr-nav">
+      <div class="pr-nav">
         ${kick('Bosqichlar')}
         <ol><li class="pr-bar" aria-hidden="true"><i></i></li>${nav}</ol>
-      </aside>
+      </div>
       <div class="pr-stage">${cards}</div>
     </div>
   </div>

@@ -67,10 +67,13 @@ function setMenu(open) {
   burger.setAttribute('aria-expanded', String(open));
   burger.setAttribute('aria-label', open ? 'Menyuni yopish' : 'Menyuni ochish');
   menu.setAttribute('aria-hidden', String(!open));
+  // menyu ochiq: orqadagi sahifa klaviatura va ekran o'quvchi uchun yopiladi, fokus menyuga o'tadi
+  $$('main, footer, .skip').forEach((e) => { e.inert = open; });
   const inn = $$('.menu-nav .in', menu), foot = $('.menu-foot', menu);
   if (open) {
     root.classList.add('menu-open'); lenis?.stop();
     gsap.set(menu, { visibility: 'visible' });
+    $('.menu-nav a', menu)?.focus({ preventScroll: true });
     gsap.set(inn, { yPercent: 115, visibility: 'visible' });
     gsap.set(foot, { opacity: 0, y: 20 });
     gsap.timeline({ onComplete: () => { menuBusy = false; } })
@@ -78,6 +81,7 @@ function setMenu(open) {
       .to(inn, { yPercent: 0, duration: 1.2, ease: 'q', stagger: 0.07 }, 0.3)
       .to(foot, { opacity: 1, y: 0, duration: 1, ease: 'q' }, 0.6);
   } else {
+    if (menu.contains(document.activeElement)) burger.focus({ preventScroll: true });
     gsap.timeline({ onComplete: () => { menuBusy = false; root.classList.remove('menu-open'); gsap.set(menu, { visibility: 'hidden' }); lenis?.start(); } })
       .to(menu, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.8, ease: 'qio' }, 0)
       .to(inn, { yPercent: -30, opacity: 0, duration: 0.6, ease: 'qin' }, 0)

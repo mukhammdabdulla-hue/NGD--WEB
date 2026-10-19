@@ -139,7 +139,7 @@ export function render(ctx) {
       ${kick(imp.eyebrow, 'g')}
       <h2 class="h-m" data-lines>${lines(['Lean va Kaizen', 'to\'g\'ri joriy etilganda'])}</h2>
     </div>
-    <dl class="res-nums" data-odo>${imp.items.map((it) => `<div class="rn"><dt class="num"><span class="pfx">${it.prefix || ''}</span>${odometer(it.value)}<span class="suf">${it.suffix}</span></dt><dd class="mono">${esc(it.label)}</dd><p>${esc(it.text)}</p></div>`).join('')}</dl>
+    <dl class="res-nums" data-odo>${imp.items.map((it) => `<div class="rn"><dt class="num"><span class="pfx">${it.prefix || ''}</span>${odometer(it.value)}<span class="suf">${it.suffix}</span></dt><dd class="mono">${esc(it.label)}</dd><dd class="rn-x">${esc(it.text)}</dd></div>`).join('')}</dl>
     <p class="res-note mono" data-rv>${esc(imp.note)}</p>
     <div class="res-head">
       <h3 class="h-s" data-rv>Tanlangan loyihalar</h3>

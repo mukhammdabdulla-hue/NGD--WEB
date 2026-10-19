@@ -177,7 +177,7 @@
 .res .num { color: #fff; }
 .res .suf, .res .pfx { color: var(--green-l); }
 .rn dd { margin-top: 18px; color: rgba(255,255,255,.5); }
-.rn p { margin-top: 8px; font-size: 15px; line-height: 1.45; color: rgba(255,255,255,.7); max-width: 22ch; }
+.rn .rn-x { margin-top: 8px; font-size: 15px; line-height: 1.45; color: rgba(255,255,255,.7); max-width: 22ch; }
 .res-note { margin-top: 26px; color: rgba(255,255,255,.34); }
 .res-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; margin-top: clamp(80px, 14vh, 160px); margin-bottom: 40px; padding-bottom: 22px; border-bottom: 1px solid var(--line-d); }
 .res-cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gut); align-items: start; }

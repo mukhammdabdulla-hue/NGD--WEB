@@ -1,5 +1,5 @@
 // Umumiy qobiq: yuklash ekrani, sahifa o'tishi pardasi, sarlavha, menyu, footer.
-import { D, CONTACT, t } from './data.mjs';
+import { D, CONTACT, SITE_URL, t } from './data.mjs';
 import { esc, LOGO, ARROW, ARROW_UR, lines, kick } from './ui.mjs';
 
 const NAV = [['xizmatlar', 'Xizmatlar', '01'], ['natijalar', 'Natijalar', '02'], ['jarayon', 'Jarayon', '03'], ['kompaniya', 'Kompaniya', '04'], ['aloqa', 'Aloqa', '05']];
@@ -79,6 +79,14 @@ ${body}
 ${footer(ctx, { cta })}`;
   const cssHref = ctx.asset(css), jsHref = ctx.asset(js);
   const robots = noindex ? '<meta name="robots" content="noindex, nofollow">' : '';
+  const url = SITE_URL + '/' + (ctx.route ? ctx.route + '/' : '');
+  const seo = noindex ? '' : `<link rel="canonical" href="${url}">
+<meta property="og:url" content="${url}"><meta property="og:site_name" content="NGD"><meta name="twitter:card" content="summary">`;
+  const ld = noindex || page !== 'home' ? '' : `\n<script type="application/ld+json">${JSON.stringify({
+    '@context': 'https://schema.org', '@type': 'Organization', name: 'Next Generation Development (NGD)', url: SITE_URL + '/', logo: SITE_URL + '/favicon.svg',
+    email: CONTACT.email, telephone: CONTACT.phone, sameAs: [CONTACT.telegram],
+    address: { '@type': 'PostalAddress', streetAddress: "Injobod ko'chasi, 32", addressLocality: 'Toshkent', addressCountry: 'UZ' },
+  }).replace(/</g, '\\u003c')}</script>`;
   if (fragment) {
     return `<title>${esc(title)}</title>
 <link rel="stylesheet" href="${cssHref}">
@@ -97,7 +105,7 @@ ${shell}
 <meta name="description" content="${esc(desc)}">
 <meta name="theme-color" content="#020b16">
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:locale" content="uz_UZ">
-${robots}
+${robots}${seo}${ld}
 <link rel="icon" href="${ctx.asset('favicon.svg')}" type="image/svg+xml">
 <link rel="preload" href="${ctx.asset('fonts/onest-latin-wght-normal.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${cssHref}">

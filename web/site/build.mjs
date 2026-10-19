@@ -6,7 +6,7 @@ import { build } from 'esbuild';
 import { rmSync, mkdirSync, cpSync, writeFileSync, readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { D } from './data.mjs';
+import { D, SITE_URL } from './data.mjs';
 import { makeCtx } from './ui.mjs';
 import { renderPage } from './layout.mjs';
 import { render as home } from './pages/home.mjs';
@@ -72,6 +72,13 @@ for (const { route, mod } of routes) {
   const ctx = { route: '404', depth: 0, up: BASE, href: (to = '') => BASE + (to ? to.replace(/\/?$/, '/') : ''), asset: (f) => BASE + f };
   const r = notFound(ctx);
   write('404.html', renderPage({ ctx, ...r, ...opts({ noindex: true }) }));
+}
+
+// Qidiruv tizimlari uchun (faqat ochiq nashrda)
+if (!NOINDEX) {
+  const urls = routes.map(({ route }) => `  <url><loc>${SITE_URL}/${route ? route + '/' : ''}</loc></url>`).join('\n');
+  write('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`);
+  write('robots.txt', `User-agent: *\nAllow: /\nSitemap: ${SITE_URL}/sitemap.xml\n`);
 }
 
 const kb = (b) => (b / 1024).toFixed(1).padStart(7);
