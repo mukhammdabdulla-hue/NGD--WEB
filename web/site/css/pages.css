@@ -1,0 +1,5 @@
+/* Ichki sahifalar uchun umumiy: kirish ekrani */
+.phero { position: relative; min-height: 100vh; min-height: 100svh; background: var(--night); color: #fff; display: flex; align-items: flex-end; padding: calc(var(--hdr) + 8vh) 0 clamp(40px, 8vh, 96px); }
+.phero .wrap { width: 100%; display: grid; gap: 28px; }
+.phero .kick { color: rgba(255,255,255,.62); }
+.phero .lead { color: rgba(255,255,255,.72); max-width: 40ch; }

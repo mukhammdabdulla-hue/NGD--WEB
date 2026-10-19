@@ -1,0 +1,263 @@
+// Bosh sahifa: hero (3D oqim), kompaniya, 7 isrof (gorizontal), jonli liniya, xizmatlar, jarayon.
+import {
+  gsap, ScrollTrigger, SplitText, $, $$, root, reduce, fine, mobile, clamp, lerp, mask, marquee, registerPin, scrollToY, scroller,
+} from '../core.js';
+
+export default function init() {
+  const hero = $('.hero'), heroIn = $('.hero-in'), canvas = $('.hero-gl');
+  const titleLines = $$('.hero-title .ht').map(mask);
+  const phs = $$('.ph').map((p) => ({ el: p, inn: mask(p) }));
+  const caps = $$('.cap');
+  const states = $$('.states li:not(.st-bar)');
+  const stBar = $('.st-bar i');
+  const gateEls = $$('.gate');
+  let flow = null;
+
+  gsap.set(phs.map((p) => p.inn), { yPercent: 150 });
+  gsap.set(titleLines, { yPercent: 150 });
+  phs.forEach((p) => (p.el.style.visibility = 'visible'));
+  gsap.set(caps, { autoAlpha: 0, y: 14 });
+  gsap.set($('.hero-title'), { autoAlpha: 1 });
+
+  // ---------------------------------------------------------------- WebGL sahna (kechiktirib)
+  const flowReady = (async () => {
+    try {
+      if (!document.createElement('canvas').getContext('webgl2')) throw new Error('webgl2 yo\'q');
+      const { createFlow } = await import('../scenes/flow.js');
+      flow = createFlow(canvas, { mobile: mobile(), reduce, labels: gateEls });
+      root.classList.add('gl-on');
+      if (!reduce) flow.reveal = 0;
+    } catch (e) {
+      console.warn('WebGL ishga tushmadi:', e);
+      root.classList.add('no-gl');
+    }
+  })();
+
+  // ---------------------------------------------------------------- Hero: skroll rejissurasi
+  function setupHero() {
+    const story = () => hero.offsetHeight - 2 * heroIn.offsetHeight;
+    const tl = gsap.timeline({
+      defaults: { ease: 'none' },
+      scrollTrigger: {
+        trigger: hero, start: 'top top', end: () => '+=' + story(), scrub: 0.5, invalidateOnRefresh: true,
+        onUpdate(self) {
+          const p = self.progress;
+          flow?.setProgress(p);
+          const idx = p < 0.1 ? 0 : p < 0.4 ? 1 : p < 0.68 ? 2 : 3;
+          states.forEach((li, i) => li.classList.toggle('on', i === idx));
+        },
+      },
+    });
+    registerPin(tl.scrollTrigger);
+    const inn = phs.map((p) => p.inn);
+    tl.to(titleLines, { yPercent: -150, duration: 0.075, ease: 'qin', stagger: 0.012 }, 0.05)
+      .to($('.hero-lead'), { opacity: 0, y: -16, duration: 0.06 }, 0.05)
+      .to($('.cue'), { opacity: 0, duration: 0.05 }, 0.03)
+      .to($('.hero-kicker'), { opacity: 0, x: 16, duration: 0.06 }, 0.06);
+    const seq = [[0.12, 0.34], [0.43, 0.62], [0.7, 2]];
+    seq.forEach(([a, b], i) => {
+      tl.fromTo(inn[i], { yPercent: 150 }, { yPercent: 0, duration: 0.1, ease: 'q' }, a);
+      tl.to(caps[i], { autoAlpha: 1, y: 0, duration: 0.07, ease: 'q' }, a + 0.03);
+      if (b < 2) {
+        tl.to(inn[i], { yPercent: -150, duration: 0.07, ease: 'qin' }, b);
+        tl.to(caps[i], { autoAlpha: 0, y: -10, duration: 0.05 }, b);
+      }
+    });
+    tl.to(stBar, { scaleY: 1, duration: 1 }, 0);
+    tl.to({}, { duration: 1 }, 0);
+    // qopqoq: "Kompaniya" bo'limi hero ustidan suriladi
+    gsap.to(heroIn, { '--dim': 0.62, scale: 0.94, ease: 'none', scrollTrigger: { trigger: '.about', start: 'top bottom', end: 'top top', scrub: true } });
+  }
+
+  // ---------------------------------------------------------------- Kompaniya: marquee
+  function setupAbout() {
+    marquee($('.about'));
+    gsap.from($$('.stat dd, .stats .suf'), { opacity: 0, y: 12, duration: 1.2, ease: 'q', stagger: 0.06, scrollTrigger: { trigger: '.stats', start: 'top 88%', once: true } });
+  }
+
+  // ---------------------------------------------------------------- 7 isrof: gorizontal skroll
+  function setupWaste() {
+    const sec = $('.waste'), track = $('.w-track');
+    const panels = $$('.w-panel'), ticks = $$('.w-tick'), cur = $('.w-cur'), prog = $('.w-prog');
+    const dist = () => Math.max(0, track.scrollWidth - innerWidth);
+    const hor = gsap.to(track, {
+      x: () => -dist(), ease: 'none',
+      scrollTrigger: {
+        trigger: sec, pin: true, scrub: 0.7, start: 'top top', end: () => '+=' + dist() * 0.8, invalidateOnRefresh: true, anticipatePin: 1,
+        onUpdate() {
+          let best = 0, bd = 1e9;
+          panels.forEach((p, i) => { const r = p.getBoundingClientRect(); const c = Math.abs(r.left + r.width * 0.3 - innerWidth * 0.5); if (c < bd) { bd = c; best = i + 1; } });
+          const done = $('.w-done').getBoundingClientRect().left < innerWidth * 0.55;
+          const n = done ? 7 : best;
+          cur.textContent = String(n).padStart(2, '0');
+          ticks.forEach((t, i) => t.classList.toggle('on', i < n));
+          prog.classList.toggle('done', done);
+          cur.style.color = done ? 'var(--green)' : '';
+        },
+      },
+    });
+    registerPin(hor.scrollTrigger);
+    const title = $('.w-title'), tin = mask(title);
+    gsap.set(tin, { yPercent: 150 });
+    gsap.to(tin, { yPercent: 0, duration: 1.5, ease: 'q', scrollTrigger: { trigger: sec, start: 'top 72%', once: true } });
+    gsap.from([$('.w-lead'), $('.w-hint')], { opacity: 0, y: 24, duration: 1.4, ease: 'q', stagger: 0.12, scrollTrigger: { trigger: sec, start: 'top 60%', once: true } });
+
+    panels.forEach((p, i) => {
+      const fill = $('.w-f', p), paths = $$('.d', p), lbs = $$('.lb', p);
+      const ptl = gsap.timeline({ defaults: { ease: 'none' } });
+      ptl.fromTo(fill, { clipPath: 'inset(100% 0% 0% 0%)' }, { clipPath: 'inset(0% 0% 0% 0%)', duration: 0.55 }, 0)
+        .fromTo(paths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 0.5, stagger: 0.06 }, 0.1)
+        .to(lbs, { opacity: 1, duration: 0.15 }, 0.65)
+        .fromTo(p.querySelectorAll('.w-tag, .w-name, .w-text'), { opacity: 0.12, y: 20 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.07 }, 0);
+      ScrollTrigger.create({
+        trigger: p, containerAnimation: hor, start: 'left 78%', end: 'left 18%', scrub: true, animation: ptl,
+        onUpdate: (s) => ticks[i].style.setProperty('--k', s.progress.toFixed(3)),
+      });
+    });
+    const dn = $('.w-done');
+    const dtl = gsap.timeline({ defaults: { ease: 'none' } });
+    dtl.fromTo($('.w-zero'), { yPercent: 40, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.6 }, 0)
+      .fromTo(dn.querySelectorAll('.w-tag, .w-name, .w-text, .btn'), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }, 0.2);
+    ScrollTrigger.create({ trigger: dn, containerAnimation: hor, start: 'left 90%', end: 'left 30%', scrub: true, animation: dtl });
+  }
+
+  // ---------------------------------------------------------------- Jonli liniya: oldin / keyin ajratgichi
+  function setupModel() {
+    const sec = $('.model'), stage = $('.mdl-stage', sec), cv = $('.mdl-cv', sec), knob = $('.mdl-split', sec);
+    const ta = $('.ml-a', sec), tb = $('.ml-b', sec);
+    const k = Object.fromEntries($$('[data-k]', sec).map((e) => [e.dataset.k, e]));
+    const cfg = JSON.parse($('[data-sim]', sec).textContent);
+    let line = null, p = 0, target = 0, st = null, ranges = [0, 1];
+
+    import('../scenes/line.js').then(({ createLine }) => {
+      line = createLine(cv, cfg, { reduce });
+      if (reduce) { line.warm(); apply(0.5); return; }
+      new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? line.start() : line.stop())), { threshold: 0.05 }).observe(sec);
+      line.setSplit(p);
+    });
+
+    const fmt = { wip: (v) => String(Math.round(v)), defect: (v) => Math.round(v) + '%', out: (v) => String(Math.round(v)), cycle: (v) => (v ? v.toFixed(1) + 's' : '—') };
+    const bad = { wip: (v) => v > 9, defect: (v) => v > 3, out: (v) => v < 60, cycle: (v) => v > 8 };
+    function paint() {
+      if (!line) return;
+      const { after, before } = line.kpis();
+      for (const key of Object.keys(k)) {
+        const v = lerp(before[key], after[key], p);
+        k[key].textContent = fmt[key](v);
+        k[key].dataset.s = bad[key](v) ? 'bad' : 'good';
+      }
+    }
+    function apply(v) {
+      p = v;
+      line?.setSplit(v);
+      knob.style.transform = `translateX(${v * stage.clientWidth}px)`;
+      knob.setAttribute('aria-valuenow', String(Math.round(v * 100)));
+      ta.style.opacity = String(1 - v * 0.75); tb.style.opacity = String(0.25 + v * 0.75);
+    }
+    apply(reduce ? 0.5 : 0);
+    if (reduce) { setInterval(paint, 600); return; }
+
+    // skroll -> ajratgich holati
+    st = ScrollTrigger.create({
+      trigger: sec, pin: true, start: 'top top', end: () => '+=' + innerHeight * (mobile() ? 1.7 : 2.2), invalidateOnRefresh: true, anticipatePin: 1,
+      onUpdate: (s) => { target = clamp((s.progress - 0.1) / 0.8, 0, 1); },
+    });
+    registerPin(st);
+    gsap.ticker.add(() => { if (Math.abs(target - p) > 0.0005) apply(p + (target - p) * 0.14); });
+    setInterval(paint, 140);
+
+    // sudrash: ajratgich skroll holatini boshqaradi (sahifa mahkamlangan, shuning uchun faqat model siljiydi)
+    const toScroll = (v) => st.start + (st.end - st.start) * (0.1 + 0.8 * v);
+    const fromPointer = (e) => clamp((e.clientX - stage.getBoundingClientRect().left) / stage.clientWidth, 0, 1);
+    let drag = false;
+    const move = (e) => { if (drag) scrollToY(toScroll(fromPointer(e)), { immediate: true, force: true }); };
+    stage.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      drag = true; knob.classList.add('is-drag'); stage.setPointerCapture(e.pointerId); move(e);
+    });
+    stage.addEventListener('pointermove', move);
+    const end = () => { drag = false; knob.classList.remove('is-drag'); };
+    stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', end);
+    knob.addEventListener('keydown', (e) => {
+      const d = e.key === 'ArrowRight' ? 0.1 : e.key === 'ArrowLeft' ? -0.1 : 0;
+      if (!d) return; e.preventDefault();
+      scrollToY(toScroll(clamp(target + d, 0, 1)), { immediate: true, force: true });
+    });
+  }
+
+  // ---------------------------------------------------------------- Xizmatlar: kursorga ergashuvchi chizma
+  function setupServices() {
+    const sec = $('.svc'), pv = $('.svc-pv'), inn = $('.svc-pv-in');
+    if (!fine || reduce) return;
+    const xTo = gsap.quickTo(pv, 'x', { duration: 0.7, ease: 'q' }), yTo = gsap.quickTo(pv, 'y', { duration: 0.7, ease: 'q' });
+    const place = (e) => {
+      const w = pv.offsetWidth, h = pv.offsetHeight;
+      xTo(clamp(e.clientX + 36, 12, innerWidth - w - 12)); yTo(clamp(e.clientY - h / 2, 12, innerHeight - h - 12));
+    };
+    let shown = false;
+    $$('.svc-row a', sec).forEach((a) => {
+      a.addEventListener('pointerenter', (e) => {
+        const src = $('.sr-draw', a); if (!src) return;
+        const s = src.cloneNode(true); s.classList.remove('sr-draw'); s.removeAttribute('style');
+        inn.replaceChildren(s);
+        const paths = $$('.d', s);
+        gsap.fromTo(paths, { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.1, ease: 'qio', stagger: 0.05, overwrite: true });
+        gsap.fromTo($$('.lb', s), { opacity: 0 }, { opacity: 1, duration: 0.6, delay: 0.5 });
+        if (!shown) { gsap.set(pv, { x: clamp(e.clientX + 36, 12, innerWidth - 400), y: e.clientY - 120 }); }
+        shown = true;
+        gsap.set(pv, { visibility: 'visible' });
+        gsap.to(pv, { opacity: 1, scale: 1, duration: 0.5, ease: 'q', overwrite: 'auto' });
+      });
+      a.addEventListener('pointermove', place);
+      a.addEventListener('pointerleave', () => { gsap.to(pv, { opacity: 0, scale: 0.94, duration: 0.4, ease: 'q', onComplete: () => { if (!+gsap.getProperty(pv, 'opacity')) { gsap.set(pv, { visibility: 'hidden' }); shown = false; } } }); });
+    });
+    gsap.set(pv, { scale: 0.94, transformOrigin: '0 50%' });
+  }
+
+  // ---------------------------------------------------------------- Jarayon: besh bosqich chizig'i
+  function setupProc() {
+    const steps = $$('.ps'), track = $('.proc-track i'), wrap = $('.proc-steps');
+    if (reduce) { steps.forEach((s) => s.classList.add('on')); gsap.set(track, { scaleX: 1, scaleY: 1 }); return; }
+    const mm = gsap.matchMedia();
+    mm.add({ v: '(max-width: 760px)', h: '(min-width: 761px)' }, (c) => {
+      const vert = c.conditions.v;
+      gsap.fromTo(track, vert ? { scaleY: 0, scaleX: 1 } : { scaleX: 0, scaleY: 1 }, {
+        [vert ? 'scaleY' : 'scaleX']: 1, ease: 'none',
+        scrollTrigger: {
+          trigger: wrap, start: vert ? 'top 70%' : 'top 72%', end: vert ? 'bottom 70%' : 'top 30%', scrub: true,
+          onUpdate: (s) => steps.forEach((el, i) => el.classList.toggle('on', s.progress >= i / (steps.length - 1) - 0.001)),
+        },
+      });
+    });
+    gsap.from($$('.ps-t, .ps-x, .ps-n'), { opacity: 0, y: 28, duration: 1.3, ease: 'q', stagger: 0.04, scrollTrigger: { trigger: wrap, start: 'top 85%', once: true } });
+  }
+
+  setupHero(); setupAbout(); setupWaste(); setupModel(); setupServices(); setupProc();
+
+  if (reduce) {
+    gsap.set(titleLines, { yPercent: 0 });
+    gsap.set([$('.hero-kicker'), $('.hero-lead'), $('.states'), $('.cue')], { opacity: 1 });
+    $$('.od').forEach((od) => gsap.set($('.od-col', od), { yPercent: -(+od.dataset.d) * 10 }));
+  }
+
+  return {
+    ready: flowReady,
+    enter() {
+      const tl = gsap.timeline({ defaults: { ease: 'q' } });
+      if (reduce) return tl;
+      tl.fromTo(heroIn, { scale: 1.1 }, { scale: 1, duration: 1.8 }, 0)
+        .to(titleLines, { yPercent: 0, duration: 1.7, stagger: 0.12 }, 0.1)
+        .to($('.hero-kicker'), { opacity: 1, duration: 1 }, 0.5)
+        .fromTo($('.hero-kicker'), { x: -16 }, { x: 0, duration: 1.4 }, 0.5)
+        .to($('.hero-lead'), { opacity: 1, duration: 1.2 }, 0.9)
+        .fromTo($('.hero-lead'), { y: 18 }, { y: 0, duration: 1.4 }, 0.9)
+        .to([$('.states'), $('.cue')], { opacity: 1, duration: 1.2 }, 1.3);
+      if (flow) {
+        const o = { v: 0 };
+        tl.to(o, { v: 1, duration: 3.2, ease: 'power3.inOut', onUpdate: () => { flow.reveal = o.v; } }, 0);
+      }
+      return tl;
+    },
+    get flow() { return flow; },
+  };
+}
