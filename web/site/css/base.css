@@ -32,13 +32,15 @@
   --hdr: 76px;
   --sec: clamp(96px, 16vh, 180px);
 }
+/* och bo'limlarda ikkinchi darajali matn qoraroq (kontrast) */
+[data-theme="light"] { --muted: #56667a; }
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; background: var(--night); }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
-body { margin: 0; background: var(--paper); color: var(--text); font: 400 16px/1.55 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+body { margin: 0; background: var(--paper); color: var(--text); font: 400 16px/1.55 var(--sans); font-size: 16px; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 img, svg, canvas { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
@@ -146,9 +148,11 @@ em { font-style: normal; }
 .hdr { position: fixed; inset: 0 0 auto; z-index: 75; height: var(--hdr); display: flex; align-items: center; gap: 32px; padding-inline: var(--gut);
   color: #fff; transition: color .5s, transform .7s var(--ease); }
 .hdr[data-theme="light"] { color: var(--ink); }
-.hdr::before { content: ''; position: absolute; inset: 0 0 -28px; z-index: -1; opacity: 0; transition: opacity .5s;
-  background: linear-gradient(rgba(2,11,22,.88) 30%, rgba(2,11,22,0)); }
-.hdr[data-theme="light"]::before { background: linear-gradient(rgba(242,244,247,.95) 30%, rgba(242,244,247,0)); }
+.hdr::before { content: ''; position: absolute; inset: 0 0 -32px; z-index: -1; opacity: 0; transition: opacity .5s;
+  background: linear-gradient(rgba(2,11,22,.92) 56%, rgba(2,11,22,0));
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  -webkit-mask-image: linear-gradient(#000 56%, transparent); mask-image: linear-gradient(#000 56%, transparent); }
+.hdr[data-theme="light"]::before { background: linear-gradient(rgba(242,244,247,.94) 56%, rgba(242,244,247,0)); }
 .hdr.is-scrolled::before { opacity: 1; }
 .menu-open .hdr { color: #fff; transform: none; }
 .menu-open .hdr::before { opacity: 0; }

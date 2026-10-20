@@ -42,7 +42,18 @@ const css = await build({
 });
 const cssFile = 'css/' + Object.keys(css.metafile.outputs).find((f) => f.endsWith('.css')).split('/').pop();
 const cssPath = join(OUT, cssFile);
-writeFileSync(cssPath, readFileSync(cssPath, 'utf8').replaceAll('url(fonts/', 'url(../fonts/'));
+// Katta ekranlarda (1440 dan 2560 gacha) 11-28 px matn silliq kattalashadi (eng ko'pi bilan 1.28 marta).
+// SVG matni (fill ishlatadigan qoidalar) o'zgarmaydi: chizma bilan birga masshtablanadi.
+const fluid = (css) => css.replace(/([^{}]*)\{([^{}]*)\}/g, (m, sel, body) => {
+  if (/(^|[;{])fill:/.test(body) || /^@/.test(sel.trim())) return m;
+  return `${sel}{${body.replace(/font-size:(\d+(?:\.\d+)?)px(?![\w/])/g, (x, n) => {
+    const v = parseFloat(n);
+    if (v < 11 || v > 28) return x;
+    const k = +(v * 0.00025).toFixed(6), max = +(v * 1.28).toFixed(2);
+    return `font-size:clamp(${v}px,calc(${v}px + (100vw - 1440px) * ${k}),${max}px)`;
+  })}}`;
+});
+writeFileSync(cssPath, fluid(readFileSync(cssPath, 'utf8')).replaceAll('url(fonts/', 'url(../fonts/'));
 for (const f of readdirSync(join(WEB, 'src/fonts'))) if (f.endsWith('.woff2') && !f.includes('cyrillic')) cpSync(join(WEB, 'src/fonts', f), join(OUT, 'fonts', f));
 cpSync(join(HERE, 'favicon.svg'), join(OUT, 'favicon.svg'));
 

@@ -12,6 +12,9 @@ CustomEase.create('qio', '.76,0,.24,1');
 CustomEase.create('qin', '.64,0,.78,0');
 gsap.config({ nullTargetWarn: false });
 ScrollTrigger.config({ ignoreMobileResize: true });
+// refreshPriority bor bo'lsa ScrollTrigger yangilanishda triggerlarni hujjat tartibida saralaydi:
+// o'lcham o'zgarganda matchMedia keyin yaratgan pinlar ham pastdagi pinlardan oldin hisoblanadi
+ScrollTrigger.create({ trigger: document.documentElement, start: 0, end: 0, refreshPriority: 0 });
 
 export { gsap, ScrollTrigger, SplitText, CustomEase };
 export const $ = (s, r = document) => r.querySelector(s);
