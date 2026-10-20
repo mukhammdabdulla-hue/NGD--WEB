@@ -3,6 +3,8 @@
 /* ---------- Rasm qutisi: rasm kelguncha o'rtacha rang ko'rinadi */
 .im { position: relative; overflow: hidden; background: var(--c, #d9e0e8); }
 .im img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* ochilish animatsiyasida ichki rasm kattalashtiriladi: ramka uni kesadi (aks holda sahifa gorizontal siljiydi) */
+[data-clip] { overflow: hidden; }
 
 /* ---------- Bo'lim sarlavhasi */
 .sh { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px 48px; flex-wrap: wrap; margin-bottom: clamp(40px, 7vh, 88px); }
