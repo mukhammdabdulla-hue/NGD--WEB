@@ -2,18 +2,40 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
-import { CustomEase } from 'gsap/CustomEase';
 import Lenis from 'lenis';
 
-gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase);
-// Bitta easing oilasi: easeOutQuint asosiy, easeInOutQuart katta pardalar uchun
-CustomEase.create('q', '.22,1,.36,1');
-CustomEase.create('qio', '.76,0,.24,1');
-CustomEase.create('qin', '.64,0,.78,0');
+gsap.registerPlugin(ScrollTrigger, SplitText);
+// Bitta easing oilasi: easeOutQuint asosiy, easeInOutQuart katta pardalar uchun.
+// CSS'dagi cubic-bezier bilan bir xil egri (CustomEase plagini o'rniga: umumiy bo'lakdan ~3 KB kam)
+function bezier(x1, y1, x2, y2) {
+  const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx;
+  const cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+  const X = (t) => ((ax * t + bx) * t + cx) * t, Y = (t) => ((ay * t + by) * t + cy) * t, dX = (t) => (3 * ax * t + 2 * bx) * t + cx;
+  return (x) => {
+    if (x <= 0 || x >= 1) return x <= 0 ? 0 : 1;
+    let t = x;
+    for (let i = 0; i < 8; i++) { // Nyuton usuli
+      const e = X(t) - x;
+      if (Math.abs(e) < 1e-6) return Y(t);
+      const d = dX(t);
+      if (Math.abs(d) < 1e-6) break;
+      t -= e / d;
+    }
+    let lo = 0, hi = 1; t = x; // egri tekis bo'lgan joylarda ikkiga bo'lish
+    for (let i = 0; i < 24; i++) { const e = X(t); if (Math.abs(e - x) < 1e-6) break; if (e < x) lo = t; else hi = t; t = (lo + hi) / 2; }
+    return Y(t);
+  };
+}
+gsap.registerEase('q', bezier(0.22, 1, 0.36, 1));
+gsap.registerEase('qio', bezier(0.76, 0, 0.24, 1));
+gsap.registerEase('qin', bezier(0.64, 0, 0.78, 0));
 gsap.config({ nullTargetWarn: false });
 ScrollTrigger.config({ ignoreMobileResize: true });
+// refreshPriority bor bo'lsa ScrollTrigger yangilanishda triggerlarni hujjat tartibida saralaydi:
+// o'lcham o'zgarganda matchMedia keyin yaratgan pinlar ham pastdagi pinlardan oldin hisoblanadi
+ScrollTrigger.create({ trigger: document.documentElement, start: 0, end: 0, refreshPriority: 0 });
 
-export { gsap, ScrollTrigger, SplitText, CustomEase };
+export { gsap, ScrollTrigger, SplitText };
 export const $ = (s, r = document) => r.querySelector(s);
 export const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 export const root = document.documentElement;
@@ -21,6 +43,8 @@ export const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const fine = matchMedia('(pointer: fine)').matches;
 export const mobile = () => innerWidth < 761 || !fine;
 export const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+// Uzun ishni bo'lish: kiritish va chizish uchun asosiy oqimni bo'shatadi
+export const yieldNow = () => (globalThis.scheduler?.yield ? globalThis.scheduler.yield() : new Promise((r) => setTimeout(r)));
 export const lerp = (a, b, t) => a + (b - a) * t;
 
 // Tarkibni niqoblash: matn pastdan ko'tariladi
@@ -67,14 +91,35 @@ export function linesIn(el, { start = 'top 88%', delay = 0, stagger = 0.1, manua
   return play;
 }
 
+// Sarlavha: SplitText qatorlarga bo'ladi (shrift yuklangach va kenglik o'zgarganda qayta bo'linadi), qatorlar niqob ichidan ko'tariladi.
+// manual = true bo'lsa skrollni kutmaydi: qaytgan funksiya animatsiyani (tween) yaratadi.
+export function splitIn(el, { start = 'top 88%', stagger = 0.1, delay = 0, duration = 1.5, manual = false } = {}) {
+  if (reduce) { el.style.visibility = 'visible'; return () => gsap.timeline(); }
+  let lines = [], entered = false, st = null;
+  const to = () => gsap.to(lines, { yPercent: 0, duration, ease: 'q', stagger, delay, onStart: () => { entered = true; } });
+  SplitText.create(el, {
+    type: 'lines', mask: 'lines', linesClass: 'sl', autoSplit: true,
+    onSplit(self) {
+      lines = self.lines;
+      el.style.visibility = 'visible';
+      if (entered) return; // allaqachon ko'ringan: qayta bo'lingan qatorlar o'z joyida qoladi
+      gsap.set(lines, { yPercent: 115 });
+      if (!manual) { st?.kill(); st = ScrollTrigger.create({ trigger: el, start, once: true, onEnter: to }); }
+    },
+  });
+  return to;
+}
+
 export function initReveals(scope = document) {
   if (reduce) {
     $$('.ln > .in', scope).forEach((e) => (e.style.visibility = 'visible'));
+    $$('[data-split]', scope).forEach((e) => (e.style.visibility = 'visible'));
     $$('[data-rv]', scope).forEach((e) => (e.style.opacity = 1));
     $$('.od', scope).forEach((od) => gsap.set($('.od-col', od), { yPercent: -(+od.dataset.d) * 10 }));
     return;
   }
   $$('[data-lines]', scope).forEach((el) => { if (!el.closest('[data-manual]')) linesIn(el); });
+  $$('[data-split]', scope).forEach((el) => { if (!el.closest('[data-manual]') && !el.hasAttribute('data-hero-title')) splitIn(el); });
   const rv = $$('[data-rv]', scope).filter((e) => !e.closest('[data-manual]'));
   rv.forEach((e) => gsap.set(e, { opacity: 0, y: 28 }));
   if (rv.length) {
@@ -125,19 +170,4 @@ export function initReveals(scope = document) {
       .to(paths, { strokeDashoffset: 0, duration: 1.6, ease: 'qio', stagger: 0.08 }, 0)
       .to(lbs, { opacity: 1, duration: 0.8, ease: 'q' }, 0.9);
   });
-}
-
-// Marquee: skroll tezligiga ergashadi
-export function marquee(el, { base = 0.05, k = 0.012 } = {}) {
-  const row = $('.marq-row', el), set = $('.marq-set', el);
-  if (!row || !set) return;
-  let x = 0;
-  const tick = (_, dt) => {
-    const v = scroller.lenis ? scroller.lenis.velocity : 0;
-    x -= (base + Math.min(Math.abs(v), 60) * k * Math.sign(v || 1)) * dt;
-    const w = set.offsetWidth;
-    if (x <= -w) x += w; else if (x > 0) x -= w;
-    row.style.transform = `translate3d(${x}px,0,0)`;
-  };
-  gsap.ticker.add(tick);
 }

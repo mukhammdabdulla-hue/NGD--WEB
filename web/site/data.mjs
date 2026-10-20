@@ -1,22 +1,31 @@
-// Kontent: web/content/uz.json (xizmatlar, loyihalar, jamoa) va umumiy aloqa ma'lumotlari.
+// Kontent: ngd.uz saytidan olingan asl matn (o'zbek lotin yozuvida) va rasmlar ro'yxati.
+// Manba: site/content/ngd.json (tools/ingest.mjs yaratadi), site/img/images.json (tools/images.py yaratadi).
 import { readFileSync } from 'node:fs';
-import { CONTACT, CLIENTS, T } from '../src/i18n.mjs';
 
-export const D = JSON.parse(readFileSync(new URL('../content/uz.json', import.meta.url), 'utf8'));
-export { CONTACT, CLIENTS, T };
-export const t = T.uz;
+const read = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
+export const D = read('./content/ngd.json');
+export const IMG = read('./img/images.json');
 export const SITE_URL = 'https://ngd.uz';
+export const C = D.common;
 
-export const bySlug = (list, slug) => list.find((x) => x.slug === slug);
+// Hamkor logotiplari: rasmning o'zida yozilgan nomlar (ngd.uz'da alt matni "Partner-1" ... "Partner-20")
+export const PARTNER_NAMES = ['IPC', 'Davr Bank', 'Energy Eco', 'Hippo', 'Uzpost', "E'tiqod Mebel", 'Texnopark', 'Muza', 'Orzu Teks', 'Index', 'Euro Print', 'Faktura.uz', 'Uzcolor', 'Domani architects', 'BrotMeister', 'Surur', 'Yuqorichirchiq Energy Systems', 'Food Pack', 'Agro Bravo', 'biwork'];
 
-// Xizmat -> o'xshash loyiha (kategoriya bo'yicha)
-export const SERVICE_CASE = {
-  'biznes-jarayonlari': 'uzbekiston-pochtasi',
-  energoaudit: 'unido-co2',
-  strategiya: 'hippo-strategiya',
-  'yashil-moliya': 'ipak-yoli-yashil-moliya',
-  'iso-sertifikatlash': 'index-consulting-ibt',
-  'bazaviy-daraja': 'unido-co2',
-  malumotlar: 'malumotlar-kompaniyasi-strategiyasi',
-  'issiqxona-gazlari': 'unido-co2',
-};
+export const section = (route) => D.sections.find((s) => s.route === route);
+export const service = (route) => D.services.find((s) => s.route === route);
+export const project = (route) => D.projects.find((p) => p.route === route);
+export const post = (route) => D.posts.items.find((p) => p.route === route);
+export const portfolioCat = (slug) => D.portfolio.cats.find((c) => c.slug === slug);
+
+// Bir xil loyiha sahifasiga ikki kartochka bog'langan (ngd.uz'dagi holat): kartochkalar saqlanadi, sahifa bitta
+export const allProjectCards = () => D.portfolio.cats.flatMap((c) => D.portfolio.lists[c.slug].map((card) => ({ ...card, cat: c.slug })));
+export const allPostCards = () => D.posts.cats.flatMap((c) => D.posts.lists[c.slug].map((card) => ({ ...card, cat: c.slug, kicker: c.title })));
+
+// Sahifa tavsifi: manbadagi meta tavsif barcha sahifalarda bir xil rus tilidagi shior, shuning uchun sahifaning o'z matni olinadi
+export function brief(text, max = 170) {
+  const s = String(text || '').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max);
+  const i = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf(', '), cut.lastIndexOf(' '));
+  return cut.slice(0, i > 60 ? i : max).replace(/[,.;:\s]+$/, '') + '…';
+}

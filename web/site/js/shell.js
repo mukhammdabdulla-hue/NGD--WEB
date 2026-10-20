@@ -1,9 +1,12 @@
 // Qobiq: silliq skroll, kursor, sarlavha, menyu, sahifa o'tishi (parda), yuklash ekrani.
 import {
-  gsap, ScrollTrigger, SplitText, $, $$, root, reduce, fine, mobile, initLenis, scroller, scrollToY, scrollToEl, initReveals, mask,
+  gsap, ScrollTrigger, SplitText, $, $$, root, reduce, fine, mobile, initLenis, scroller, scrollToY, scrollToEl, initReveals, mask, yieldNow,
 } from './core.js';
 
 const lenis = initLenis();
+let page = null;
+// sinov va nosozliklarni topish uchun: modul yuklanishi bilan ochiladi
+window.__ngd = { lenis, ScrollTrigger, gsap, get page() { return page; } };
 const hdr = $('.hdr'), curtain = $('.curtain'), pre = $('.pre'), wipe = $('.wipe'), menu = $('#menu'), burger = $('.burger');
 const store = { get: (k) => { try { return sessionStorage.getItem(k); } catch { return null; } }, set: (k, v) => { try { sessionStorage.setItem(k, v); } catch {} }, del: (k) => { try { sessionStorage.removeItem(k); } catch {} } };
 
@@ -40,27 +43,31 @@ export function magnetic(scope = document) {
 
 // ---------------------------------------------------------------- Sarlavha: mavzu va yashirinish
 function initHeader() {
-  $$('[data-theme]').forEach((sec) => {
-    if (sec === hdr || sec === menu) return;
-    ScrollTrigger.create({
-      trigger: sec, start: 'top 38px', end: 'bottom 38px',
-      onToggle: (s) => { if (s.isActive && !root.classList.contains('menu-open')) hdr.dataset.theme = sec.dataset.theme; },
-    });
-  });
-  let last = 0;
-  ScrollTrigger.create({
-    onUpdate(self) {
-      const y = self.scroll();
-      const free = y > innerHeight * 0.9 && !scroller.pins.some((p) => p.isActive);
-      if (self.direction === 1 && free && y > last + 4) hdr.classList.add('is-hidden');
-      else if (self.direction === -1 || !free) hdr.classList.remove('is-hidden');
-      last = y;
-    },
-  });
+  // Sarlavha rangi: sarlavha chizig'i ostidagi bo'limning mavzusiga mos bo'ladi.
+  // Joy to'g'ridan-to'g'ri o'lchanadi (mahkamlangan bo'limlar va tez skrollda ham to'g'ri chiqadi).
+  const secs = $$('[data-theme]').filter((s) => s !== hdr && s !== menu);
+  const line = 38;
+  let raf = 0;
+  const sync = () => {
+    raf = 0;
+    if (root.classList.contains('menu-open')) return;
+    let theme = '';
+    for (const s of secs) {
+      const r = s.getBoundingClientRect();
+      if (r.top <= line && r.bottom > line) theme = s.dataset.theme;
+    }
+    if (theme && hdr.dataset.theme !== theme) hdr.dataset.theme = theme;
+    hdr.classList.toggle('is-scrolled', scrollY > 24);
+  };
+  const queue = () => { if (!raf) raf = requestAnimationFrame(sync); };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  ScrollTrigger.addEventListener('refresh', queue);
+  sync();
 }
 
 // ---------------------------------------------------------------- Menyu
-let menuOpen = false, menuBusy = false;
+let menuOpen = false, menuBusy = false, menuHold = 0;
 function setMenu(open) {
   if (menuBusy || open === menuOpen) return;
   menuBusy = true; menuOpen = open;
@@ -72,6 +79,7 @@ function setMenu(open) {
   const inn = $$('.menu-nav .in', menu), foot = $('.menu-foot', menu);
   if (open) {
     root.classList.add('menu-open'); lenis?.stop();
+    menuHold = setTimeout(() => page?.flow?.hold('menu', true), 1000); // menyu to'liq ochilgach orqadagi 3D sahna to'xtaydi
     gsap.set(menu, { visibility: 'visible' });
     $('.menu-nav a', menu)?.focus({ preventScroll: true });
     gsap.set(inn, { yPercent: 115, visibility: 'visible' });
@@ -81,6 +89,7 @@ function setMenu(open) {
       .to(inn, { yPercent: 0, duration: 1.2, ease: 'q', stagger: 0.07 }, 0.3)
       .to(foot, { opacity: 1, y: 0, duration: 1, ease: 'q' }, 0.6);
   } else {
+    clearTimeout(menuHold); page?.flow?.hold('menu', false);
     if (menu.contains(document.activeElement)) burger.focus({ preventScroll: true });
     gsap.timeline({ onComplete: () => { menuBusy = false; root.classList.remove('menu-open'); gsap.set(menu, { visibility: 'hidden' }); lenis?.start(); } })
       .to(menu, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.8, ease: 'qio' }, 0)
@@ -95,16 +104,35 @@ function initMenu() {
 }
 
 // ---------------------------------------------------------------- Sahifa o'tishi
+// Keyingi sahifani oldindan yuklash: bosishdan oldin (kursor ustida, barmoq tekkanda) yoki parda yopilayotganda uning HTML'i va
+// asosiy modul bo'laklari keshga tushadi, shu sababli yangi sahifa pardaning ostida deyarli kutmasdan ochiladi.
+const warmed = new Set();
+function warm(href) {
+  let u; try { u = new URL(href, location.href); } catch { return; }
+  u.hash = '';
+  if (u.origin !== location.origin || !/^https?:$/.test(u.protocol) || navigator.connection?.saveData) return;
+  const key = u.href;
+  if (warmed.has(key) || key === location.href.split('#')[0]) return;
+  warmed.add(key);
+  fetch(key, { priority: 'low' }).then((r) => (r.ok ? r.text() : '')).then((html) => {
+    // faqat yuqori ustuvorlikdagi bo'laklar (og'ir 3D sahna kiritilmaydi)
+    for (const m of html.matchAll(/<link rel="modulepreload" href="([^"]+)">/g)) {
+      const l = document.createElement('link'); l.rel = 'modulepreload'; l.href = new URL(m[1], key).href; document.head.append(l);
+    }
+  }).catch(() => {});
+}
+
 let navBusy = false;
 function leave(url, label) {
   if (navBusy) return;
   navBusy = true;
-  store.set('ngd-nav', JSON.stringify({ n: label[0], t: label[1] }));
-  $('.cv-n', curtain).textContent = label[0]; $('.cv-t', curtain).textContent = label[1];
   lenis?.stop();
   // Brauzer o'tishga ruxsat bermasa (masalan, ko'rinish oynasida), parda yopilib qolmasin
   const go = () => { location.href = url; setTimeout(() => { navBusy = false; store.del('ngd-nav'); gsap.set(curtain, { visibility: 'hidden' }); gsap.set($('main'), { clearProps: 'transform' }); lenis?.start(); }, 4000); };
   if (reduce) return go();
+  store.set('ngd-nav', JSON.stringify({ n: label[0], t: label[1] }));
+  $('.cv-n', curtain).textContent = label[0]; $('.cv-t', curtain).textContent = label[1];
+  warm(url);
   gsap.set(curtain, { visibility: 'visible', clipPath: 'inset(100% 0% 0% 0%)' });
   gsap.set($('.cv-lb', curtain), { yPercent: 30, opacity: 0 });
   gsap.set($('.cv-logo', curtain), { opacity: 0 });
@@ -136,13 +164,24 @@ const gridWipe = (() => {
   };
 })();
 
+// Parda yorlig'i: havolaning data-label/data-n (sarlavha va menyu havolalarida raqam bor), aks holda matni
 function labelFor(a) {
   const text = (a.dataset.label || a.textContent || '').replace(/\s+/g, ' ').trim();
-  const nav = ['Xizmatlar', 'Natijalar', 'Jarayon', 'Kompaniya', 'Aloqa'];
-  const i = nav.indexOf(text);
-  return [i >= 0 ? String(i + 1).padStart(2, '0') : '—', text || 'NGD'];
+  return [a.dataset.n || '—', text || 'NGD'];
 }
 function initLinks() {
+  let hoverTm = 0;
+  document.addEventListener('pointerover', (e) => {
+    if (e.pointerType !== 'mouse') return;
+    const a = e.target.closest?.('a[href]');
+    if (!a || a.target || a.dataset.native !== undefined) return;
+    clearTimeout(hoverTm); hoverTm = setTimeout(() => warm(a.href), 65);
+  }, { passive: true });
+  document.addEventListener('pointerout', () => clearTimeout(hoverTm), { passive: true });
+  document.addEventListener('pointerdown', (e) => {
+    const a = e.target.closest?.('a[href]');
+    if (a && !a.target && a.dataset.native === undefined) warm(a.href);
+  }, { passive: true });
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href]');
     if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -177,20 +216,22 @@ function revealHeader() {
     .fromTo(hdr, { yPercent: -60 }, { yPercent: 0, duration: 1.4 }, 0);
 }
 
+// Yuklash ekrani. Logotip, chiziq va izoh harakati CSS'da (base.css), bu yerda faqat raqamlar: ular CSS chizig'i bilan
+// bir soatda yuradi, ya'ni hisob birinchi chizilishdan (window.__ngdT) boshlanadi, JS yuklanishini kutmaydi.
+const PRE_AT = 0.2, PRE_FOR = 2; // chiziq 0.2 s dan keyin 2 s davomida to'ladi (CSS bilan bir xil)
 async function runPreloader(until) {
   store.set('ngd-pre', '1');
+  try { localStorage.setItem('ngd-seen', String(Date.now())); } catch {}
   lenis?.stop();
-  const cnt = $('.pre-n'), bar = $('.pre-bar i'), logo = $('.pre-logo .logo');
-  gsap.set(logo, { yPercent: 105 });
-  gsap.set([$('.pre-bar'), $('.pre-cap')], { opacity: 0 });
+  const cnt = $('.pre-n');
+  const age = Math.max(0, (performance.now() - (window.__ngdT ?? performance.now())) / 1000);
   const n = { v: 0 };
-  const tl = gsap.timeline();
-  tl.to(logo, { yPercent: 0, duration: 1.1, ease: 'q' }, 0.1)
-    .to([$('.pre-bar'), $('.pre-cap')], { opacity: 1, duration: 0.8, ease: 'q' }, 0.3)
-    .to(n, { v: 100, duration: 2, ease: 'power2.inOut', onUpdate: () => { cnt.textContent = String(Math.round(n.v)).padStart(3, '0'); } }, 0.2)
-    .to(bar, { scaleX: 1, duration: 2, ease: 'power2.inOut' }, 0.2);
-  await new Promise((r) => tl.eventCallback('onComplete', r));
-  await until();
+  const paint = () => { cnt.textContent = String(Math.round(n.v)).padStart(3, '0'); };
+  gsap.timeline().to(n, { v: 100, duration: PRE_FOR, ease: 'power2.inOut', onUpdate: paint }, PRE_AT).time(Math.min(age, PRE_AT + PRE_FOR));
+  paint();
+  await new Promise((r) => gsap.delayedCall(Math.max(0, PRE_AT + PRE_FOR - age), r));
+  n.v = 100; paint();
+  await until(700);
   return () => {
     // parda: yuqoriga yig'iladi, ichidagi mazmun biroz yuqoriga siljiydi
     gsap.set(pre, { clipPath: 'inset(0% 0% 0% 0%)' });
@@ -236,47 +277,106 @@ function initFooter() {
   }
   if (!reduce) {
     gsap.from('.ft-col', { opacity: 0, y: 24, duration: 1.3, ease: 'q', stagger: 0.1, scrollTrigger: { trigger: '.ft-cols', start: 'top 92%', once: true } });
-    gsap.from('.ft-big .logo', { yPercent: 40, opacity: 0, duration: 1.8, ease: 'q', scrollTrigger: { trigger: '.ft-big', start: 'top 96%', once: true } });
   }
+}
+
+// ---------------------------------------------------------------- Konsultatsiya oynasi, xarita, nusxalash, sahifa imkoniyatlari
+// Oyna kodi faqat kerak bo'lganda yuklanadi: tugma ustiga kelinganda oldindan isitiladi, bosilganda ochiladi
+let modalMod = null;
+const loadModal = () => (modalMod ||= import('./parts/modal.js'));
+function initModal() {
+  const hot = (e) => { if (e.target.closest?.('[data-modal]')) loadModal(); };
+  document.addEventListener('pointerover', hot, { passive: true });
+  document.addEventListener('focusin', hot);
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest?.('[data-modal]');
+    if (!b) return;
+    e.preventDefault();
+    if (menuOpen) setMenu(false);
+    loadModal().then((m) => m.openModal(b));
+  });
+}
+
+// Xarita: tashqi xizmat faqat bosilganda (yoki ekranga yaqinlashganda, data-auto) yuklanadi
+function initMaps() {
+  const open = (box) => {
+    if (box.querySelector('iframe')) return;
+    const f = document.createElement('iframe');
+    f.src = box.dataset.map; f.title = 'Xarita'; f.loading = 'lazy'; f.referrerPolicy = 'no-referrer-when-downgrade'; f.allowFullscreen = true;
+    box.append(f); box.classList.add('is-on');
+  };
+  $$('[data-map]').forEach((box) => {
+    $('[data-map-open]', box)?.addEventListener('click', () => open(box));
+    if (box.hasAttribute('data-auto')) new IntersectionObserver((es, io) => { if (es.some((e) => e.isIntersecting)) { open(box); io.disconnect(); } }, { rootMargin: '300px' }).observe(box);
+  });
+}
+
+function initCopy() {
+  $$('[data-copy]').forEach((b) => {
+    const label = $('span', b), text = label?.textContent;
+    b.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(b.dataset.copy); } catch { return; }
+      b.classList.add('is-ok');
+      if (label && b.dataset.done) label.textContent = b.dataset.done;
+      setTimeout(() => { b.classList.remove('is-ok'); if (label) label.textContent = text; }, 1800);
+    });
+  });
+}
+
+// Sahifadagi tayyor bloklar: fikrlar, toifa filtri, forma
+function initFeatures() {
+  const fk = $('[data-fk]'); if (fk) import('./parts/fikr.js').then((m) => m.initFikr(fk));
+  $$('[data-filter]').forEach((s) => import('./parts/filter.js').then((m) => m.initFilter(s)));
+  const form = $('main [data-form]'); if (form) import('./parts/form.js').then((m) => m.initForm(form));
 }
 
 // ---------------------------------------------------------------- Ishga tushirish
 const loaders = {
   home: () => import('./pages/home.js'),
-  services: () => import('./pages/services.js'),
-  service: () => import('./pages/service.js'),
-  process: () => import('./pages/process.js'),
-  results: () => import('./pages/results.js'),
-  project: () => import('./pages/project.js'),
-  company: () => import('./pages/company.js'),
-  contact: () => import('./pages/contact.js'),
-  notfound: () => import('./pages/notfound.js'),
   generic: () => import('./pages/generic.js'),
 };
 
 export async function boot() {
+  window.__ngdBoot = true;
   const holder = $('[data-page]');
   const name = holder?.dataset.page || 'generic';
   const preOn = root.classList.contains('pre-on') && !reduce;
   const navIn = root.classList.contains('nav-in') && !reduce;
 
-  initCursor(); magnetic(); initMenu(); initLinks();
+  initCursor(); magnetic(); initMenu(); initLinks(); initModal(); initMaps(); initCopy();
 
-  // sahifa moduli (parallel yuklanadi), keyin umumiy animatsiyalar (mahkamlangan bo'limlardan keyin hisoblanishi uchun)
-  let page = null;
+  // Shriftlar sahifa tetiklagichlari yaratilgandan keyin kelsa o'lchamlar o'zgaradi: bunda bir marta qayta hisoblanadi
+  // (oldindan yuklangan bo'lsa, odatda bunga hojat qolmaydi)
+  let initStarted = false, initDone = false, stale = false;
+  const refreshSoon = () => (window.requestIdleCallback ? requestIdleCallback(() => ScrollTrigger.refresh(), { timeout: 1200 }) : setTimeout(() => ScrollTrigger.refresh(), 200));
+  document.fonts?.addEventListener('loadingdone', () => { if (!initStarted) return; if (initDone) refreshSoon(); else stale = true; });
+
+  // sahifa moduli (parallel yuklanadi), keyin umumiy animatsiyalar (mahkamlangan bo'limlardan keyin hisoblanishi uchun).
+  // Uzun ishlar bo'laklarga bo'linadi: kiritish va chizish ular orasida bajariladi.
   const pageReady = (async () => {
-    try { const m = await (loaders[name] || loaders.generic)(); page = (await m.default({ lenis, magnetic })) || {}; }
-    catch (err) { console.error('Sahifa moduli yuklanmadi:', err); page = {}; }
-    initReveals(); initFooter(); initHeader(); magnetic();
-    await page.ready;
+    let m;
+    try { m = await (loaders[name] || loaders.generic)(); }
+    catch (err) { console.error('Sahifa moduli yuklanmadi:', err); root.classList.add('nojs'); return; }
+    if (root.classList.contains('nojs')) return; // zaxira ishga tushib bo'lgan: sahifa harakatsiz ko'rinishda qoladi
+    initStarted = true;
+    try { page = (await m.default({ lenis, magnetic })) || {}; }
+    catch (err) { console.error('Sahifa ishga tushmadi:', err); root.classList.add('nojs'); return; }
+    await yieldNow(); initReveals();
+    await yieldNow(); initFooter(); initHeader(); magnetic(); initFeatures();
+    initDone = true;
+    if (stale || document.fonts?.status === 'loading') { stale = false; refreshSoon(); }
   })();
-  const until = () => Promise.race([pageReady, new Promise((r) => setTimeout(r, 4500))]);
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  // Sahifaning asosiy qismi (matn, harakat) tayyor bo'lguncha kutiladi. Og'ir 3D sahna uni to'xtatmaydi:
+  // unga qisqa muhlat beriladi, kech kelsa o'zi asta paydo bo'ladi.
+  const until = async (grace = 600) => { await pageReady; if (page?.ready) await Promise.race([page.ready, sleep(grace)]); };
 
   let lift = null;
   if (preOn) lift = await runPreloader(until);
-  else if (navIn) { await until(); lift = curtainOut(); store.del('ngd-nav'); }
-  else { pre?.remove(); await Promise.race([pageReady, new Promise((r) => setTimeout(r, 1500))]); }
+  else if (navIn) { await until(400); lift = curtainOut(); store.del('ngd-nav'); }
+  else { pre?.remove(); await pageReady; }
   if (!preOn) pre?.remove();
+  if (root.classList.contains('nojs')) { lenis?.start(); return; }
 
   const tl = gsap.timeline();
   if (lift) tl.add(lift(), 0);
@@ -284,7 +384,6 @@ export async function boot() {
   tl.add(revealHeader(), at);
   if (page?.enter) tl.add(page.enter(), at);
   window.__ngdOK = true;
-  document.fonts?.ready.then(() => ScrollTrigger.refresh());
   // sahifa balandligi o'zgarsa (kech yuklangan rasm, olib tashlangan logotip) tetiklagichlar qayta hisoblanadi
   if (window.ResizeObserver) {
     let h = document.documentElement.scrollHeight, tm = 0;
@@ -293,6 +392,5 @@ export async function boot() {
       tm = setTimeout(() => { const n = document.documentElement.scrollHeight; if (Math.abs(n - h) > 2) { h = n; ScrollTrigger.refresh(); } }, 200);
     }).observe(document.body);
   }
-  window.__ngd = { lenis, ScrollTrigger, gsap, get page() { return page; } };
   if (reduce) { root.classList.remove('pre-on', 'nav-in'); pre?.remove(); gsap.set(hdr, { opacity: 1 }); }
 }

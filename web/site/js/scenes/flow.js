@@ -2,17 +2,20 @@
 // 65 ming zarracha GPU'da hisoblanadi. Xaos holatida ular turbulent (curl noise) oqimda,
 // skroll bilan laminar oqimga o'tadi: parallel yo'laklar, besh bekat, chiqishda yashil natija.
 // Izlar (long exposure) teskari aloqa buferida to'planadi.
-import {
-  WebGLRenderer, Scene, PerspectiveCamera, BufferGeometry, BufferAttribute, LineSegments, Mesh,
-  PlaneGeometry, ShaderMaterial, WebGLRenderTarget, HalfFloatType, FloatType, LinearFilter,
-  LinearMipmapLinearFilter, AdditiveBlending, NoBlending, Vector3, Vector2,
-} from 'three';
-import { GPUComputationRenderer } from 'three/addons/misc/GPUComputationRenderer.js';
+// Sahna kutubxonasiz, to'g'ridan-to'g'ri WebGL2 bilan chiziladi: shaderlar avvalgi bilan bir xil, kod esa ~140 KB o'rniga bir necha KB.
+import { yieldNow } from '../core.js';
 
 const GATES = [-4.2, -2.1, 0, 2.1, 4.2];
 const LANES = 9;
 const LANE_GAP = 0.3;
 const X0 = -7.6, X1 = 7.6;
+const GATE_H = ((LANES - 1) / 2) * LANE_GAP * 2 + 1.1; // bekat chizig'ining balandligi
+
+// Piksel zichligi va zarracha ulushi pog'onalari: kuchsiz qurilmada ketma-ket pasayadi (0-pog'ona: asl ko'rinish)
+const TIERS = [[1, 1], [0.85, 1], [0.7, 0.75], [0.55, 0.5], [0.5, 0.25]];
+
+const HEAD_V = '#version 300 es\nprecision highp float;precision highp int;precision highp sampler2D;\n#define varying out\n#define texture2D texture\n';
+const HEAD_F = '#version 300 es\nprecision highp float;precision highp int;precision highp sampler2D;\n#define varying in\n#define texture2D texture\nout vec4 fragColor;\n#define gl_FragColor fragColor\n';
 
 const NOISE = /* glsl */`
 vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
@@ -50,7 +53,15 @@ const HASH = /* glsl */`
 float hash12(vec2 p){vec3 p3=fract(vec3(p.xyx)*.1031);p3+=dot(p3,p3.yzx+33.33);return fract((p3.x+p3.y)*p3.z);}
 `;
 
-const SIM = /* glsl */`
+// Uchburchak butun ekranni qoplaydi (vUv: 0..1)
+const FULL_V = /* glsl */`
+varying vec2 vUv;
+void main(){ vec2 p=vec2(float((gl_VertexID<<1)&2),float(gl_VertexID&2)); vUv=p; gl_Position=vec4(p*2.-1.,0.,1.); }
+`;
+
+const simF = (SIZE) => /* glsl */`
+uniform sampler2D texturePosition;
+#define resolution vec2(${SIZE}.,${SIZE}.)
 uniform float uTime, uDt, uOrder, uMouseF;
 uniform vec3 uMouse;
 ${NOISE}
@@ -90,15 +101,19 @@ void main(){
 }
 `;
 
-const LINE_V = /* glsl */`
+// Har zarracha uchun bitta kesma: tepaliklar raqami (gl_VertexID) zarracha o'rnini va kesma uchini belgilaydi
+const lineV = (SIZE) => /* glsl */`
 uniform sampler2D uPos, uPrev;
 uniform float uOrder, uFind, uGlow, uOut;
+uniform mat4 modelViewMatrix, projectionMatrix;
 varying vec3 vCol; varying float vA;
 ${HASH}
 void main(){
-  vec2 ref=position.xy;
+  int seg=gl_VertexID>>1;
+  vec2 ref=(vec2(float(seg%${SIZE}),float(seg/${SIZE}))+.5)/${SIZE}.;
+  float end=float(gl_VertexID&1);
   vec4 c=texture2D(uPos,ref), p=texture2D(uPrev,ref);
-  vec3 pos=mix(p.xyz,c.xyz,position.z);
+  vec3 pos=mix(p.xyz,c.xyz,end);
   float jump=step(.35,distance(c.xyz,p.xyz));
   float s=hash12(ref*91.7+.5);
   bool waste=s<.17;
@@ -130,7 +145,6 @@ varying vec3 vCol; varying float vA;
 void main(){ gl_FragColor=vec4(vCol*vA*uIntensity,1.); }
 `;
 
-const QUAD_V = /* glsl */`varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.,1.); }`;
 const FADE_F = /* glsl */`uniform sampler2D tPrev; uniform float uFade; varying vec2 vUv; void main(){ gl_FragColor=texture2D(tPrev,vUv)*uFade; }`;
 const SHOW_F = /* glsl */`
 uniform sampler2D tTrail; uniform float uExposure, uTime, uReveal; uniform vec2 uRes; uniform vec3 uBgA, uBgB;
@@ -148,7 +162,17 @@ void main(){
   gl_FragColor=vec4(col,1.);
 }
 `;
-const GATE_V = /* glsl */`varying vec2 vUv; void main(){ vUv=uv; gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.); }`;
+// Bekatlar: nozik vertikal yorug'lik chiziqlari (bitta chaqiruvda beshta to'rtburchak)
+const GATE_V = /* glsl */`
+uniform mat4 modelViewMatrix, projectionMatrix;
+uniform float uGate[${GATES.length}];
+varying vec2 vUv;
+void main(){
+  vec2 c=vec2(float(gl_VertexID&1),float(gl_VertexID>>1));
+  vUv=c;
+  gl_Position=projectionMatrix*modelViewMatrix*vec4(uGate[gl_InstanceID]+(c.x-.5)*.012,(c.y-.5)*${GATE_H.toFixed(2)},0.,1.);
+}
+`;
 const GATE_F = /* glsl */`uniform float uA; varying vec2 vUv; void main(){ float a=smoothstep(0.,.25,vUv.y)*smoothstep(1.,.75,vUv.y); gl_FragColor=vec4(vec3(.62,.75,1.)*a*uA,1.); }`;
 
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -157,127 +181,148 @@ const smooth = (a, b, v) => { const t = clamp01((v - a) / (b - a)); return t * t
 
 // Kamera nuqtalari: xaos (old), tizim (yonboshdan), oqim ichiga.
 const CAM = [
-  { p: new Vector3(0, 0, 7.4), l: new Vector3(0, 0, 0) },
-  { p: new Vector3(-4.6, 2.05, 4.7), l: new Vector3(0.9, -0.2, 0) },
-  { p: new Vector3(-2.6, 0.95, 2.6), l: new Vector3(3.2, -0.08, 0) },
+  { p: [0, 0, 7.4], l: [0, 0, 0] },
+  { p: [-4.6, 2.05, 4.7], l: [0.9, -0.2, 0] },
+  { p: [-2.6, 0.95, 2.6], l: [3.2, -0.08, 0] },
 ];
+const mix3 = (a, b, t) => [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)];
 
-export function createFlow(canvas, { mobile = false, reduce = false, labels = [] } = {}) {
-  const renderer = new WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance' });
-  const gl = renderer.getContext();
-  const floatOK = renderer.extensions.has('EXT_color_buffer_float');
+// Ustunlar bo'yicha 4x4 matritsalar: ko'rish (kamera tepa tomoni +Y) va perspektiva
+function lookAt(m, e, t) {
+  let zx = e[0] - t[0], zy = e[1] - t[1], zz = e[2] - t[2];
+  let l = Math.hypot(zx, zy, zz) || 1; zx /= l; zy /= l; zz /= l;
+  let xx = zz, xz = -zx; l = Math.hypot(xx, xz) || 1; xx /= l; xz /= l;
+  const yx = zy * xz, yy = zz * xx - zx * xz, yz = -zy * xx;
+  m.set([xx, yx, zx, 0, 0, yy, zy, 0, xz, yz, zz, 0, -(xx * e[0] + xz * e[2]), -(yx * e[0] + yy * e[1] + yz * e[2]), -(zx * e[0] + zy * e[1] + zz * e[2]), 1]);
+}
+function perspective(m, fov, aspect, n, f) {
+  const t = 1 / Math.tan((fov * Math.PI) / 360);
+  m.set([t / aspect, 0, 0, 0, 0, t, 0, 0, 0, 0, (f + n) / (n - f), -1, 0, 0, (2 * f * n) / (n - f), 0]);
+}
+
+export async function createFlow(canvas, { mobile = false, reduce = false } = {}) {
+  const gl = canvas.getContext('webgl2', { antialias: false, alpha: false, depth: false, stencil: false });
+  if (!gl) throw new Error('WebGL2 yo\'q');
+  const f32 = !!gl.getExtension('EXT_color_buffer_float');
+  if (!f32 && !gl.getExtension('EXT_color_buffer_half_float')) throw new Error('suzuvchi nuqtali render nishoni yo\'q');
+  const par = gl.getExtension('KHR_parallel_shader_compile');
   const SIZE = mobile ? 128 : 256;
   const dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 1.75);
-  renderer.setPixelRatio(dpr);
-  renderer.autoClear = false;
+  const BASE_I = mobile ? 0.3 : 0.15;
 
-  const camera = new PerspectiveCamera(38, 1, 0.1, 60);
-  camera.position.copy(CAM[0].p);
-  const look = CAM[0].l.clone();
-
-  // --- GPU simulyatsiya
-  const gpu = new GPUComputationRenderer(SIZE, SIZE, renderer);
-  if (!floatOK) gpu.setDataType(HalfFloatType);
-  const tex0 = gpu.createTexture();
-  const a = tex0.image.data;
-  for (let i = 0; i < a.length; i += 4) {
-    a[i] = (Math.random() * 2 - 1) * 7.4;
-    a[i + 1] = (Math.random() * 2 - 1) * 3.7;
-    a[i + 2] = (Math.random() * 2 - 1) * 3.2;
-    a[i + 3] = Math.random() * 6;
+  // --- dasturlar: hammasi birdan kompilyatsiya qilinadi, tayyor bo'lguncha asosiy oqim bo'sh turadi
+  const sources = {
+    sim: [HEAD_V + FULL_V, HEAD_F + simF(SIZE)], line: [HEAD_V + lineV(SIZE), HEAD_F + LINE_F],
+    fade: [HEAD_V + FULL_V, HEAD_F + FADE_F], show: [HEAD_V + FULL_V, HEAD_F + SHOW_F], gate: [HEAD_V + GATE_V, HEAD_F + GATE_F],
+  };
+  const prog = {};
+  for (const [k, [vs, fs]] of Object.entries(sources)) {
+    const p = prog[k] = gl.createProgram();
+    for (const [type, src] of [[gl.VERTEX_SHADER, vs], [gl.FRAGMENT_SHADER, fs]]) {
+      const sh = gl.createShader(type); gl.shaderSource(sh, src); gl.compileShader(sh); gl.attachShader(p, sh); gl.deleteShader(sh);
+    }
+    gl.linkProgram(p);
   }
-  const posVar = gpu.addVariable('texturePosition', SIM, tex0);
-  gpu.setVariableDependencies(posVar, [posVar]);
-  const su = posVar.material.uniforms;
-  Object.assign(su, {
-    uTime: { value: 0 }, uDt: { value: 0.016 }, uOrder: { value: 0 },
-    uMouse: { value: new Vector3(99, 99, 0) }, uMouseF: { value: 0 },
-  });
-  const err = gpu.init();
-  if (err) throw new Error(err);
+  // Brauzer dasturlarni parallel jarayonda bog'laydi: tayyor bo'lishini so'rab turamiz (bog'lash tugamasdan holatni so'rash oqimni to'xtatadi)
+  const progs = Object.values(prog);
+  if (par) while (progs.some((p) => !gl.getProgramParameter(p, par.COMPLETION_STATUS_KHR))) await new Promise((r) => setTimeout(r, 8));
+  for (const [k, p] of Object.entries(prog)) if (!gl.getProgramParameter(p, gl.LINK_STATUS)) throw new Error(`shader (${k}): ${gl.getProgramInfoLog(p)}`);
+  const loc = (p, names) => Object.fromEntries(names.split(' ').map((n) => [n, gl.getUniformLocation(p, n)]));
+  const U = {
+    sim: loc(prog.sim, 'texturePosition uTime uDt uOrder uMouseF uMouse'),
+    line: loc(prog.line, 'uPos uPrev uOrder uFind uGlow uOut uIntensity modelViewMatrix projectionMatrix'),
+    fade: loc(prog.fade, 'tPrev uFade'),
+    show: loc(prog.show, 'tTrail uExposure uTime uReveal uRes uBgA uBgB'),
+    gate: loc(prog.gate, 'modelViewMatrix projectionMatrix uGate uA'),
+  };
+  gl.useProgram(prog.sim); gl.uniform1i(U.sim.texturePosition, 0);
+  gl.useProgram(prog.line); gl.uniform1i(U.line.uPos, 1); gl.uniform1i(U.line.uPrev, 2); gl.uniform1f(U.line.uGlow, 2.2);
+  gl.useProgram(prog.fade); gl.uniform1i(U.fade.tPrev, 0);
+  gl.useProgram(prog.show); gl.uniform1i(U.show.tTrail, 0); gl.uniform1f(U.show.uExposure, 1.25); gl.uniform3f(U.show.uBgA, 0.02, 0.085, 0.17); gl.uniform3f(U.show.uBgB, 0.004, 0.02, 0.042);
+  gl.useProgram(prog.gate); gl.uniform1fv(U.gate.uGate, GATES);
+  await yieldNow();
 
-  // --- Izlar uchun chiziqlar
-  const N = SIZE * SIZE;
-  const pa = new Float32Array(N * 2 * 3);
-  for (let i = 0; i < N; i++) {
-    const u = ((i % SIZE) + 0.5) / SIZE, v = (Math.floor(i / SIZE) + 0.5) / SIZE;
-    pa.set([u, v, 0, u, v, 1], i * 6);
+  // --- bufer va teksturalar
+  const texture = (w, h, fmt, levels, min) => {
+    const t = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, t);
+    gl.texStorage2D(gl.TEXTURE_2D, levels, fmt, w, h);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, min);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, min === gl.NEAREST ? gl.NEAREST : gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    return t;
+  };
+  const target = (tex, w, h, levels = 1) => {
+    const fbo = gl.createFramebuffer();
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+    if (gl.checkFramebufferStatus(gl.FRAMEBUFFER) !== gl.FRAMEBUFFER_COMPLETE) throw new Error('render nishoni to\'liq emas');
+    return { tex, fbo, w, h, levels };
+  };
+
+  // Zarrachalar holati (x, y, z, umr): ikki tekstura almashib turadi. Boshlang'ich qiymat har ikkisiga yoziladi.
+  const init = new Float32Array(SIZE * SIZE * 4);
+  for (let i = 0; i < init.length; i += 4) {
+    init[i] = (Math.random() * 2 - 1) * 7.4;
+    init[i + 1] = (Math.random() * 2 - 1) * 3.7;
+    init[i + 2] = (Math.random() * 2 - 1) * 3.2;
+    init[i + 3] = Math.random() * 6;
   }
-  const lg = new BufferGeometry();
-  lg.setAttribute('position', new BufferAttribute(pa, 3));
-  const lineMat = new ShaderMaterial({
-    vertexShader: LINE_V, fragmentShader: LINE_F,
-    uniforms: {
-      uPos: { value: null }, uPrev: { value: null }, uOrder: { value: 0 }, uFind: { value: 0 },
-      uGlow: { value: 2.2 }, uOut: { value: 0 }, uIntensity: { value: mobile ? 0.3 : 0.15 },
-    },
-    blending: AdditiveBlending, depthTest: false, depthWrite: false, transparent: true,
+  const sim = [0, 1].map(() => {
+    const t = texture(SIZE, SIZE, f32 ? gl.RGBA32F : gl.RGBA16F, 1, gl.NEAREST);
+    gl.texSubImage2D(gl.TEXTURE_2D, 0, 0, 0, SIZE, SIZE, gl.RGBA, gl.FLOAT, init);
+    return target(t, SIZE, SIZE);
   });
-  const lines = new LineSegments(lg, lineMat);
-  lines.frustumCulled = false;
-  lines.renderOrder = 1;
+  let cur = 0; // hozirgi holat sim[cur]da
+  await yieldNow();
 
-  const quad = new PlaneGeometry(2, 2);
-  const fadeMat = new ShaderMaterial({
-    vertexShader: QUAD_V, fragmentShader: FADE_F,
-    uniforms: { tPrev: { value: null }, uFade: { value: 0.9 } },
-    blending: NoBlending, depthTest: false, depthWrite: false,
-  });
-  const fadeQuad = new Mesh(quad, fadeMat);
-  fadeQuad.frustumCulled = false;
-  fadeQuad.renderOrder = 0;
-  const trailScene = new Scene();
-  trailScene.add(fadeQuad, lines);
+  let tier = 0, rows = SIZE, dens = 1;
+  let trail = [], W = 1, H = 1;
+  const mkTrail = (w, h) => {
+    const levels = Math.floor(Math.log2(Math.max(w, h))) + 1;
+    return target(texture(w, h, gl.RGBA16F, levels, gl.LINEAR_MIPMAP_LINEAR), w, h, levels);
+  };
+  const free = (r) => { gl.deleteFramebuffer(r.fbo); gl.deleteTexture(r.tex); };
 
-  const showMat = new ShaderMaterial({
-    vertexShader: QUAD_V, fragmentShader: SHOW_F,
-    uniforms: {
-      tTrail: { value: null }, uExposure: { value: 1.25 }, uTime: { value: 0 }, uReveal: { value: 0 },
-      uRes: { value: new Vector2(1, 1) },
-      uBgA: { value: new Vector3(0.02, 0.085, 0.17) }, uBgB: { value: new Vector3(0.004, 0.02, 0.042) },
-    },
-    depthTest: false, depthWrite: false,
-  });
-  const showQuad = new Mesh(quad, showMat);
-  showQuad.frustumCulled = false;
-  const showScene = new Scene();
-  showScene.add(showQuad);
+  const proj = new Float32Array(16), view = new Float32Array(16);
+  const cam = { fov: 38, aspect: 1 };
 
-  // Bekatlar: nozik vertikal yorug'lik chiziqlari
-  const gateScene = new Scene();
-  const gateMat = new ShaderMaterial({
-    vertexShader: GATE_V, fragmentShader: GATE_F, uniforms: { uA: { value: 0 } },
-    blending: AdditiveBlending, depthTest: false, depthWrite: false, transparent: true,
-  });
-  const half = ((LANES - 1) / 2) * LANE_GAP;
-  for (const gx of GATES) {
-    const m = new Mesh(new PlaneGeometry(0.012, half * 2 + 1.1), gateMat);
-    m.position.set(gx, 0, 0);
-    gateScene.add(m);
-  }
+  // To'liq ekranli uchburchak (bo'sh VAO yetarli: tepaliklar gl_VertexID'dan olinadi)
+  const vao = gl.createVertexArray();
+  gl.bindVertexArray(vao);
+  gl.disable(gl.DEPTH_TEST);
 
-  let rtA, rtB, W = 1, H = 1;
-  const makeRT = () => new WebGLRenderTarget(Math.max(1, Math.floor(W * renderer.getPixelRatio())), Math.max(1, Math.floor(H * renderer.getPixelRatio())), {
-    type: HalfFloatType, minFilter: LinearMipmapLinearFilter, magFilter: LinearFilter,
-    generateMipmaps: true, depthBuffer: false,
-  });
-  function resize() {
+  function resize(keep) {
+    const pr = dpr * TIERS[tier][0];
     W = canvas.clientWidth || window.innerWidth;
     H = canvas.clientHeight || window.innerHeight;
-    renderer.setSize(W, H, false);
-    camera.aspect = W / H;
+    canvas.width = Math.max(1, Math.floor(W * pr));
+    canvas.height = Math.max(1, Math.floor(H * pr));
+    const w = Math.max(1, Math.floor(W * pr)), h = Math.max(1, Math.floor(H * pr));
+    cam.aspect = W / H;
     // tor ekranda sahna to'liq sig'ishi uchun kamerani uzoqlashtiramiz
-    camera.fov = W / H < 0.8 ? 58 : W / H < 1.2 ? 46 : 38;
-    camera.updateProjectionMatrix();
-    rtA?.dispose(); rtB?.dispose();
-    rtA = makeRT(); rtB = makeRT();
-    showMat.uniforms.uRes.value.set(W, H);
+    cam.fov = cam.aspect < 0.8 ? 58 : cam.aspect < 1.2 ? 46 : 38;
+    perspective(proj, cam.fov, cam.aspect, 0.1, 60);
+    const old = trail;
+    gl.disable(gl.BLEND);
+    trail = [mkTrail(w, h), mkTrail(w, h)];
+    for (const r of trail) { gl.bindFramebuffer(gl.FRAMEBUFFER, r.fbo); gl.clearColor(0, 0, 0, 0); gl.clear(gl.COLOR_BUFFER_BIT); }
+    if (keep && old.length) { // pog'ona o'zgarganda izlar o'chib ketmasin: eski rasm yangi o'lchamga ko'chiriladi
+      gl.bindFramebuffer(gl.FRAMEBUFFER, trail[0].fbo); gl.viewport(0, 0, w, h);
+      gl.useProgram(prog.fade); gl.uniform1f(U.fade.uFade, 1);
+      gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, old[0].tex);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+    old.forEach(free);
+    gl.useProgram(prog.show); gl.uniform2f(U.show.uRes, W, H);
   }
   resize();
 
   // --- holat
-  const st = { q: 0, qs: 0, reveal: 0, mx: 0, my: 0, sx: 0, sy: 0, mouseF: 0, lastMove: 0, active: true, t: 0 };
-  const tmp = new Vector3(), tmp2 = new Vector3(), ray = new Vector3();
+  const st = { q: 0, qs: 0, reveal: 0, mx: 0, my: 0, sx: 0, sy: 0, mouseF: 0, lastMove: 0, t: 0 };
+  const mouse = [99, 99, 0];
+  const uni = { order: 0, find: 0, out: 0, fade: 0.9, i: BASE_I, gate: 0 };
 
   function onMove(e) {
     st.mx = (e.clientX / window.innerWidth) * 2 - 1;
@@ -286,11 +331,7 @@ export function createFlow(canvas, { mobile = false, reduce = false, labels = []
   }
   if (!mobile && !reduce) window.addEventListener('pointermove', onMove, { passive: true });
 
-  function camAt(q, out, outL) {
-    const k1 = smooth(0.1, 0.62, q), k2 = smooth(0.62, 1, q);
-    out.copy(CAM[0].p).lerp(CAM[1].p, k1).lerp(CAM[2].p, k2);
-    outL.copy(CAM[0].l).lerp(CAM[1].l, k1).lerp(CAM[2].l, k2);
-  }
+  const eff = { ms: 1000 / 60 }; // bitta chizilgan kadr davomiyligi (ekran yangilanish tezligiga bog'liq), ms
 
   function step(dt) {
     st.t += dt;
@@ -299,109 +340,184 @@ export function createFlow(canvas, { mobile = false, reduce = false, labels = []
     const order = smooth(0.1, 0.6, q);
     const find = smooth(0.08, 0.2, q) * (1 - smooth(0.3, 0.42, q));
     // kamera: skroll + intro yaqinlashuvi + sichqoncha parallaksi
-    camAt(q, tmp, tmp2);
+    const k1 = smooth(0.1, 0.62, q), k2 = smooth(0.62, 1, q);
+    const p = mix3(mix3(CAM[0].p, CAM[1].p, k1), CAM[2].p, k2), l = mix3(mix3(CAM[0].l, CAM[1].l, k1), CAM[2].l, k2);
     st.sx = lerp(st.sx, st.mx, 1 - Math.pow(0.02, dt));
     st.sy = lerp(st.sy, st.my, 1 - Math.pow(0.02, dt));
     const push = (1 - st.reveal) * 3.2;
-    camera.position.set(tmp.x + st.sx * 0.35, tmp.y + st.sy * 0.22, tmp.z + push);
-    look.copy(tmp2);
-    camera.lookAt(look);
+    const e = [p[0] + st.sx * 0.35, p[1] + st.sy * 0.22, p[2] + push];
+    lookAt(view, e, l);
 
-    // sichqoncha dunyo koordinatasida (z=0 tekislik)
+    // sichqoncha dunyo koordinatasida (z=0 tekislik): kameradan o'tuvchi nur
     const idle = performance.now() - st.lastMove > 900;
     st.mouseF = lerp(st.mouseF, idle || mobile ? 0 : 1, 1 - Math.pow(0.05, dt));
-    ray.set(st.mx, st.my, 0.5).unproject(camera).sub(camera.position).normalize();
-    const tz = -camera.position.z / ray.z;
-    su.uMouse.value.copy(camera.position).addScaledVector(ray, tz > 0 ? tz : 50);
+    const kx = st.mx / proj[0], ky = st.my / proj[5];
+    let dx = view[0] * kx + view[1] * ky - view[2], dy = view[4] * kx + view[5] * ky - view[6], dz = view[8] * kx + view[9] * ky - view[10];
+    const dl = Math.hypot(dx, dy, dz) || 1; dx /= dl; dy /= dl; dz /= dl;
+    const tz = -e[2] / dz, s = tz > 0 ? tz : 50;
+    mouse[0] = e[0] + dx * s; mouse[1] = e[1] + dy * s; mouse[2] = e[2] + dz * s;
 
-    su.uTime.value = st.t;
-    su.uDt.value = Math.min(dt, 1 / 30);
-    su.uOrder.value = order;
-    su.uMouseF.value = st.mouseF;
-    gpu.compute();
+    // zarrachalar: faqat ko'rinadigan qatorlar hisoblanadi (kuchsiz qurilmada ulushi kamayadi)
+    const nxt = cur ^ 1;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, sim[nxt].fbo);
+    gl.viewport(0, 0, SIZE, SIZE);
+    gl.disable(gl.BLEND); // suzuvchi nuqtali (32 bit) nishonga qo'shish yoqilmaydi
+    if (rows < SIZE) { gl.enable(gl.SCISSOR_TEST); gl.scissor(0, 0, SIZE, rows); }
+    gl.useProgram(prog.sim);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, sim[cur].tex);
+    gl.uniform1f(U.sim.uTime, st.t);
+    gl.uniform1f(U.sim.uDt, Math.min(dt, 1 / 30));
+    gl.uniform1f(U.sim.uOrder, order);
+    gl.uniform1f(U.sim.uMouseF, st.mouseF);
+    gl.uniform3fv(U.sim.uMouse, mouse);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    if (rows < SIZE) gl.disable(gl.SCISSOR_TEST);
+    cur = nxt;
 
-    const lu = lineMat.uniforms;
-    lu.uPos.value = gpu.getCurrentRenderTarget(posVar).texture;
-    lu.uPrev.value = gpu.getAlternateRenderTarget(posVar).texture;
-    lu.uOrder.value = order;
-    lu.uFind.value = find;
-    lu.uOut.value = smooth(0.62, 0.86, q);
-    fadeMat.uniforms.uFade.value = lerp(0.84, 0.945, order);
+    uni.order = order;
+    uni.find = find;
+    uni.out = smooth(0.62, 0.86, q);
+    // kadr uzoqroq/qisqaroq bo'lsa ham iz bir xil tezlikda so'nadi (60 Gs'da koeffitsient o'zgarmaydi)
+    uni.fade = Math.pow(lerp(0.84, 0.945, order), eff.ms / (1000 / 60));
     // o'tish paytida zarrachalar bir yo'lakka siqilib, ortiqcha yorug' bo'lib ketmasin
-    lu.uIntensity.value = (mobile ? 0.3 : 0.15) * lerp(1, 0.5, order) * (1 - 0.5 * Math.sin(Math.PI * order));
-    gateMat.uniforms.uA.value = smooth(0.42, 0.62, q) * 0.5 * st.reveal;
+    uni.i = BASE_I * dens * lerp(1, 0.5, order) * (1 - 0.5 * Math.sin(Math.PI * order));
+    uni.gate = smooth(0.42, 0.62, q) * 0.5 * st.reveal;
   }
 
   function render() {
-    fadeMat.uniforms.tPrev.value = rtA.texture;
-    renderer.setRenderTarget(rtB);
-    renderer.render(trailScene, camera);
-    renderer.setRenderTarget(null);
-    renderer.clear();
-    showMat.uniforms.tTrail.value = rtB.texture;
-    showMat.uniforms.uTime.value = st.t;
-    showMat.uniforms.uReveal.value = st.reveal;
-    renderer.render(showScene, camera);
-    renderer.render(gateScene, camera);
-    [rtA, rtB] = [rtB, rtA];
-    placeLabels();
-  }
-
-  // Bekat yorliqlari HTML'da, 3D nuqtaga proyeksiya qilinadi
-  const lab = labels.map((el, i) => ({ el, p: new Vector3(GATES[i], half + 0.42, 0) }));
-  function placeLabels() {
-    if (!lab.length) return;
-    const vis = smooth(0.5, 0.64, st.qs) * st.reveal;
-    for (const { el, p } of lab) {
-      tmp.copy(p).project(camera);
-      const x = (tmp.x * 0.5 + 0.5) * W, y = (-tmp.y * 0.5 + 0.5) * H;
-      el.style.transform = `translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,0)`;
-      el.style.opacity = vis.toFixed(3);
+    const [a, b] = trail;
+    // 1) iz: oldingi kadr so'ndiriladi, ustiga zarrachalar chiziqlari qo'shiladi
+    gl.bindFramebuffer(gl.FRAMEBUFFER, b.fbo);
+    gl.viewport(0, 0, b.w, b.h);
+    gl.disable(gl.BLEND);
+    gl.useProgram(prog.fade);
+    gl.uniform1f(U.fade.uFade, uni.fade);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, a.tex);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+    gl.useProgram(prog.line);
+    gl.activeTexture(gl.TEXTURE1); gl.bindTexture(gl.TEXTURE_2D, sim[cur].tex);
+    gl.activeTexture(gl.TEXTURE2); gl.bindTexture(gl.TEXTURE_2D, sim[cur ^ 1].tex);
+    gl.uniform1f(U.line.uOrder, uni.order);
+    gl.uniform1f(U.line.uFind, uni.find);
+    gl.uniform1f(U.line.uOut, uni.out);
+    gl.uniform1f(U.line.uIntensity, uni.i);
+    gl.uniformMatrix4fv(U.line.modelViewMatrix, false, view);
+    gl.uniformMatrix4fv(U.line.projectionMatrix, false, proj);
+    gl.drawArrays(gl.LINES, 0, rows * SIZE * 2);
+    gl.activeTexture(gl.TEXTURE0); gl.bindTexture(gl.TEXTURE_2D, b.tex);
+    gl.generateMipmap(gl.TEXTURE_2D);
+    // 2) ekran: iz, fon va donalar; ustidan bekat chiziqlari
+    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.disable(gl.BLEND);
+    gl.useProgram(prog.show);
+    gl.uniform1f(U.show.uTime, st.t);
+    gl.uniform1f(U.show.uReveal, st.reveal);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    if (uni.gate > 0.001) {
+      gl.enable(gl.BLEND); gl.blendFunc(gl.SRC_ALPHA, gl.ONE);
+      gl.useProgram(prog.gate);
+      gl.uniform1f(U.gate.uA, uni.gate);
+      gl.uniformMatrix4fv(U.gate.modelViewMatrix, false, view);
+      gl.uniformMatrix4fv(U.gate.projectionMatrix, false, proj);
+      gl.drawArraysInstanced(gl.TRIANGLE_STRIP, 0, 4, GATES.length);
     }
+    trail = [b, a];
   }
 
-  // Kuchsiz qurilmada piksel zichligini pasaytiradi (1.5 soniya davomida kadr >30 ms bo'lsa)
-  let slow = 0, scale = 1;
+  // Kuchsiz qurilmada sifat pog'onasi pasayadi: kadrlar median bo'yicha ekran tezligidan sezilarli uzoq davom etsa (bitta sakrash e'tiborga olinmaydi)
   const adaptive = !/[?&]q=hi/.test(location.search) && !reduce;
-  function adapt(dt) {
-    if (!adaptive || scale <= 0.5) return;
-    slow = dt > 0.032 ? slow + dt : Math.max(0, slow - dt * 2);
-    if (slow > 1.5) {
-      slow = 0; scale = Math.max(0.5, scale - 0.25);
-      renderer.setPixelRatio(dpr * scale);
-      resize();
-    }
+  const win = [];
+  let slow = 0, calm = 0;
+  function adapt(ms) {
+    if (!adaptive || tier >= TIERS.length - 1) return;
+    if (calm > 0) { calm--; return; } // pog'ona almashgandan keyin biroz kutiladi
+    win.push(ms);
+    if (win.length < 40) return;
+    win.sort((x, y) => x - y);
+    const med = win[20]; win.length = 0;
+    slow = med > eff.ms * 1.45 ? slow + 1 : 0;
+    if (slow < 2) return;
+    slow = 0; calm = 60;
+    tier++;
+    rows = Math.max(8, Math.round(SIZE * TIERS[tier][1]));
+    dens = Math.min(2.5, SIZE / rows);
+    resize(true);
   }
-  let raf = 0, last = performance.now();
+
+  // --- tsikl. Ekran yangilanish davri eng qisqa kadrdan aniqlanadi (dastlabki 24 kadr hali chizilmaydi, shuning uchun yuk uni buzmaydi).
+  // 100 Gs dan yuqori ekranlarda har ikkinchi kadr chiziladi: ko'rinish 60 Gs dagidek qoladi, GPU yuki esa ikki baravar kamayadi.
+  const hold = new Set(); // to'xtatish sabablari: 'view' (ekranda yo'q), 'cover' (boshqa bo'lim yopgan), 'menu', 'lost'
+  const SNAP = [4.17, 6.94, 8.33, 11.11, 16.67, 33.33]; // 240, 144, 120, 90, 60, 30 Gs
+  let raf = 0, last = 0, acc = 0, div = 1, frame = 0, best = Infinity;
+  const kick = () => {
+    const run = !hold.size && !document.hidden;
+    if (run && !raf && !reduce) { last = 0; acc = 0; raf = requestAnimationFrame(loop); }
+    else if (!run && raf) { cancelAnimationFrame(raf); raf = 0; }
+  };
   function loop(now) {
     raf = requestAnimationFrame(loop);
-    const dt = Math.min(0.05, (now - last) / 1000);
+    const d = last ? now - last : 0; // davom etganda birinchi kadr faqat vaqtni belgilaydi: to'liq bo'lmagan oraliq o'lchovni buzmasin
     last = now;
-    if (!st.active) return;
-    adapt(dt);
-    step(dt);
+    if (!d) return;
+    if (++frame > 4 && d > 3 && d < best * 0.97) {
+      best = d;
+      const snap = SNAP.reduce((b, s) => (Math.abs(s - d) < Math.abs(b - d) ? s : b));
+      const ms = Math.abs(snap - d) / snap < 0.12 ? snap : d;
+      div = Math.max(1, Math.floor((1000 / ms + 10) / 60));
+      eff.ms = Math.min(33.4, ms * div);
+    }
+    if (frame < 24) return;
+    acc += d;
+    if (frame % div) return;
+    const ms = acc; acc = 0;
+    adapt(ms);
+    step(Math.min(0.05, ms / 1000));
     render();
   }
 
   if (reduce) {
+    // harakat kamaytirilgan: bitta tayyor kadr (bo'laklarga bo'linib hisoblanadi)
     st.q = st.qs = 0.78; st.reveal = 1;
-    for (let i = 0; i < 320; i++) step(1 / 60);
-    for (let i = 0; i < 140; i++) { step(1 / 60); render(); }
-  } else {
-    raf = requestAnimationFrame(loop);
+    const work = async () => {
+      for (let i = 0; i < 320; i++) { step(1 / 60); if (i % 80 === 79) await yieldNow(); }
+      for (let i = 0; i < 140; i++) { step(1 / 60); render(); if (i % 35 === 34) await yieldNow(); }
+    };
+    await work();
   }
 
-  const ro = new ResizeObserver(() => { resize(); if (reduce) for (let i = 0; i < 140; i++) { step(1 / 60); render(); } });
+  // O'lcham o'zgarishi: faqat haqiqiy o'zgarishda, biroz kechikib (oyna sudralganda har kadrda qayta ajratilmasin)
+  let lw = W, lh = H, tm = 0;
+  const ro = new ResizeObserver(() => {
+    const w = canvas.clientWidth, h = canvas.clientHeight;
+    if (w === lw && h === lh) return;
+    clearTimeout(tm);
+    tm = setTimeout(async () => {
+      lw = canvas.clientWidth; lh = canvas.clientHeight;
+      resize(true);
+      if (reduce) for (let i = 0; i < 90; i++) { step(1 / 60); render(); if (i % 30 === 29) await yieldNow(); }
+    }, 150);
+  });
   ro.observe(canvas);
-  const io = new IntersectionObserver(([e]) => { st.active = e.isIntersecting; last = performance.now(); });
+  const io = new IntersectionObserver(([e]) => { if (e.isIntersecting) hold.delete('view'); else hold.add('view'); kick(); });
   io.observe(canvas);
-  document.addEventListener('visibilitychange', () => { last = performance.now(); });
+  const onVis = () => kick();
+  document.addEventListener('visibilitychange', onVis);
+  const lost = (e) => { e.preventDefault(); hold.add('lost'); kick(); canvas.dispatchEvent(new CustomEvent('flowlost')); };
+  canvas.addEventListener('webglcontextlost', lost);
+  kick();
 
   return {
-    gl,
     setProgress(q) { st.q = clamp01(q); },
     get reveal() { return st.reveal; },
     set reveal(v) { st.reveal = v; },
-    destroy() { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); renderer.dispose(); },
+    // sahna boshqa bo'lim ostida qolganda yoki menyu ochiqligida hisoblash to'xtaydi
+    hold(key, on) { on ? hold.add(key) : hold.delete(key); kick(); },
+    destroy() {
+      cancelAnimationFrame(raf); ro.disconnect(); io.disconnect();
+      document.removeEventListener('visibilitychange', onVis); canvas.removeEventListener('webglcontextlost', lost); window.removeEventListener('pointermove', onMove);
+      gl.getExtension('WEBGL_lose_context')?.loseContext();
+    },
   };
 }

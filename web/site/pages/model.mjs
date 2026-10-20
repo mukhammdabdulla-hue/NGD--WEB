@@ -1,11 +1,25 @@
-// Jonli ishlab chiqarish liniyasi bo'limi (bosh sahifa va jarayon sahifasida bir xil).
-import { D } from '../data.mjs';
+// Jonli ishlab chiqarish liniyasi: bosh sahifadagi tushuntiruvchi model (oldin / keyin). Matnlar interfeys yozuvlari.
 import { esc } from '../ui.mjs';
 
-const sim = D.ui.home.sim;
-const LEAD = 'Bir xil liniya, bir xil buyurtma. Faqat tizim farq qiladi. Chiziqni suring yoki pastga skroll qiling.';
+export const SIM = {
+  title: 'Ishlab chiqarish liniyasi',
+  live: 'jonli model',
+  before: 'Oldin',
+  after: 'NGD bilan',
+  stations: ['Qabul', 'Kesish', "Yig'ish", 'Nazorat', "Jo'natish"],
+  wip: 'Tugallanmagan ish',
+  defect: 'Nuqson',
+  out: 'Chiqish, dona/daq',
+  cycle: "O'rtacha sikl",
+  stop: "To'xtash",
+  rework: 'Brak',
+  methods: ['5S', 'SMED', 'Kanban', 'Poka-Yoke', 'Kaizen'],
+  note: "Tushuntirish uchun model: ko'rsatkichlar simulyatsiyadan real vaqtda hisoblanadi.",
+};
+const LEAD = "Bir xil liniya, bir xil buyurtma. Faqat tizim farq qiladi. Chiziqni suring yoki pastga skroll qiling.";
 
 export function modelSection({ id = 'model', lead = LEAD } = {}) {
+  const sim = SIM;
   return `<section class="model" id="${id}" data-theme="dark" aria-label="${esc(sim.title)}">
   <div class="mdl-in">
     <div class="mdl-head wrap">

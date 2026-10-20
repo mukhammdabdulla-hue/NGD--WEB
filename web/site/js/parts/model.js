@@ -8,12 +8,24 @@ export function setupModel(sec = $('.model')) {
   const cfg = JSON.parse($('[data-sim]', sec).textContent);
   let line = null, p = 0, target = 0, st = null, ranges = [0, 1];
 
-  import('../scenes/line.js').then(({ createLine }) => {
-    line = createLine(cv, cfg, { reduce });
-    if (reduce) { line.warm(); apply(0.5); return; }
-    new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? line.start() : line.stop())), { threshold: 0.05 }).observe(sec);
-    line.setSplit(p);
-  });
+  // Sahna kodi va ko'rsatkich taymeri bo'lim ekranga bir ekran qolganda ishga tushadi: yuklanish paytida bo'sh turadi
+  let loading = false, kpi = 0;
+  const load = () => {
+    if (loading) return;
+    loading = true;
+    import('../scenes/line.js').then(({ createLine }) => {
+      line = createLine(cv, cfg, { reduce });
+      if (reduce) { line.warm(); apply(0.5); return; }
+      new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? line.start() : line.stop())), { threshold: 0.05 }).observe(sec);
+      line.setSplit(p);
+    });
+  };
+  new IntersectionObserver((es) => {
+    const near = es.some((e) => e.isIntersecting);
+    if (near) load();
+    clearInterval(kpi);
+    kpi = near ? setInterval(paint, reduce ? 600 : 140) : 0;
+  }, { rootMargin: '100% 0px' }).observe(sec);
 
   const fmt = { wip: (v) => String(Math.round(v)), defect: (v) => Math.round(v) + '%', out: (v) => String(Math.round(v)), cycle: (v) => (v ? v.toFixed(1) + 's' : '—') };
   const bad = { wip: (v) => v > 9, defect: (v) => v > 3, out: (v) => v < 60, cycle: (v) => v > 8 };
@@ -34,7 +46,7 @@ export function setupModel(sec = $('.model')) {
     ta.style.opacity = String(1 - v * 0.75); tb.style.opacity = String(0.25 + v * 0.75);
   }
   apply(reduce ? 0.5 : 0);
-  if (reduce) { setInterval(paint, 600); return; }
+  if (reduce) return;
 
   // skroll -> ajratgich holati
   st = ScrollTrigger.create({
@@ -43,7 +55,6 @@ export function setupModel(sec = $('.model')) {
   });
   registerPin(st);
   gsap.ticker.add(() => { if (Math.abs(target - p) > 0.0005) apply(p + (target - p) * 0.14); });
-  setInterval(paint, 140);
 
   // sudrash: ajratgich skroll holatini boshqaradi (sahifa mahkamlangan, shuning uchun faqat model siljiydi)
   const toScroll = (v) => st.start + (st.end - st.start) * (0.1 + 0.8 * v);
