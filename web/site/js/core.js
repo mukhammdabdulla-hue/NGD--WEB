@@ -91,14 +91,35 @@ export function linesIn(el, { start = 'top 88%', delay = 0, stagger = 0.1, manua
   return play;
 }
 
+// Sarlavha: SplitText qatorlarga bo'ladi (shrift yuklangach va kenglik o'zgarganda qayta bo'linadi), qatorlar niqob ichidan ko'tariladi.
+// manual = true bo'lsa skrollni kutmaydi: qaytgan funksiya animatsiyani (tween) yaratadi.
+export function splitIn(el, { start = 'top 88%', stagger = 0.1, delay = 0, duration = 1.5, manual = false } = {}) {
+  if (reduce) { el.style.visibility = 'visible'; return () => gsap.timeline(); }
+  let lines = [], entered = false, st = null;
+  const to = () => gsap.to(lines, { yPercent: 0, duration, ease: 'q', stagger, delay, onStart: () => { entered = true; } });
+  SplitText.create(el, {
+    type: 'lines', mask: 'lines', linesClass: 'sl', autoSplit: true,
+    onSplit(self) {
+      lines = self.lines;
+      el.style.visibility = 'visible';
+      if (entered) return; // allaqachon ko'ringan: qayta bo'lingan qatorlar o'z joyida qoladi
+      gsap.set(lines, { yPercent: 115 });
+      if (!manual) { st?.kill(); st = ScrollTrigger.create({ trigger: el, start, once: true, onEnter: to }); }
+    },
+  });
+  return to;
+}
+
 export function initReveals(scope = document) {
   if (reduce) {
     $$('.ln > .in', scope).forEach((e) => (e.style.visibility = 'visible'));
+    $$('[data-split]', scope).forEach((e) => (e.style.visibility = 'visible'));
     $$('[data-rv]', scope).forEach((e) => (e.style.opacity = 1));
     $$('.od', scope).forEach((od) => gsap.set($('.od-col', od), { yPercent: -(+od.dataset.d) * 10 }));
     return;
   }
   $$('[data-lines]', scope).forEach((el) => { if (!el.closest('[data-manual]')) linesIn(el); });
+  $$('[data-split]', scope).forEach((el) => { if (!el.closest('[data-manual]') && !el.hasAttribute('data-hero-title')) splitIn(el); });
   const rv = $$('[data-rv]', scope).filter((e) => !e.closest('[data-manual]'));
   rv.forEach((e) => gsap.set(e, { opacity: 0, y: 28 }));
   if (rv.length) {
@@ -149,19 +170,4 @@ export function initReveals(scope = document) {
       .to(paths, { strokeDashoffset: 0, duration: 1.6, ease: 'qio', stagger: 0.08 }, 0)
       .to(lbs, { opacity: 1, duration: 0.8, ease: 'q' }, 0.9);
   });
-}
-
-// Marquee: skroll tezligiga ergashadi
-export function marquee(el, { base = 0.05, k = 0.012 } = {}) {
-  const row = $('.marq-row', el), set = $('.marq-set', el);
-  if (!row || !set) return;
-  let x = 0;
-  const tick = (_, dt) => {
-    const v = scroller.lenis ? scroller.lenis.velocity : 0;
-    x -= (base + Math.min(Math.abs(v), 60) * k * Math.sign(v || 1)) * dt;
-    const w = set.offsetWidth;
-    if (x <= -w) x += w; else if (x > 0) x -= w;
-    row.style.transform = `translate3d(${x}px,0,0)`;
-  };
-  gsap.ticker.add(tick);
 }

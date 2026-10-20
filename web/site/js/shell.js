@@ -162,11 +162,10 @@ const gridWipe = (() => {
   };
 })();
 
+// Parda yorlig'i: havolaning data-label/data-n (sarlavha va menyu havolalarida raqam bor), aks holda matni
 function labelFor(a) {
   const text = (a.dataset.label || a.textContent || '').replace(/\s+/g, ' ').trim();
-  const nav = ['Xizmatlar', 'Natijalar', 'Jarayon', 'Kompaniya', 'Aloqa'];
-  const i = nav.indexOf(text);
-  return [i >= 0 ? String(i + 1).padStart(2, '0') : '—', text || 'NGD'];
+  return [a.dataset.n || '—', text || 'NGD'];
 }
 function initLinks() {
   let hoverTm = 0;
@@ -279,17 +278,59 @@ function initFooter() {
   }
 }
 
+// ---------------------------------------------------------------- Konsultatsiya oynasi, xarita, nusxalash, sahifa imkoniyatlari
+// Oyna kodi faqat kerak bo'lganda yuklanadi: tugma ustiga kelinganda oldindan isitiladi, bosilganda ochiladi
+let modalMod = null;
+const loadModal = () => (modalMod ||= import('./parts/modal.js'));
+function initModal() {
+  const hot = (e) => { if (e.target.closest?.('[data-modal]')) loadModal(); };
+  document.addEventListener('pointerover', hot, { passive: true });
+  document.addEventListener('focusin', hot);
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest?.('[data-modal]');
+    if (!b) return;
+    e.preventDefault();
+    if (menuOpen) setMenu(false);
+    loadModal().then((m) => m.openModal(b));
+  });
+}
+
+// Xarita: tashqi xizmat faqat bosilganda (yoki ekranga yaqinlashganda, data-auto) yuklanadi
+function initMaps() {
+  const open = (box) => {
+    if (box.querySelector('iframe')) return;
+    const f = document.createElement('iframe');
+    f.src = box.dataset.map; f.title = 'Xarita'; f.loading = 'lazy'; f.referrerPolicy = 'no-referrer-when-downgrade'; f.allowFullscreen = true;
+    box.append(f); box.classList.add('is-on');
+  };
+  $$('[data-map]').forEach((box) => {
+    $('[data-map-open]', box)?.addEventListener('click', () => open(box));
+    if (box.hasAttribute('data-auto')) new IntersectionObserver((es, io) => { if (es.some((e) => e.isIntersecting)) { open(box); io.disconnect(); } }, { rootMargin: '300px' }).observe(box);
+  });
+}
+
+function initCopy() {
+  $$('[data-copy]').forEach((b) => {
+    const label = $('span', b), text = label?.textContent;
+    b.addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(b.dataset.copy); } catch { return; }
+      b.classList.add('is-ok');
+      if (label && b.dataset.done) label.textContent = b.dataset.done;
+      setTimeout(() => { b.classList.remove('is-ok'); if (label) label.textContent = text; }, 1800);
+    });
+  });
+}
+
+// Sahifadagi tayyor bloklar: fikrlar, toifa filtri, forma
+function initFeatures() {
+  const fk = $('[data-fk]'); if (fk) import('./parts/fikr.js').then((m) => m.initFikr(fk));
+  $$('[data-filter]').forEach((s) => import('./parts/filter.js').then((m) => m.initFilter(s)));
+  const form = $('main [data-form]'); if (form) import('./parts/form.js').then((m) => m.initForm(form));
+}
+
 // ---------------------------------------------------------------- Ishga tushirish
 const loaders = {
   home: () => import('./pages/home.js'),
-  services: () => import('./pages/services.js'),
-  service: () => import('./pages/service.js'),
-  process: () => import('./pages/process.js'),
-  results: () => import('./pages/results.js'),
-  project: () => import('./pages/project.js'),
-  company: () => import('./pages/company.js'),
-  contact: () => import('./pages/contact.js'),
-  notfound: () => import('./pages/notfound.js'),
   generic: () => import('./pages/generic.js'),
 };
 
@@ -300,7 +341,7 @@ export async function boot() {
   const preOn = root.classList.contains('pre-on') && !reduce;
   const navIn = root.classList.contains('nav-in') && !reduce;
 
-  initCursor(); magnetic(); initMenu(); initLinks();
+  initCursor(); magnetic(); initMenu(); initLinks(); initModal(); initMaps(); initCopy();
 
   // Shriftlar sahifa tetiklagichlari yaratilgandan keyin kelsa o'lchamlar o'zgaradi: bunda bir marta qayta hisoblanadi
   // (oldindan yuklangan bo'lsa, odatda bunga hojat qolmaydi)
@@ -319,7 +360,7 @@ export async function boot() {
     try { page = (await m.default({ lenis, magnetic })) || {}; }
     catch (err) { console.error('Sahifa ishga tushmadi:', err); root.classList.add('nojs'); return; }
     await yieldNow(); initReveals();
-    await yieldNow(); initFooter(); initHeader(); magnetic();
+    await yieldNow(); initFooter(); initHeader(); magnetic(); initFeatures();
     initDone = true;
     if (stale || document.fonts?.status === 'loading') { stale = false; refreshSoon(); }
   })();
