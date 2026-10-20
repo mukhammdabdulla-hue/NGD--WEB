@@ -39,7 +39,7 @@ export function render(ctx) {
     <ol class="svc-list">${D.sections.map((s, i) => `<li class="svc-row" data-rv><a href="${ctx.href(s.route)}" data-label="${esc(s.title)}" data-n="${pad2(i + 1)}">
       <span class="sr-n mono">${pad2(i + 1)}</span>
       <span class="sr-t">${esc(s.title)}</span>
-      <span class="sr-q">${esc(brief(s.intro, 200))}</span>
+      <span class="sr-q">${esc(s.intro)}</span>
       <span class="sr-a">${ARROW_UR}</span>
     </a></li>`).join('')}</ol>
   </div>

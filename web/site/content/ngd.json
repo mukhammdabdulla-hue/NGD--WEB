@@ -1108,7 +1108,7 @@
    "body": [
     {
      "k": "h",
-     "x": "Loyihaning tavsifi",
+     "x": "Loyihaning tavsifi:",
      "sub": true
     },
     {
@@ -1117,7 +1117,7 @@
     },
     {
      "k": "h",
-     "x": "Maqsad va vazifalar",
+     "x": "Maqsad va vazifalar:",
      "sub": true
     },
     {
@@ -1141,7 +1141,7 @@
     },
     {
      "k": "h",
-     "x": "Asosiy ko'rsatiladigan xizmatlar",
+     "x": "Asosiy ko'rsatiladigan xizmatlar:",
      "sub": true
     },
     {
@@ -1161,7 +1161,7 @@
     },
     {
      "k": "h",
-     "x": "Usullar va yondashuvlar",
+     "x": "Usullar va yondashuvlar:",
      "sub": true
     },
     {
@@ -1181,7 +1181,7 @@
     },
     {
      "k": "h",
-     "x": "Natijalar va yutuqlar",
+     "x": "Natijalar va yutuqlar:",
      "sub": true
     },
     {
@@ -1200,8 +1200,24 @@
     }
    ],
    "more": [
-    "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
-    "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen"
+    {
+     "route": "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
+     "title": "Ma'lumotlarni qayta ishlash kompaniyasini rivojlantirish strategiyasini ishlab chiqish",
+     "img": "cvq7b5owi3",
+     "client": "",
+     "region": "",
+     "sector": "Ma'lumotlarni qayta ishlash, moliyaviy texnologiyalar, innovatsion yechimlar.",
+     "date": "30.04.2025"
+    },
+    {
+     "route": "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen",
+     "title": "Barqaror Ishlab Chiqarish va Kaizen Usullarida O'qitish",
+     "img": "62zmtfmcga",
+     "client": "\"Orzu-teks\" MCHJ",
+     "region": "Chirchiq. sh, O'zbekiston",
+     "sector": "tekstil korxonasi",
+     "date": "01.05.2024"
+    }
    ]
   },
   {
@@ -1227,7 +1243,7 @@
    "body": [
     {
      "k": "h",
-     "x": "Loyihaning tavsifi",
+     "x": "Loyihaning tavsifi:",
      "sub": true
     },
     {
@@ -1236,7 +1252,7 @@
     },
     {
      "k": "h",
-     "x": "Maqsad va vazifalar",
+     "x": "Maqsad va vazifalar:",
      "sub": true
     },
     {
@@ -1260,7 +1276,7 @@
     },
     {
      "k": "h",
-     "x": "Asosiy ko'rsatiladigan xizmatlar",
+     "x": "Asosiy ko'rsatiladigan xizmatlar:",
      "sub": true
     },
     {
@@ -1280,7 +1296,7 @@
     },
     {
      "k": "h",
-     "x": "Usullar va yondashuvlar",
+     "x": "Usullar va yondashuvlar:",
      "sub": true
     },
     {
@@ -1304,7 +1320,7 @@
     },
     {
      "k": "h",
-     "x": "Natijalar va yutuqlar",
+     "x": "Natijalar va yutuqlar:",
      "sub": true
     },
     {
@@ -1323,8 +1339,24 @@
     }
    ],
    "more": [
-    "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
-    "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen"
+    {
+     "route": "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
+     "title": "Ma'lumotlarni qayta ishlash kompaniyasini rivojlantirish strategiyasini ishlab chiqish",
+     "img": "cvq7b5owi3",
+     "client": "",
+     "region": "",
+     "sector": "Ma'lumotlarni qayta ishlash, moliyaviy texnologiyalar, innovatsion yechimlar.",
+     "date": "30.04.2025"
+    },
+    {
+     "route": "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen",
+     "title": "Barqaror Ishlab Chiqarish va Kaizen Usullarida O'qitish",
+     "img": "62zmtfmcga",
+     "client": "\"Orzu-teks\" MCHJ",
+     "region": "Chirchiq. sh, O'zbekiston",
+     "sector": "tekstil korxonasi",
+     "date": "01.05.2024"
+    }
    ]
   },
   {
@@ -1350,7 +1382,7 @@
    "body": [
     {
      "k": "h",
-     "x": "Loyihaning tavsifi",
+     "x": "Loyihaning tavsifi:",
      "sub": true
     },
     {
@@ -1359,7 +1391,7 @@
     },
     {
      "k": "h",
-     "x": "Maqsad va vazifalar",
+     "x": "Maqsad va vazifalar:",
      "sub": true
     },
     {
@@ -1383,7 +1415,7 @@
     },
     {
      "k": "h",
-     "x": "Asosiy ko'rsatiladigan xizmatlar",
+     "x": "Asosiy ko'rsatiladigan xizmatlar:",
      "sub": true
     },
     {
@@ -1403,7 +1435,7 @@
     },
     {
      "k": "h",
-     "x": "Usullar va yondashuvlar",
+     "x": "Usullar va yondashuvlar:",
      "sub": true
     },
     {
@@ -1428,7 +1460,7 @@
     },
     {
      "k": "h",
-     "x": "Natijalar va yutuqlar",
+     "x": "Natijalar va yutuqlar:",
      "sub": true
     },
     {
@@ -1447,8 +1479,24 @@
     }
    ],
    "more": [
-    "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
-    "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen"
+    {
+     "route": "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
+     "title": "Ma'lumotlarni qayta ishlash kompaniyasini rivojlantirish strategiyasini ishlab chiqish",
+     "img": "cvq7b5owi3",
+     "client": "",
+     "region": "",
+     "sector": "Ma'lumotlarni qayta ishlash, moliyaviy texnologiyalar, innovatsion yechimlar.",
+     "date": "30.04.2025"
+    },
+    {
+     "route": "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen",
+     "title": "Barqaror Ishlab Chiqarish va Kaizen Usullarida O'qitish",
+     "img": "62zmtfmcga",
+     "client": "\"Orzu-teks\" MCHJ",
+     "region": "Chirchiq. sh, O'zbekiston",
+     "sector": "tekstil korxonasi",
+     "date": "01.05.2024"
+    }
    ]
   },
   {
@@ -1474,7 +1522,15 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "\"Integratsiyalashgan Boshqaruv Tizimini Ishlab Chiqish va Joriy Qilish\" loyihasi \"Index Consulting Company\" MCHJ uchun ISO 9001 standartiga o'tishga qaratilgan. Loyihaning asosiy maqsadi tashkilotda boshqaruv jarayonlarini soddalashtiradigan va yaxshilaydigan Integratsiyalashgan Boshqaruv Tizimini (IBT) ishlab chiqish va joriy qilishdir. IBT mavjud boshqaruv tizimlarini, jumladan sifatni boshqarish, atrof-muhitni boshqarish va mehnat xavfsizligi va texnikasi boshqaruvini yagona strukturaga integratsiyalashni hisobga olgan holda ishlab chiqiladi. IBTning muvaffaqiyatli joriy qilinishi ICCga umumiy samaradorlikni, standartlar va regulyator talablarga muvofiqlikni, xavflarni boshqarishni va manfaatdor tomonlar qoniqishini yaxshilash imkonini beradi."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -1489,6 +1545,10 @@
       "**O'qitish va xabardorlikni oshirish:** ISO 9001 asoslarini tushunish uchun xodimlar uchun maqsadli treninglar o'tkazish.",
       "**Xavflarni baholash:** Potensial xavflarni tahlil qilish va ularni samarali boshqarish strategiyalarini joriy qilish."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Asosiy ko'rsatilgan xizmatlar:** "
     },
     {
      "k": "p",
@@ -1511,6 +1571,10 @@
     },
     {
      "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha davomida ISO 9001ni joriy qilish jarayonlarini optimizatsiya qilish uchun turli usullar qo'llanildi, jumladan:"
     },
     {
@@ -1522,6 +1586,10 @@
       "**Nazorat va baholash:** Joriy qilingan o'zgarishlarning natijalarini va ularning standartlarga muvofiqligini baholash.",
       "**Samaradorlikni monitoring qilish:** Sifat maqsadlariga erishishda progressni kuzatish uchun monitoring tizimini o'rnatish."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
     },
     {
      "k": "p",
@@ -1539,8 +1607,24 @@
     }
    ],
    "more": [
-    "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
-    "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen"
+    {
+     "route": "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
+     "title": "Ma'lumotlarni qayta ishlash kompaniyasini rivojlantirish strategiyasini ishlab chiqish",
+     "img": "cvq7b5owi3",
+     "client": "",
+     "region": "",
+     "sector": "Ma'lumotlarni qayta ishlash, moliyaviy texnologiyalar, innovatsion yechimlar.",
+     "date": "30.04.2025"
+    },
+    {
+     "route": "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen",
+     "title": "Barqaror Ishlab Chiqarish va Kaizen Usullarida O'qitish",
+     "img": "62zmtfmcga",
+     "client": "\"Orzu-teks\" MCHJ",
+     "region": "Chirchiq. sh, O'zbekiston",
+     "sector": "tekstil korxonasi",
+     "date": "01.05.2024"
+    }
    ]
   },
   {
@@ -1564,12 +1648,20 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "Loyihaning maqsadi \"Art of the Business Assistance\" (Hippo™) elektron hujjat aylanishi kompaniyasi uchun o'sish strategiyasini ishlab chiqishdan iborat. Loyiha kompaniyaning bozordagi pozitsiyasini yaxshilashga qaratilgan bo'lib, mahsulotning funksionallig'ini oshirish va xizmatlar assortimentni kengaytirishni maqsad qiladi. Tajribali maslahatchini jalb qilish orqali loyiha iste'molchi talabini aniq baholash, mahsulotni yaxshilashni rejalashtirish va ta'minot zanjiri operatsiyalarini qamrab oladigan yangi modullarni yaratish imkoniyatlarini aniqlashga intiladi. Bundan tashqari, maslahatchi mavjud mijozlarni tahlil qilib, sotuv hajmini oshirish salohiyatini aniqlaydi va ushbu maqsadlarga erishish uchun strategiyani ishlab chiqadi. Loyihaning asosiy vazifasi kompaniyaning raqobatbardoshligini oshirish va elektron hujjat aylanishi bozorida barqaror o'sishni ta'minlashdir."
     },
     {
      "k": "img",
      "id": "sn-67c5435651c8d",
      "alt": ""
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -1592,6 +1684,10 @@
     },
     {
      "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha davomida jarayonlarni optimizatsiya qilish uchun turli usullar qo'llanildi, jumladan:"
     },
     {
@@ -1603,6 +1699,10 @@
       "**O'qitish:** Xodimlar orasida unikal taklif va sifatni boshqarish to'g'risidagi tushunchani oshirish uchun o'qitish sessiyalarini o'tkazish.",
       "**Samaradorlikni nazorat qilish:** Joriy qilingan o'zgarishlarning natijalarini va ularning ishlab chiqarish jarayonlariga ta'sirini baholash."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
     },
     {
      "k": "p",
@@ -1620,8 +1720,24 @@
     }
    ],
    "more": [
-    "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
-    "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen"
+    {
+     "route": "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
+     "title": "Ma'lumotlarni qayta ishlash kompaniyasini rivojlantirish strategiyasini ishlab chiqish",
+     "img": "cvq7b5owi3",
+     "client": "",
+     "region": "",
+     "sector": "Ma'lumotlarni qayta ishlash, moliyaviy texnologiyalar, innovatsion yechimlar.",
+     "date": "30.04.2025"
+    },
+    {
+     "route": "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen",
+     "title": "Barqaror Ishlab Chiqarish va Kaizen Usullarida O'qitish",
+     "img": "62zmtfmcga",
+     "client": "\"Orzu-teks\" MCHJ",
+     "region": "Chirchiq. sh, O'zbekiston",
+     "sector": "tekstil korxonasi",
+     "date": "01.05.2024"
+    }
    ]
   },
   {
@@ -1645,6 +1761,22 @@
    "cover": "cvq7b5owi3",
    "body": [
     {
+     "k": "p",
+     "x": "**Loyiha tavsifi:** Ushbu loyiha ma'lumotlarni qayta ishlashga ixtisoslashgan kompaniya uchun keng qamrovli rivojlanish strategiyasini ishlab chiqishga bag'ishlandi. Asosiy e'tibor moliyaviy xizmatlar sohasidagi yangi yechimlarni ishlab chiqishga qaratildi, bu esa hamkorning mavjud, keng tarqalgan infratuzilmasidan foydalanishni nazarda tutdi. Strategiya biznesning barqaror o'sishini ta'minlash va bozordagi mavqeini kengaytirishga qaratilgan edi."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** Loyiha o'ziga ambitsiyali maqsadlarni qo'ydi: bozorni chuqur tahlil qilish, innovatsion texnik arxitekturani ishlab chiqish, xavfsizlik tizimi va normativ talablarga muvofiqlikni yaratish, mijozlar bilan munosabatlar strategiyasini ishlab chiqish, marketing strategiyasini yaratish, barcha mumkin bo'lgan xavflarni baholash va ularni kamaytirish choralarini ishlab chiqish, shuningdek, uzoq muddatli strategik yo'l xaritasini shakllantirish."
+    },
+    {
+     "k": "p",
+     "x": "**Asosiy taqdim etiladigan xizmatlar:** Loyiha doirasida quyidagi xizmatlar ko'rsatildi: bozor va raqobat muhitini tahlil qilish, rivojlanish strategiyasini ishlab chiqish, texnik arxitektura va infratuzilmani ishlab chiqish, yuridik ekspertiza va xavflarni baholash, marketing va kommunikatsiya materiallarini ishlab chiqish, ma'lumotlarni boshqarish tizimini ishlab chiqish va joriy qilish, shuningdek, personalni o'qitish."
+    },
+    {
+     "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
      "k": "ul",
      "items": [
       "SWOT-tahlil",
@@ -1653,11 +1785,31 @@
       "Moliyaviy modellashtirish",
       "Manfaatdor tomonlardan qayta aloqa bilan iterativ yondashuv"
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** Loyiha natijasida quyidagilarga erishildi: bozor holati to'g'risida batafsil hisobot, kompaniyaning keng qamrovli rivojlanish strategiyasi, texnik hujjatlar va amalga oshirish rejasi, yuridik xulosa va marketing rejasi."
     }
    ],
    "more": [
-    "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen",
-    "portfolio/konsaltingovie-proekty/optimizaciya-proizvodstvennyx-processov"
+    {
+     "route": "portfolio/konsaltingovie-proekty/vnedrenie-berezlivogo-proizvodstva-i-kaidzen",
+     "title": "Barqaror Ishlab Chiqarish va Kaizen Usullarida O'qitish",
+     "img": "62zmtfmcga",
+     "client": "\"Orzu-teks\" MCHJ",
+     "region": "Chirchiq. sh, O'zbekiston",
+     "sector": "tekstil korxonasi",
+     "date": "01.05.2024"
+    },
+    {
+     "route": "portfolio/konsaltingovie-proekty/optimizaciya-proizvodstvennyx-processov",
+     "title": "Ishlab chiqarish jarayonlarini optimallashtirish",
+     "img": "mziggacnf9",
+     "client": "\"E’tiqod Mebel\" MCHJ",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Mebel ishlab chiqarish",
+     "date": "10.07.2022"
+    }
    ]
   },
   {
@@ -1683,11 +1835,19 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "Barqaror Ishlab Chiqarish va Kaizen loyihasi \"Orzu-Teks\" kompaniyasi xodimlari uchun o'tkazilgan bir qator treninglarni o'z ichiga olgan. Birinchi seminar Barqaror Ishlab Chiqarish asoslariga bag'ishlandi. Qatnashchilar Barqaror Ishlab Chiqarish prinsiplari, chiqindilarni kamaytirish strategiyalari, ish joyini tashkil qilish, yagona mahsulot oqimi va Barqaror Ishlab Chiqarishning boshqa vositalari kabi asosiy tushunchalarga chuqur kirib borishdi. Sessiyaning eng yorqin lahzalaridan biri \"Samolyotlar ishlab chiqarish\" interaktiv simulyatsion o'yini bo'lib, u Barqaror Ishlab Chiqarish prinsiplarini amaliy qo'llashni namoyish etdi."
     },
     {
      "k": "p",
      "x": "Loyihaning ikkinchi seminari \"Kaizen/Berejlivoye proizvodstvo\" kompaniyada sifat nazorati tizimini joriy etishga qaratilgan edi. Qatnashchilar kompaniyaning uchta ishlab chiqarish maydonida sifat nazorati jarayonlarini joriy etish masalalarini muhokama qildilar."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -1706,6 +1866,10 @@
      "k": "img",
      "id": "sn-67c54650deda9",
      "alt": ""
+    },
+    {
+     "k": "p",
+     "x": "**Asosiy ko'rsatilgan xizmatlar:** "
     },
     {
      "k": "p",
@@ -1738,6 +1902,10 @@
     },
     {
      "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
+     "k": "p",
      "x": "Seminarlar davomida turli usullar qo'llanildi, jumladan:"
     },
     {
@@ -1747,6 +1915,10 @@
       "**Interaktiv o'qitish:** Barqaror Ishlab Chiqarish va Kanban prinsiplarini namoyish etish uchun simulyatsion o'yinlardan foydalanish.",
       "**Muhokamalar va treninglar:** Sifat nazorati va jarayonlarni optimallashtirishga oid mavzularni muhokama qilishda qatnashchilarni faol ishtirok etishi."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
     },
     {
      "k": "p",
@@ -1763,8 +1935,24 @@
     }
    ],
    "more": [
-    "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
-    "portfolio/konsaltingovie-proekty/optimizaciya-proizvodstvennyx-processov"
+    {
+     "route": "portfolio/konsaltingovie-proekty/razrabotka-strategii-razvitiya-kompanii-po-obrabotke-dannyx",
+     "title": "Ma'lumotlarni qayta ishlash kompaniyasini rivojlantirish strategiyasini ishlab chiqish",
+     "img": "cvq7b5owi3",
+     "client": "",
+     "region": "",
+     "sector": "Ma'lumotlarni qayta ishlash, moliyaviy texnologiyalar, innovatsion yechimlar.",
+     "date": "30.04.2025"
+    },
+    {
+     "route": "portfolio/konsaltingovie-proekty/optimizaciya-proizvodstvennyx-processov",
+     "title": "Ishlab chiqarish jarayonlarini optimallashtirish",
+     "img": "mziggacnf9",
+     "client": "\"E’tiqod Mebel\" MCHJ",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Mebel ishlab chiqarish",
+     "date": "10.07.2022"
+    }
    ]
   },
   {
@@ -1790,7 +1978,15 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "Loyihaning maqsadi Ipak Yo'li Bankning operatsiyalari va binolarining hozirgi holatini aniqlaydigan bazaviy darajani o'rnatish, yaxshilash imkoniyatlarini aniqlash va yashil moliyalashtirish FMO doirasida tanlangan investitsiya imkoniyatlarini moliyalashtirish uchun keyingi qadamlar yo'l xaritasini ishlab chiqishda qo'llab-quvvatlashdan iborat. Bu qo'llab-quvvatlash Ipak Yo'li Bankga o'zining operatsiyalari va binolarini ekologizatsiya qilish maqsadlarini amalga oshirishda yordam beradi va ushbu bilimlarni O'zbekiston bozoridagi yashil transformatsiyani qo'llab-quvvatlash uchun samarali foydalanish imkoniyatini yaratadi."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -1812,6 +2008,10 @@
     },
     {
      "k": "p",
+     "x": "**Asosiy ko'rsatilgan xizmatlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha doirasida quyidagi xizmatlar ko'rsatildi:"
     },
     {
@@ -1821,6 +2021,10 @@
       "**Mavjud operatsiyalarni tahlil qilish:** Bankaning energiya va xomashyo iste'molini kamaytirish, parnik gazlar chiqindilarini va boshqa salbiy ta'sirlarni qisqartirishga qaratilgan operatsiyalarini o'rganish.",
       "**Harakatlar rejasini ishlab chiqish:** Moliyaviy muassasa o'zining yashil moliyalashtirish maqsadlariga erishish uchun amalga oshirishi kerak bo'lgan qadamlarni aniqlash, jumladan, aniq harakatlar, muddatlar, resurslar va mas'ulliklar detallarini qamrab oladi."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
     },
     {
      "k": "p",
@@ -1836,6 +2040,10 @@
     },
     {
      "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha natijasida quyidagi natijalarga erishildi:"
     },
     {
@@ -1847,6 +2055,10 @@
      ]
     },
     {
+     "k": "p",
+     "x": "**Ishtirok etgan mutaxassislar:** "
+    },
+    {
      "k": "ul",
      "items": [
       "Karsten Rit (CRS) – Loyiha menejeri.",
@@ -1856,8 +2068,24 @@
     }
    ],
    "more": [
-    "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
-    "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane"
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
+     "title": "Portfel va bozorni skrining qilishni o'tkazish",
+     "img": "wdvkkh9rph",
+     "client": "Internationale Projekt Consult Gmbh (IPC)",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "15.10.2024"
+    },
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane",
+     "title": "O'zbekistonda energiya samaradorligiga ega chakana texnologiyalarning uglerod ta'sirini miqdoriy baholash uchun asosiy darajalarni belgilash maqsadida bozor so'rovi o'tkazish.",
+     "img": "zaopv1cvz5",
+     "client": "Internationale Projekt Consult Gmbh",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "25.07.2024"
+    }
    ]
   },
   {
@@ -1882,7 +2110,15 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "Bankning KICHIK VA O'RTA BIZNES PORTFELINI kengaytirish rejalarini qo'llab-quvvatlash doirasida FMO 40 million AQSH dollari miqdorida shartsiz kredit taqdim etdi. Kredit to'liq kambag'allikni kamaytirish va yashil loyihalarga ajratiladi. Valyuta tanlashda elastiklik mavjud (o'zbek so'mlari va AQSH dollari), DAVR Bank to'lovlarni boshlashgacha valyutani tanlash imkoniyatiga ega. Loyiha doirasida konsultant qo'llab-quvvatlashi bilan bank biznes jarayonlariga Yashil Ijobiy Ro'yxat ishlab chiqilishi va integratsiya qilinishi kerak."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -1911,6 +2147,10 @@
     },
     {
      "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha davomida tahlil va samarali yechimlarni joriy qilish uchun turli usullar qo'llaniladi, jumladan:"
     },
     {
@@ -1922,6 +2162,10 @@
       "**Manfaatdor tomonlar bilan muhokamalar:** Axborot va tavsiyalar olish uchun uchrashuvlar o'tkazish.",
       "**Imkoniyatlarni namoyish etish:** Haqiqiy mijozlarda yashil mahsulotlarni sinovdan o'tkazish va ularning samaradorligini tekshirish."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
     },
     {
      "k": "p",
@@ -1937,6 +2181,10 @@
      ]
     },
     {
+     "k": "p",
+     "x": "**Qatnashgan mutaxassislar:** "
+    },
+    {
      "k": "ul",
      "items": [
       "Abdullaz Muhamedov – Energetika samaradorligi va qayta tiklanadigan energiya manbalari bo'yicha mahalliy mutaxassis.",
@@ -1945,8 +2193,24 @@
     }
    ],
    "more": [
-    "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
-    "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane"
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
+     "title": "Portfel va bozorni skrining qilishni o'tkazish",
+     "img": "wdvkkh9rph",
+     "client": "Internationale Projekt Consult Gmbh (IPC)",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "15.10.2024"
+    },
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane",
+     "title": "O'zbekistonda energiya samaradorligiga ega chakana texnologiyalarning uglerod ta'sirini miqdoriy baholash uchun asosiy darajalarni belgilash maqsadida bozor so'rovi o'tkazish.",
+     "img": "zaopv1cvz5",
+     "client": "Internationale Projekt Consult Gmbh",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "25.07.2024"
+    }
    ]
   },
   {
@@ -1972,7 +2236,15 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "O'zbek sanoat sektorida barqaror energetik yechimlarga bo'lgan ehtiyoj ortib borishini hisobga olgan holda, loyiha ikki tajribaviy sanoat zonasida (Farg'ona mexanik kichik sanoat zonasi va Urgut erkin iqtisodiy zonasi) qayta tiklanadigan energiya manbalari texnologiyalarini joriy qilish va infratuzilmasini yaxshilashni tadqiq qilishga qaratilgan. Asosiy e'tibor quyosh energiyasidan foydalanishga qaratilgan bo'lib, photovoltaic (PV) panellarini o'rnatish imkoniyatlarini baholash va ushbu zonalardagi bir necha kompaniyalarga xizmat ko'rsatuvchi elektr energiyasi transformatsiya qilish stansiyalarini optimallashtirish bo'yicha chora-tadbirlarni ishlab chiqish. Loyiha energiya yo'qotishlarini kamaytirish, ekspluatatsion xarajatlarni qisqartirish va sanoat operatsiyalarining umumiy ekologik barqarorligiga hissa qo'shishga intiladi."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -1993,6 +2265,10 @@
     },
     {
      "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha davomida uglerod chiqindilarini kamaytirish choralarini baholash va ishlab chiqish uchun turli usullar qo'llanildi, jumladan:"
     },
     {
@@ -2004,6 +2280,10 @@
       "**Manfaatdor tomonlar bilan muhokamalar:** Tahlil natijalarini ishtirokchilarga yetkazish.",
       "**Biznes modellarni yaratish:** Texnologiyalarni joriy qilish uchun amalga oshiriladigan biznes strategiyalarni ishlab chiqish."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
     },
     {
      "k": "p",
@@ -2019,6 +2299,10 @@
      ]
     },
     {
+     "k": "p",
+     "x": "**Qatnashgan mutaxassislar:** "
+    },
+    {
      "k": "ul",
      "items": [
       "Ivan Butuk (EES) – Loyiha menejeri.",
@@ -2028,8 +2312,24 @@
     }
    ],
    "more": [
-    "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
-    "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane"
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
+     "title": "Portfel va bozorni skrining qilishni o'tkazish",
+     "img": "wdvkkh9rph",
+     "client": "Internationale Projekt Consult Gmbh (IPC)",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "15.10.2024"
+    },
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane",
+     "title": "O'zbekistonda energiya samaradorligiga ega chakana texnologiyalarning uglerod ta'sirini miqdoriy baholash uchun asosiy darajalarni belgilash maqsadida bozor so'rovi o'tkazish.",
+     "img": "zaopv1cvz5",
+     "client": "Internationale Projekt Consult Gmbh",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "25.07.2024"
+    }
    ]
   },
   {
@@ -2055,7 +2355,15 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "Loyihaning maqsadi O'zbekistonda energiya samaradorligiga ega chakana texnologiyalarning uglerod ta'sirini miqdoriy baholash uchun keng qamrovli bozor so'rovini o'tkazishdan iborat. So'rov ushbu texnologiyalarning joriy foydalanish hajmi va energiya iste'moli to'g'risida ma'lumotlarni yig'ish va tahlil qilishga qaratilgan bo'lib, mahalliy va Yevropa markirovka tizimlaridan foydalaniladi. Loyiha batafsil rejalashtirish, ma'lumotlar yig'ish va manfaatdor tomonlar bilan suhbatlar o'tkazishni o'z ichiga oladi, bu esa dolzarb bozor ma'lumotlarini olish imkonini beradi. Natijalar hisobot va Excel fayli shaklida jamlanadi, ular tanlangan texnologiyalarning uglerod ta'sirini hisoblash uchun mo'ljallangan. Maqsad - Global Iqlim Shariklik Jamg'armasi (GCPF) ga O'zbekistonda energiya samaradorligi yuqori bo'lgan mahsulotlar bozorini tushunish va yaxshilashga yordam beradigan amaliy tavsiyalar berish. Ushbu tashabbus energiya samaradorligini oshirish, uglerod chiqindilarini kamaytirish va chakana texnologiyalarda barqaror amaliyotlarni ilgari surishga qaratilgan."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -2069,6 +2377,10 @@
       "**Manfaatdor tomonlar bilan munosabat:** Yetkazib beruvchilar va bozorning boshqa ishtirokchilari bilan suhbatlar o'tkazish.",
       "**Hisobotlar va hujjatlar tayyorlash:** Natijalarni hisobot shaklida jamlash va GCPF ga ma'lumotlar taqdim etish."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Asosiy taqdim etiladigan xizmatlar:** "
     },
     {
      "k": "p",
@@ -2089,6 +2401,10 @@
     },
     {
      "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha jarayonida uglerod ta'sirini tahlil qilish va baholash uchun turli usullar qo'llanildi, jumladan:"
     },
     {
@@ -2102,8 +2418,12 @@
      ]
     },
     {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
+    },
+    {
      "k": "h",
-     "x": "Loyiha natijasida quyidagilarga erishildi",
+     "x": "Loyiha natijasida quyidagilarga erishildi:",
      "sub": true
     },
     {
@@ -2114,6 +2434,10 @@
       "**GCPF ni qo'llab-quvvatlash:** Samarali moliyalashtirish dasturini ishlab chiqish uchun ma'lumotlar taqdim etildi.",
       "**Xabardorlikni oshirish:** Manfaatdor tomonlar orasida energiya samaradorligi texnologiyalarining potensial ta'siri va imkoniyatlari to'g'risida xabardorlikni oshirish."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Ishtirok etgan mutaxassislar:** "
     },
     {
      "k": "ul",
@@ -2128,8 +2452,24 @@
     }
    ],
    "more": [
-    "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
-    "portfolio/obrazovatelnye-proekty/doroznaya-karta-zelenogo-finansirovaniya-dlya-davr-bank"
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
+     "title": "Portfel va bozorni skrining qilishni o'tkazish",
+     "img": "wdvkkh9rph",
+     "client": "Internationale Projekt Consult Gmbh (IPC)",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "15.10.2024"
+    },
+    {
+     "route": "portfolio/obrazovatelnye-proekty/doroznaya-karta-zelenogo-finansirovaniya-dlya-davr-bank",
+     "title": "DAVR BANK uchun Yashil Moliyalashtirish bo'yicha Yo'l Xaritasi",
+     "img": "nqd8jhvatu",
+     "client": "Internationale Projekt Consult Gmbh (IPC)",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "15.07.2025"
+    }
    ]
   },
   {
@@ -2155,7 +2495,15 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "Global Iqlim Shariklik Jamg'armasi (GCPF) O'zbekistonda energiya samaradorligi (YEYE) va qayta tiklanuvchi energiya (RE) loyihalarini ilgari surish orqali iqlim o'zgarishi oqibatlarini yumshatish bo'yicha tashabbusni boshqaradi. Loyiha O'zbekistondagi xususiy bank bilan hamkorlikni o'z ichiga oladi, ushbu bank 1 milliard AQSH dollari miqdoridagi kredit portfeliga ega bo'lib, kichik va o'rta biznes korxonalari, chakana savdo, mikrobiznes va korporativ mijozlarga xizmat ko'rsatadi. Asosiy maqsad - YEYE/RE loyihalari portfelini ishlab chiqish va GCPF moliyalashtirishidan foydalangan holda yashil kreditlash uchun bozor potensialini aniqlash."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -2175,6 +2523,10 @@
     },
     {
      "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha jarayonida turli usullar qo'llanildi, jumladan:"
     },
     {
@@ -2188,8 +2540,12 @@
      ]
     },
     {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
+    },
+    {
      "k": "h",
-     "x": "Loyiha natijasida quyidagilarga erishildi",
+     "x": "Loyiha natijasida quyidagilarga erishildi:",
      "sub": true
     },
     {
@@ -2202,6 +2558,10 @@
      ]
     },
     {
+     "k": "p",
+     "x": "**Ishtirok etgan mutaxassislar:** "
+    },
+    {
      "k": "ul",
      "items": [
       "Karina Dunker (IPC) – Yashil moliyalashtirish bo'yicha ekspert.",
@@ -2212,8 +2572,24 @@
     }
    ],
    "more": [
-    "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane",
-    "portfolio/obrazovatelnye-proekty/doroznaya-karta-zelenogo-finansirovaniya-dlya-davr-bank"
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane",
+     "title": "O'zbekistonda energiya samaradorligiga ega chakana texnologiyalarning uglerod ta'sirini miqdoriy baholash uchun asosiy darajalarni belgilash maqsadida bozor so'rovi o'tkazish.",
+     "img": "zaopv1cvz5",
+     "client": "Internationale Projekt Consult Gmbh",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "25.07.2024"
+    },
+    {
+     "route": "portfolio/obrazovatelnye-proekty/doroznaya-karta-zelenogo-finansirovaniya-dlya-davr-bank",
+     "title": "DAVR BANK uchun Yashil Moliyalashtirish bo'yicha Yo'l Xaritasi",
+     "img": "nqd8jhvatu",
+     "client": "Internationale Projekt Consult Gmbh (IPC)",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "15.07.2025"
+    }
    ]
   },
   {
@@ -2239,7 +2615,15 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "Loyihaning maqsadi O'zbekistonda elektr va gaz motorli yuk mashinalari (HDV) uchun bazaviy darajani ishlab chiqish orqali Global Climate Partnership Fund (GCPF) uchun yashil moliyalashtirish liniyasini yaratishdan iborat. Loyiha mamlakatda elektr va yuk mashinalaridan foydalanishning hozirgi holatini baholashni, elektr va gaz motorli yuk mashinalari potensialini o'rganishni va ekologik toza alternativaga o'tishning moliyaviy maqbulligini baholashni o'z ichiga oladi. Loyiha GCPFga O'zbekistonda samarali yashil moliyalashtirish dasturini ishlab chiqish va joriy etish uchun zarur bo'lgan ma'lumotlar va insaytlarni taqdim etadi."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -2264,6 +2648,10 @@
     },
     {
      "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha davomida bazaviy darajani baholash va ishlab chiqish uchun turli usullar qo'llanildi, jumladan:"
     },
     {
@@ -2275,6 +2663,10 @@
       "**Manfaatdor tomonlar bilan muhokama:** Qimmatli ma'lumot olish uchun mahalliy ekspertlar va ishtirokchilarni jalb qilish.",
       "**Taqqoslash tahlili:** Turli modellar va segmentlar uchun CAPEX va OPEX tahlilini o'tkazish."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
     },
     {
      "k": "p",
@@ -2290,6 +2682,10 @@
      ]
     },
     {
+     "k": "p",
+     "x": "**Ishtirok etgan mutaxassislar:** "
+    },
+    {
      "k": "ul",
      "items": [
       "Gernot Kulitsh (IPC) – Loyiha menejeri.",
@@ -2301,8 +2697,24 @@
     }
    ],
    "more": [
-    "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
-    "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane"
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
+     "title": "Portfel va bozorni skrining qilishni o'tkazish",
+     "img": "wdvkkh9rph",
+     "client": "Internationale Projekt Consult Gmbh (IPC)",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "15.10.2024"
+    },
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane",
+     "title": "O'zbekistonda energiya samaradorligiga ega chakana texnologiyalarning uglerod ta'sirini miqdoriy baholash uchun asosiy darajalarni belgilash maqsadida bozor so'rovi o'tkazish.",
+     "img": "zaopv1cvz5",
+     "client": "Internationale Projekt Consult Gmbh",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "25.07.2024"
+    }
    ]
   },
   {
@@ -2328,7 +2740,15 @@
    "body": [
     {
      "k": "p",
+     "x": "**Loyiha tavsifi:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha \"Ipak Yo'li Banki\" uchun yashil moliya bo'yicha strategik yo'l xaritasini yaratishga qaratilgan bo'lib, karbon chiqindilarini baholash va iqlim o'zgarishiga barqarorlikni yaxshilashni o'z ichiga oladi. Asosiy vazifa bankning barqaror rivojlanishga o'tishini ta'minlaydigan tavsiyalar ishlab chiqishdir."
+    },
+    {
+     "k": "p",
+     "x": "**Maqsad va vazifalar:** "
     },
     {
      "k": "p",
@@ -2342,6 +2762,10 @@
       "**Ta'limni qo'llab-quvvatlash:** Eng yaxshi amaliyotlar bo'yicha o'quv sessiyalari va seminarlar o'tkazish.",
       "**Strategiyalarni yaratish:** Barqaror moliyalashtirish maqsadlariga erishish uchun yo'l xaritasini ishlab chiqish."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Asosiy ko'rsatiladigan xizmatlar:** "
     },
     {
      "k": "ul",
@@ -2359,6 +2783,10 @@
     },
     {
      "k": "p",
+     "x": "**Usullar va yondashuvlar:** "
+    },
+    {
+     "k": "p",
      "x": "Loyiha doirasida turli usullardan foydalanildi, jumladan:"
     },
     {
@@ -2369,6 +2797,10 @@
       "**Manfaatdor tomonlar bilan muhokamalar:** Qo'shimcha ma'lumot olish uchun mahalliy mutaxassislarni jalb qilish.",
       "**Pilot mahsulotlarini sinovdan o'tkazish:** Yangi yechimlarning haqiqiy mijozlardagi muvaffaqiyatini ishga tushirish va tahlil qilish."
      ]
+    },
+    {
+     "k": "p",
+     "x": "**Natijalar va yutuqlar:** "
     },
     {
      "k": "p",
@@ -2383,6 +2815,10 @@
      ]
     },
     {
+     "k": "p",
+     "x": "**Qatnashgan mutaxassislar:** "
+    },
+    {
      "k": "ul",
      "items": [
       "Abdulaziz Muhamedov – Energetika samaradorligi va qayta tiklanadigan energiya manbalari bo'yicha mahalliy mutaxassis.",
@@ -2391,8 +2827,24 @@
     }
    ],
    "more": [
-    "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
-    "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane"
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-skrininga-portfelya-i-rynka",
+     "title": "Portfel va bozorni skrining qilishni o'tkazish",
+     "img": "wdvkkh9rph",
+     "client": "Internationale Projekt Consult Gmbh (IPC)",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "15.10.2024"
+    },
+    {
+     "route": "portfolio/obrazovatelnye-proekty/provedenie-rynocnogo-oprosa-dlya-ustanovleniya-bazovogo-urovnya-kvantovaniya-uglerodnyx-vliyanii-energoeffektivnyx-roznicnyx-texnologii-v-uzbekistane",
+     "title": "O'zbekistonda energiya samaradorligiga ega chakana texnologiyalarning uglerod ta'sirini miqdoriy baholash uchun asosiy darajalarni belgilash maqsadida bozor so'rovi o'tkazish.",
+     "img": "zaopv1cvz5",
+     "client": "Internationale Projekt Consult Gmbh",
+     "region": "Toshkent, O'zbekiston",
+     "sector": "Barqaror rivojlanish va moliyalashtirish sohasida konsalting va loyihalarni boshqarish",
+     "date": "25.07.2024"
+    }
    ]
   },
   {
@@ -2416,7 +2868,15 @@
    "cover": "pfithprniu",
    "body": [],
    "more": [
-    "portfolio/proekty-po-avtomatizacii/robotizaciya-proizvodstvennyx-processov"
+    {
+     "route": "portfolio/proekty-po-avtomatizacii/robotizaciya-proizvodstvennyx-processov",
+     "title": "Ishlab chiqarish jarayonlarini robotlashtirish",
+     "img": "77bc4blu5t",
+     "client": "\"TEXNOPARK\" MCHJ",
+     "region": "Toshkent shahar",
+     "sector": "Maishiy texnika ishlab chiqarish",
+     "date": "19.11.2021"
+    }
    ]
   },
   {
@@ -2454,7 +2914,7 @@
     },
     {
      "k": "h",
-     "x": "Klyucheviye tseli",
+     "x": "Klyucheviye tseli:",
      "sub": true
     },
     {
@@ -2469,7 +2929,7 @@
     },
     {
      "k": "h",
-     "x": "Ko'rsatilgan xizmatlar",
+     "x": "Ko'rsatilgan xizmatlar:",
      "sub": true
     },
     {
@@ -2485,7 +2945,15 @@
     }
    ],
    "more": [
-    "portfolio/proekty-po-avtomatizacii/integraciya-sistemy-hippo-edi"
+    {
+     "route": "portfolio/proekty-po-avtomatizacii/integraciya-sistemy-hippo-edi",
+     "title": "Elektron ma'lumot almashish tizimini (EDI) integratsiya qilish",
+     "img": "pfithprniu",
+     "client": "ZAHRATUN™",
+     "region": "Buxoro, Samarqand",
+     "sector": "Savdo tarmog'i",
+     "date": "30.06.2025"
+    }
    ]
   }
  ],
@@ -2594,7 +3062,7 @@
      },
      {
       "k": "h",
-      "x": "O'quvning asosiy jihatlari",
+      "x": "O'quvning asosiy jihatlari:",
       "sub": true
      },
      {

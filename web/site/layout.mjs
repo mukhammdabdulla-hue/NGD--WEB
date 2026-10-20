@@ -57,7 +57,9 @@ function footer(ctx, { cta = true } = {}) {
       <div class="ft-col ft-contact">
         <p class="ft-h mono">${esc(F.addrLabel)}</p>
         <p class="ft-addr">${esc(F.address)}</p>
+        <p class="ft-h mono">${esc(C.modal.labels.phone)}</p>
         <a href="${F.phoneHref}">${esc(F.phone)}</a>
+        <p class="ft-h mono">${esc(C.modal.labels.email)}</p>
         <a href="mailto:${F.email}">${esc(F.email)}</a>
         ${socials()}
       </div>

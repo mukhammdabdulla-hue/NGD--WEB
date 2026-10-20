@@ -105,8 +105,8 @@ export function prose(ctx, blocks, { imgSizes = '(min-width: 1100px) 860px, 94vw
       case 'p': return `<p data-rv>${inline(b.x)}</p>`;
       case 'ul': return `<ul class="pr-ul" data-rv>${b.items.map((i) => `<li>${lead(i)}</li>`).join('')}</ul>`;
       case 'ol': return `<ol class="pr-ol" data-rv>${b.items.map((i) => `<li>${lead(i)}</li>`).join('')}</ol>`;
-      case 'emo': return `<ul class="pr-emo" data-rv>${b.items.map((i) => `<li>${esc(i)}</li>`).join('')}</ul>`;
-      case 'img': return `<figure class="pr-fig" data-clip>${pic(ctx, b.id, { alt: b.alt || '', sizes: imgSizes })}</figure>`;
+      case 'emo': return `<ul class="pr-emo" data-rv>${b.items.map((i) => `<li>${inline(i)}</li>`).join('')}</ul>`;
+      case 'img': return `<figure class="pr-fig" data-clip>${pic(ctx, b.id, { alt: b.alt || '', sizes: imgSizes })}${b.cap ? `<figcaption>${inline(b.cap)}</figcaption>` : ''}</figure>`;
       default: return '';
     }
   }).join('\n');

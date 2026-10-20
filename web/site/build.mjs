@@ -51,7 +51,7 @@ const staticClosure = (f, seen = new Set()) => {
 };
 const mainSet = staticClosure(mainOut);
 // Sahifa ichidagi imkoniyatlar (oyna, filtr, fikrlar, forma) shell'dan dinamik yuklanadi: ular ham past ustuvorlikda oldindan e'lon qilinadi
-const FEATURES = { section: ['fikr'], portfolio: ['filter'], posts: ['filter'], contact: ['form'] };
+const FEATURES = { section: ['fikr'], project: ['fikr'], portfolio: ['filter'], posts: ['filter'], contact: ['form'] };
 const entryOut = (name) => Object.keys(outs).find((f) => outs[f].entryPoint?.endsWith(`js/parts/${name}.js`));
 // bo'lak va uning statik zanjiri + shu zanjir dinamik yuklaydigan bo'laklar
 const withDynamic = (start) => {

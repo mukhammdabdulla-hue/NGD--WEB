@@ -121,7 +121,7 @@ function blocks(tokens, page) {
     if (t.t === 'h') out.push({ k: 'h', x: T(t.x) });
     else if (t.t === 'p') {
       const x = T(t.x);
-      if (/:$/.test(t.x) && wordCount(t.x) <= 4 && !/[.!?]/.test(t.x.slice(0, -1))) out.push({ k: 'h', x: x.replace(/:$/, ''), sub: true });
+      if (/:$/.test(t.x) && wordCount(t.x) <= 4 && !/[.!?]/.test(t.x.slice(0, -1))) out.push({ k: 'h', x, sub: true });
       else if (/^\p{Extended_Pictographic}/u.test(t.x)) {
         const prev = out[out.length - 1];
         if (prev && prev.k === 'emo') prev.items.push(x); else out.push({ k: 'emo', items: [x] });
@@ -130,7 +130,10 @@ function blocks(tokens, page) {
       if (isIcon(t.file)) continue;
       const im = img(t.file, t.alt);
       out.push({ k: 'img', ...im, cap: T(t.tail) || undefined });
-    } else if (t.t === 'empty' || t.t === 'btn' || t.t === 'link' || t.t === 'imglink' || t.t === 'kv') { /* kontent bloki emas */ }
+    } else if (t.t === 'kv') {
+      if (t.empty) missing.push({ route: page ? routeOf(page.fm.url) : '', field: 'kv:' + T(t.k) });
+      else out.push({ k: 'p', x: `**${T(t.k)}:** ${T(t.x)}` });
+    } else if (t.t === 'empty' || t.t === 'btn' || t.t === 'link' || t.t === 'imglink') { /* kontent bloki emas */ }
   }
   flush();
   return out;
@@ -298,7 +301,7 @@ const projects = files.filter((f) => P[f].fm.sahifa_turi === 'loyiha').map((f) =
     goal: get('мақсади'),
     cover: img(cover.file, cover.alt).id,
     body: blocks(gap.tokens, p),
-    more: moreSec ? cards(moreSec.tokens, 'portfolio-card').map((c) => routeOf(first(c.tokens, 'h').href)) : [],
+    more: moreSec ? cards(moreSec.tokens, 'portfolio-card').map((c) => portfolioCard(c, null)) : [],
   };
 });
 const moreTitle = T(first(sections(P[files.find((f) => P[f].fm.sahifa_turi === 'loyiha')].tokens).find((s) => s.tokens.some((t) => t.t === 'card')).tokens, 'h').x);

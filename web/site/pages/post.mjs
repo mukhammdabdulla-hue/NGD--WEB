@@ -1,21 +1,9 @@
 // Yangilik / maqola sahifasi: banner, muqova, asl matn, ulashish, boshqa yozuvlar.
-import { D, C, SITE_URL, allPostCards, brief } from '../data.mjs';
-import { esc, prose, pic, icon, sectionHead } from '../ui.mjs';
-import { banner, newsCard } from '../parts.mjs';
+import { D, allPostCards, brief } from '../data.mjs';
+import { prose, pic, sectionHead } from '../ui.mjs';
+import { banner, newsCard, shareBlock } from '../parts.mjs';
 
 export function render(ctx, p) {
-  const L = D.ui;
-  const url = `${SITE_URL}/${p.route}/`;
-  const enc = encodeURIComponent(url);
-  const share = `<div class="shr" data-rv>
-  <p class="shr-h mono">${esc(L.share)}</p>
-  <div class="shr-b">
-    <button type="button" class="shr-c" data-copy="${esc(url)}" data-done="Nusxalandi">${icon('copy')}<span>${esc(L.copy)}</span></button>
-    <a href="https://t.me/share/url?url=${enc}" target="_blank" rel="noopener" aria-label="Telegram">${icon('telegram')}</a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=${enc}" target="_blank" rel="noopener" aria-label="Facebook">${icon('facebook')}</a>
-    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${enc}" target="_blank" rel="noopener" aria-label="LinkedIn">${icon('linkedin')}</a>
-  </div>
-</div>`;
   const others = allPostCards().filter((c) => c.route !== p.route);
   const rel = others.length ? `<section class="rel sec sec-light" data-theme="light">
   <div class="wrap">
@@ -32,7 +20,7 @@ export function render(ctx, p) {
 <section class="art art-post sec sec-white" data-theme="light">
   <div class="wrap">
     <figure class="pj-cover" data-clip>${pic(ctx, p.cover, { sizes: '(min-width: 1100px) 1300px, 96vw', eager: true })}</figure>
-    <div class="prose prose-c">${prose(ctx, p.body)}${share}</div>
+    <div class="prose prose-c">${prose(ctx, p.body)}${shareBlock(p.route, p.title || p.kicker)}</div>
   </div>
 </section>
 ${rel}`,

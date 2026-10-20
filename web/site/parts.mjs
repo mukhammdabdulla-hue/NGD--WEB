@@ -1,5 +1,5 @@
 // Sahifalar uchun umumiy bloklar: banner, yorliqlar, kartochkalar, hamkorlar, fikrlar, forma, xarita.
-import { D, C, PARTNER_NAMES } from './data.mjs';
+import { D, C, PARTNER_NAMES, SITE_URL } from './data.mjs';
 import { esc, img, pic, imgFull, icon, ARROW, ARROW_UR, kick, btn, pad2, sectionHead } from './ui.mjs';
 
 const L = D.ui;
@@ -152,6 +152,21 @@ export function socials(cls = '') {
   const S = C.social;
   const a = (k, name) => `<a href="${esc(S[k])}" target="_blank" rel="noopener" aria-label="${name}">${icon(k)}</a>`;
   return `<div class="soc ${cls}">${a('telegram', 'Telegram')}${a('linkedin', 'LinkedIn')}${a('facebook', 'Facebook')}</div>`;
+}
+
+// ---------------------------------------------------------------- Ulashish (yangilik va loyiha sahifalari): havola nusxalash + Telegram, Facebook, LinkedIn (ngd.uz'dagi havolalar bilan bir xil)
+export function shareBlock(route, title) {
+  const L = D.ui;
+  const url = `${SITE_URL}/${route}/`, u = encodeURIComponent(url), t = encodeURIComponent(title);
+  return `<div class="shr" data-rv>
+  <p class="shr-h mono">${esc(L.share)}</p>
+  <div class="shr-b">
+    <button type="button" class="shr-c" data-copy="${esc(url)}" data-done="Nusxalandi">${icon('copy')}<span>${esc(L.copy)}</span></button>
+    <a href="https://telegram.me/share/url?url=${u}&text=${t}" target="_blank" rel="noopener" aria-label="Telegram">${icon('telegram')}</a>
+    <a href="https://www.facebook.com/sharer.php?u=${u}&t=${t}" target="_blank" rel="noopener" aria-label="Facebook">${icon('facebook')}</a>
+    <a href="https://www.linkedin.com/feed/?shareActive=true&text=${t}%20${u}" target="_blank" rel="noopener" aria-label="LinkedIn">${icon('linkedin')}</a>
+  </div>
+</div>`;
 }
 
 // ---------------------------------------------------------------- Loyiha / yangilik ro'yxatlari uchun bo'sh holat
