@@ -40,23 +40,27 @@ export function magnetic(scope = document) {
 
 // ---------------------------------------------------------------- Sarlavha: mavzu va yashirinish
 function initHeader() {
-  $$('[data-theme]').forEach((sec) => {
-    if (sec === hdr || sec === menu) return;
-    ScrollTrigger.create({
-      trigger: sec, start: 'top 38px', end: 'bottom 38px',
-      onToggle: (s) => { if (s.isActive && !root.classList.contains('menu-open')) hdr.dataset.theme = sec.dataset.theme; },
-    });
-  });
-  let last = 0;
-  ScrollTrigger.create({
-    onUpdate(self) {
-      const y = self.scroll();
-      const free = y > innerHeight * 0.9 && !scroller.pins.some((p) => p.isActive);
-      if (self.direction === 1 && free && y > last + 4) hdr.classList.add('is-hidden');
-      else if (self.direction === -1 || !free) hdr.classList.remove('is-hidden');
-      last = y;
-    },
-  });
+  // Sarlavha rangi: sarlavha chizig'i ostidagi bo'limning mavzusiga mos bo'ladi.
+  // Joy to'g'ridan-to'g'ri o'lchanadi (mahkamlangan bo'limlar va tez skrollda ham to'g'ri chiqadi).
+  const secs = $$('[data-theme]').filter((s) => s !== hdr && s !== menu);
+  const line = 38;
+  let raf = 0;
+  const sync = () => {
+    raf = 0;
+    if (root.classList.contains('menu-open')) return;
+    let theme = '';
+    for (const s of secs) {
+      const r = s.getBoundingClientRect();
+      if (r.top <= line && r.bottom > line) theme = s.dataset.theme;
+    }
+    if (theme && hdr.dataset.theme !== theme) hdr.dataset.theme = theme;
+    hdr.classList.toggle('is-scrolled', scrollY > 24);
+  };
+  const queue = () => { if (!raf) raf = requestAnimationFrame(sync); };
+  addEventListener('scroll', queue, { passive: true });
+  addEventListener('resize', queue);
+  ScrollTrigger.addEventListener('refresh', queue);
+  sync();
 }
 
 // ---------------------------------------------------------------- Menyu
@@ -236,7 +240,6 @@ function initFooter() {
   }
   if (!reduce) {
     gsap.from('.ft-col', { opacity: 0, y: 24, duration: 1.3, ease: 'q', stagger: 0.1, scrollTrigger: { trigger: '.ft-cols', start: 'top 92%', once: true } });
-    gsap.from('.ft-big .logo', { yPercent: 40, opacity: 0, duration: 1.8, ease: 'q', scrollTrigger: { trigger: '.ft-big', start: 'top 96%', once: true } });
   }
 }
 

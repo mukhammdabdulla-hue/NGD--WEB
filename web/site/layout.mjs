@@ -57,8 +57,7 @@ function footer(ctx, { cta = true } = {}) {
       </div>
     </div>
   </div>
-  <div class="ft-big" aria-hidden="true">${LOGO}</div>
-  <div class="ft-copy mono wrap"><span>© ${new Date().getFullYear()} Next Generation Development</span><button type="button" class="to-top mono" data-totop>Yuqoriga ↑</button></div>
+  <div class="wrap"><div class="ft-copy mono"><span>© ${new Date().getFullYear()} Next Generation Development</span><button type="button" class="to-top mono" data-totop aria-label="Sahifa boshiga qaytish">Yuqoriga <i aria-hidden="true">↑</i></button></div></div>
 </footer>`;
 }
 

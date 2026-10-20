@@ -146,10 +146,10 @@ em { font-style: normal; }
 .hdr { position: fixed; inset: 0 0 auto; z-index: 75; height: var(--hdr); display: flex; align-items: center; gap: 32px; padding-inline: var(--gut);
   color: #fff; transition: color .5s, transform .7s var(--ease); }
 .hdr[data-theme="light"] { color: var(--ink); }
-.hdr.is-hidden { transform: translateY(-110%); }
-.hdr::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .5s;
-  background: linear-gradient(rgba(242,244,247,.94), rgba(242,244,247,0)); }
-.hdr[data-theme="light"]::before { opacity: 1; }
+.hdr::before { content: ''; position: absolute; inset: 0 0 -28px; z-index: -1; opacity: 0; transition: opacity .5s;
+  background: linear-gradient(rgba(2,11,22,.88) 30%, rgba(2,11,22,0)); }
+.hdr[data-theme="light"]::before { background: linear-gradient(rgba(242,244,247,.95) 30%, rgba(242,244,247,0)); }
+.hdr.is-scrolled::before { opacity: 1; }
 .menu-open .hdr { color: #fff; transform: none; }
 .menu-open .hdr::before { opacity: 0; }
 .js:not(.nojs) .hdr { opacity: 0; }
@@ -181,25 +181,24 @@ em { font-style: normal; }
 .js:not(.nojs) .menu-foot { opacity: 0; }
 
 /* ---------- Footer */
-.ft { position: relative; z-index: 2; background: var(--brand); color: #fff; padding: clamp(110px, 18vh, 200px) 0 0; overflow: hidden; }
+.ft { position: relative; z-index: 2; background: var(--brand); color: #fff; padding: clamp(72px, 11vh, 128px) 0 0; overflow: hidden; }
 .ft .kick { color: rgba(255,255,255,.62); }
-.ft-title { margin-top: 30px; font-size: clamp(56px, 9.6vw, 184px); line-height: .88; letter-spacing: -.058em; font-weight: 500; max-width: 12ch; }
+.ft-title { margin-top: 26px; font-size: clamp(40px, 5.6vw, 104px); line-height: .94; letter-spacing: -.055em; font-weight: 500; max-width: 14ch; text-wrap: balance; }
 .ft-title .char { display: inline-block; will-change: transform; }
-.ft-row { margin-top: 56px; display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; }
+.ft-row { margin-top: 40px; display: flex; justify-content: space-between; align-items: end; gap: 32px; flex-wrap: wrap; }
 .ft-text { max-width: 34ch; font-size: clamp(18px, 1.5vw, 23px); line-height: 1.45; color: rgba(255,255,255,.78); }
 .ft-cols { margin-top: clamp(64px, 10vh, 120px); display: grid; grid-template-columns: 1.3fr 1fr 1.2fr; border-top: 1px solid var(--line-d); }
-.ft-cta + .ft-cols { margin-top: clamp(64px, 10vh, 120px); }
+.ft-cta + .ft-cols { margin-top: clamp(56px, 8vh, 96px); }
 .ft-col { display: grid; align-content: start; gap: 12px; padding: 30px 24px 10px 0; font-size: 15.5px; }
 .ft-col + .ft-col { padding-left: 24px; border-left: 1px solid var(--line-d); }
 .ft-col .mono { color: rgba(255,255,255,.5); margin-bottom: 8px; }
 .ft-col a { color: rgba(255,255,255,.86); width: fit-content; position: relative; display: inline-flex; gap: 6px; align-items: center; }
 .ft-col a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: #fff; transform: scaleX(0); transform-origin: 100% 50%; transition: transform .7s var(--ease); }
 .ft-col a:hover::after { transform: scaleX(1); transform-origin: 0 50%; }
-.ft-big { margin-top: clamp(40px, 8vh, 90px); padding-inline: var(--gut); color: rgba(255,255,255,.08); }
-.ft-big .logo { width: 100%; height: auto; }
-.ft-copy { display: flex; justify-content: space-between; padding-block: 22px 26px; color: rgba(255,255,255,.5); }
-.to-top { color: inherit; font-family: var(--mono); font-size: inherit; letter-spacing: inherit; text-transform: inherit; }
-.to-top:hover { color: #fff; }
+.ft-copy { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: clamp(40px, 6vh, 64px); padding-block: 20px 24px; border-top: 1px solid var(--line-d); color: rgba(255,255,255,.5); }
+.to-top { display: inline-flex; align-items: center; gap: 10px; height: 36px; padding: 0 16px; border: 1px solid rgba(255,255,255,.28); border-radius: 999px; color: rgba(255,255,255,.78); font-family: var(--mono); font-size: inherit; letter-spacing: inherit; text-transform: inherit; transition: background .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease); }
+.to-top i { font-style: normal; }
+.to-top:hover, .to-top:focus-visible { background: #fff; border-color: #fff; color: var(--brand); }
 
 /* ---------- Telefon va planshet */
 @media (max-width: 1080px) {
@@ -216,7 +215,6 @@ em { font-style: normal; }
   .ft-cols { grid-template-columns: 1fr; }
   .ft-col + .ft-col { padding-left: 0; border-left: 0; border-top: 1px solid var(--line-d); }
   .ft-col { padding-right: 0; padding-bottom: 22px; }
-  .ft-copy span { display: none; }
 }
 
 /* ---------- Harakatsiz rejim */
