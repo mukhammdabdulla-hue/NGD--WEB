@@ -199,9 +199,9 @@ export function createFlow(canvas, { mobile = false, reduce = false, labels = []
   // --- Izlar uchun chiziqlar
   const N = SIZE * SIZE;
   const pa = new Float32Array(N * 2 * 3);
-  for (let i = 0; i < N; i++) {
+  for (let i = 0, o = 0; i < N; i++, o += 6) {
     const u = ((i % SIZE) + 0.5) / SIZE, v = (Math.floor(i / SIZE) + 0.5) / SIZE;
-    pa.set([u, v, 0, u, v, 1], i * 6);
+    pa[o] = u; pa[o + 1] = v; pa[o + 3] = u; pa[o + 4] = v; pa[o + 5] = 1;
   }
   const lg = new BufferGeometry();
   lg.setAttribute('position', new BufferAttribute(pa, 3));

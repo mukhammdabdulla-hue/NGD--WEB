@@ -1,7 +1,9 @@
 // Natijalar: kirish sahnasi, filtr va qidiruv (Flip bilan qayta joylashish).
 import { gsap, ScrollTrigger, $, $$, reduce, fine, linesIn, mobile } from '../core.js';
-import { Flip } from 'gsap/Flip';
-gsap.registerPlugin(Flip);
+
+// Flip faqat filtr bosilganda kerak: sahifa ko'rinishini kechiktirmaslik uchun bo'sh vaqtda yoki birinchi bosishda yuklanadi
+let Flip = null, flipLoad = null;
+const loadFlip = () => (flipLoad ||= import('gsap/Flip').then((m) => { Flip = m.Flip; gsap.registerPlugin(Flip); }, () => {}));
 
 const SPANS = [7, 5, 5, 7, 4, 4, 4, 6, 6, 7];
 
@@ -34,9 +36,10 @@ export default function init() {
       c.style.setProperty('--s', s); c.dataset.w = s >= 6 ? 'w' : 'n';
     });
   };
-  function apply() {
+  async function apply() {
     const q = st.q.trim().toLowerCase();
-    const state = reduce ? null : Flip.getState(cards);
+    if (!reduce) await loadFlip();
+    const state = reduce || !Flip ? null : Flip.getState(cards);
     let shown = 0;
     cards.forEach((c) => {
       const ok = (st.cat === 'all' || c.dataset.cat === st.cat) && (!q || c.dataset.hay.includes(q));
@@ -57,6 +60,8 @@ export default function init() {
     st.cat = b.dataset.cat; chips.forEach((x) => x.setAttribute('aria-pressed', String(x === b))); apply();
   }));
   let tm; input.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(() => { st.q = input.value; apply(); }, 160); });
+
+  if (!reduce) (window.requestIdleCallback || ((f) => setTimeout(f, 1200)))(loadFlip, { timeout: 3000 });
 
   // kartalar: skroll bilan ketma-ket chiqish
   if (!reduce) {

@@ -1,12 +1,12 @@
 // Bosh sahifa: hero (3D oqim), kompaniya, 7 isrof (gorizontal), jonli liniya, xizmatlar, jarayon.
 import {
-  gsap, ScrollTrigger, SplitText, $, $$, root, reduce, fine, mobile, clamp, lerp, mask, marquee, registerPin, scrollToY, scroller,
+  gsap, ScrollTrigger, SplitText, $, $$, root, reduce, fine, mobile, clamp, lerp, mask, marquee, registerPin, scrollToY, scroller, yieldNow,
 } from '../core.js';
 import { setupProc } from '../parts/proc.js';
 import { setupModel } from '../parts/model.js';
 import { setupSvcList } from '../parts/svclist.js';
 
-export default function init() {
+export default async function init() {
   const hero = $('.hero'), heroIn = $('.hero-in'), canvas = $('.hero-gl');
   const titleLines = $$('.hero-title .ht').map(mask);
   const phs = $$('.ph').map((p) => ({ el: p, inn: mask(p) }));
@@ -14,7 +14,7 @@ export default function init() {
   const states = $$('.states li:not(.st-bar)');
   const stBar = $('.st-bar i');
   const gateEls = $$('.gate');
-  let flow = null;
+  let flow = null, entered = false;
 
   gsap.set(phs.map((p) => p.inn), { yPercent: 150 });
   gsap.set(titleLines, { yPercent: 150 });
@@ -22,14 +22,23 @@ export default function init() {
   gsap.set(caps, { autoAlpha: 0, y: 14 });
   gsap.set($('.hero-title'), { autoAlpha: 1 });
 
+  // Sahna ochilishi: zarrachalar asta yorishadi. Sahna sahifa matnidan oldin tayyor bo'lsa kirish zanjiriga qo'shiladi,
+  // kech kelsa (sekin tarmoq) kelgan zahoti o'zi boshlanadi: matn uni kutib turmaydi.
+  const revealFlow = (tl) => {
+    const o = { v: 0 };
+    const vars = { v: 1, duration: 3.2, ease: 'power3.inOut', onUpdate: () => { flow.reveal = o.v; } };
+    return tl ? tl.to(o, vars, 0) : gsap.to(o, vars);
+  };
+
   // ---------------------------------------------------------------- WebGL sahna (kechiktirib)
   const flowReady = (async () => {
     try {
+      if (navigator.connection?.saveData) throw new Error('trafik tejash yoqilgan');
       if (!document.createElement('canvas').getContext('webgl2')) throw new Error('webgl2 yo\'q');
       const { createFlow } = await import('../scenes/flow.js');
       flow = createFlow(canvas, { mobile: mobile(), reduce, labels: gateEls });
       root.classList.add('gl-on');
-      if (!reduce) flow.reveal = 0;
+      if (!reduce) { flow.reveal = 0; if (entered) revealFlow(); }
     } catch (e) {
       console.warn('WebGL ishga tushmadi:', e);
       root.classList.add('no-gl');
@@ -126,7 +135,10 @@ export default function init() {
 
   // ---------------------------------------------------------------- Jonli liniya: oldin / keyin ajratgichi
 
-  setupHero(); setupAbout(); setupWaste(); setupModel($('.model')); setupSvcList($('.svc')); setupProc();
+  // Tetiklagichlar sahifadagi tartibida yaratiladi; ishning qismlari orasida asosiy oqim bo'shatiladi
+  setupHero(); setupAbout();
+  await yieldNow(); setupWaste();
+  await yieldNow(); setupModel($('.model')); setupSvcList($('.svc')); setupProc();
 
   if (reduce) {
     gsap.set(titleLines, { yPercent: 0 });
@@ -146,10 +158,8 @@ export default function init() {
         .to($('.hero-lead'), { opacity: 1, duration: 1.2 }, 0.9)
         .fromTo($('.hero-lead'), { y: 18 }, { y: 0, duration: 1.4 }, 0.9)
         .to([$('.states'), $('.cue')], { opacity: 1, duration: 1.2 }, 1.3);
-      if (flow) {
-        const o = { v: 0 };
-        tl.to(o, { v: 1, duration: 3.2, ease: 'power3.inOut', onUpdate: () => { flow.reveal = o.v; } }, 0);
-      }
+      entered = true;
+      if (flow) revealFlow(tl);
       return tl;
     },
     get flow() { return flow; },

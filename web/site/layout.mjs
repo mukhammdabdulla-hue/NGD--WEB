@@ -5,7 +5,11 @@ import { esc, LOGO, ARROW, ARROW_UR, lines, kick } from './ui.mjs';
 const NAV = [['xizmatlar', 'Xizmatlar', '01'], ['natijalar', 'Natijalar', '02'], ['jarayon', 'Jarayon', '03'], ['kompaniya', 'Kompaniya', '04'], ['aloqa', 'Aloqa', '05']];
 export const NAV_LABELS = Object.fromEntries([['', 'Bosh sahifa'], ...NAV.map(([r, l]) => [r, l])]);
 
-const HEAD_SCRIPT = `(function(d){var h=d.documentElement;h.classList.add('js');try{var s=sessionStorage;if(s.getItem('ngd-nav'))h.classList.add('nav-in');else if(!s.getItem('ngd-pre'))h.classList.add('pre-on')}catch(e){h.classList.add('pre-on')}setTimeout(function(){if(!window.__ngdOK)h.classList.add('nojs')},7000)})(document)`;
+// Birinchi chizilishdan oldin ishlaydi: yuklash ekrani / parda holati, soat belgisi, JS ishlamasa zaxira.
+// - ngd-pre: shu varaqda yuklash ekrani ko'rsatilgan; ngd-seen (localStorage): oxirgi ko'rsatilgan vaqt, 8 soat ichida qayta ko'rsatilmaydi
+// - harakatni kamaytirish yoqilgan bo'lsa ekran va parda umuman chizilmaydi
+// - __ngdBoot: main.js ishga tushdi (7 soniyada belgi bo'lmasa, sahifa harakatsiz ko'rinishga o'tadi); __ngdOK: kirish tugadi (15 soniyalik zaxira)
+const HEAD_SCRIPT = `(function(d){var h=d.documentElement,w=window,c=0;h.classList.add('js');w.__ngdT=performance.now();try{c=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}if(!c){try{var s=sessionStorage,n=0;try{n=Date.now()-localStorage.getItem('ngd-seen')<288e5}catch(e){}if(s.getItem('ngd-nav'))h.classList.add('nav-in');else if(!s.getItem('ngd-pre')&&!n)h.classList.add('pre-on')}catch(e){h.classList.add('pre-on')}}setTimeout(function(){if(!w.__ngdBoot)h.classList.add('nojs')},7000);setTimeout(function(){if(!w.__ngdOK)h.classList.add('nojs')},15000)})(document)`;
 const CURTAIN_SCRIPT = `try{var n=sessionStorage.getItem('ngd-nav');if(n){n=JSON.parse(n);document.querySelector('.cv-n').textContent=n.n;document.querySelector('.cv-t').textContent=n.t}}catch(e){}`;
 
 function header(ctx, active) {
@@ -62,7 +66,7 @@ function footer(ctx, { cta = true } = {}) {
 }
 
 // route: '' | 'xizmatlar' | ... ; active — sarlavhadagi joriy bo'lim
-export function renderPage({ ctx, page, active = '', title, desc, body, label, cta = true, fragment = false, css, js, noindex = false, ogImage = '' }) {
+export function renderPage({ ctx, page, active = '', title, desc, body, label, cta = true, fragment = false, css, js, noindex = false, ogImage = '', preload = { high: [], low: [] } }) {
   const shell = `<a class="skip" href="#main">${esc(t.skip)}</a>
 <div class="pre" aria-hidden="true">
   <div class="pre-mid"><div class="pre-logo">${LOGO}</div><div class="pre-bar"><i></i></div><p class="pre-cap mono"><span>Next Generation Development</span><span class="pre-n">000</span></p></div>
@@ -77,6 +81,10 @@ ${body}
 </main>
 ${footer(ctx, { cta })}`;
   const cssHref = ctx.asset(css), jsHref = ctx.asset(js);
+  // Yuklash tartibi: CSS (to'sadi) -> JS zanjiri (main, umumiy bo'lak, sahifa bo'lagi bir vaqtda) -> shriftlar -> keyinroq kerak bo'ladigan og'ir modullar (past ustuvorlik)
+  const mp = (f, low) => `<link rel="modulepreload" href="${ctx.asset(f)}"${low ? ' fetchpriority="low"' : ''}>`;
+  const font = (f) => `<link rel="preload" href="${ctx.asset('fonts/' + f)}" as="font" type="font/woff2" crossorigin>`;
+  const hints = [...preload.high.map((f) => mp(f)), font('onest-latin-wght-normal.woff2'), font('ibm-plex-mono-latin-500-normal.woff2'), ...preload.low.map((f) => mp(f, true))].join('\n');
   const robots = noindex ? '<meta name="robots" content="noindex, nofollow">' : '';
   const url = SITE_URL + '/' + (ctx.route ? ctx.route + '/' : '');
   const seo = noindex ? '' : `<link rel="canonical" href="${url}">
@@ -106,10 +114,10 @@ ${shell}
 <meta property="og:type" content="website"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}"><meta property="og:locale" content="uz_UZ">
 ${robots}${seo}${ld}
 <link rel="icon" href="${ctx.asset('favicon.svg')}" type="image/svg+xml">
-<link rel="preload" href="${ctx.asset('fonts/onest-latin-wght-normal.woff2')}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="${cssHref}">
 <script>${HEAD_SCRIPT}</script>
 <script type="module" src="${jsHref}"></script>
+${hints}
 </head>
 <body data-page="${page}">
 ${shell}

@@ -14,3 +14,6 @@ web/dist-proto/
 # Prototip yig'ilmasi
 web/dist-proto/
 web/dist-preview/
+
+# Barcha vaqtinchalik yig'ilmalar
+web/dist-*/

@@ -2,21 +2,40 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
-import { CustomEase } from 'gsap/CustomEase';
 import Lenis from 'lenis';
 
-gsap.registerPlugin(ScrollTrigger, SplitText, CustomEase);
-// Bitta easing oilasi: easeOutQuint asosiy, easeInOutQuart katta pardalar uchun
-CustomEase.create('q', '.22,1,.36,1');
-CustomEase.create('qio', '.76,0,.24,1');
-CustomEase.create('qin', '.64,0,.78,0');
+gsap.registerPlugin(ScrollTrigger, SplitText);
+// Bitta easing oilasi: easeOutQuint asosiy, easeInOutQuart katta pardalar uchun.
+// CSS'dagi cubic-bezier bilan bir xil egri (CustomEase plagini o'rniga: umumiy bo'lakdan ~3 KB kam)
+function bezier(x1, y1, x2, y2) {
+  const cx = 3 * x1, bx = 3 * (x2 - x1) - cx, ax = 1 - cx - bx;
+  const cy = 3 * y1, by = 3 * (y2 - y1) - cy, ay = 1 - cy - by;
+  const X = (t) => ((ax * t + bx) * t + cx) * t, Y = (t) => ((ay * t + by) * t + cy) * t, dX = (t) => (3 * ax * t + 2 * bx) * t + cx;
+  return (x) => {
+    if (x <= 0 || x >= 1) return x <= 0 ? 0 : 1;
+    let t = x;
+    for (let i = 0; i < 8; i++) { // Nyuton usuli
+      const e = X(t) - x;
+      if (Math.abs(e) < 1e-6) return Y(t);
+      const d = dX(t);
+      if (Math.abs(d) < 1e-6) break;
+      t -= e / d;
+    }
+    let lo = 0, hi = 1; t = x; // egri tekis bo'lgan joylarda ikkiga bo'lish
+    for (let i = 0; i < 24; i++) { const e = X(t); if (Math.abs(e - x) < 1e-6) break; if (e < x) lo = t; else hi = t; t = (lo + hi) / 2; }
+    return Y(t);
+  };
+}
+gsap.registerEase('q', bezier(0.22, 1, 0.36, 1));
+gsap.registerEase('qio', bezier(0.76, 0, 0.24, 1));
+gsap.registerEase('qin', bezier(0.64, 0, 0.78, 0));
 gsap.config({ nullTargetWarn: false });
 ScrollTrigger.config({ ignoreMobileResize: true });
 // refreshPriority bor bo'lsa ScrollTrigger yangilanishda triggerlarni hujjat tartibida saralaydi:
 // o'lcham o'zgarganda matchMedia keyin yaratgan pinlar ham pastdagi pinlardan oldin hisoblanadi
 ScrollTrigger.create({ trigger: document.documentElement, start: 0, end: 0, refreshPriority: 0 });
 
-export { gsap, ScrollTrigger, SplitText, CustomEase };
+export { gsap, ScrollTrigger, SplitText };
 export const $ = (s, r = document) => r.querySelector(s);
 export const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 export const root = document.documentElement;
@@ -24,6 +43,8 @@ export const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const fine = matchMedia('(pointer: fine)').matches;
 export const mobile = () => innerWidth < 761 || !fine;
 export const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+// Uzun ishni bo'lish: kiritish va chizish uchun asosiy oqimni bo'shatadi
+export const yieldNow = () => (globalThis.scheduler?.yield ? globalThis.scheduler.yield() : new Promise((r) => setTimeout(r)));
 export const lerp = (a, b, t) => a + (b - a) * t;
 
 // Tarkibni niqoblash: matn pastdan ko'tariladi

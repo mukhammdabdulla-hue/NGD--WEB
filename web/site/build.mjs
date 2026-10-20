@@ -36,6 +36,30 @@ const js = await build({
   outdir: join(OUT, 'js'), entryNames: '[name].[hash]', chunkNames: '[name].[hash]', metafile: true,
 });
 const jsFile = 'js/' + Object.keys(js.metafile.outputs).find((f) => /js\/main\.[^/]+\.js$/.test(f)).split('/').pop();
+
+// ---- Modul zanjiri: har sahifa uchun kerakli bo'laklar oldindan e'lon qilinadi (HTML -> main -> umumiy -> sahifa zanjiri bir bosqichda ochiladi).
+// Statik importlar yuqori ustuvorlikda, sahifadan keyin kerak bo'ladigan dinamik modullar (3D sahna, chiziq modeli) past ustuvorlikda.
+const outs = js.metafile.outputs;
+const mainOut = Object.keys(outs).find((f) => /js\/main\.[^/]+\.js$/.test(f));
+const pub = (f) => 'js/' + f.split('/').pop();
+const staticClosure = (f, seen = new Set()) => {
+  if (seen.has(f)) return seen;
+  seen.add(f);
+  for (const i of outs[f]?.imports ?? []) if (i.kind === 'import-statement') staticClosure(i.path, seen);
+  return seen;
+};
+const mainSet = staticClosure(mainOut);
+const preloadFor = (page) => {
+  const pageOut = Object.keys(outs).find((f) => outs[f].entryPoint?.endsWith(`js/pages/${page}.js`));
+  if (!pageOut) return { high: [...mainSet].filter((f) => f !== mainOut).map(pub), low: [] };
+  const hi = new Set([...mainSet, ...staticClosure(pageOut)]);
+  const low = new Set();
+  for (const f of staticClosure(pageOut)) for (const i of outs[f]?.imports ?? []) if (i.kind === 'dynamic-import') for (const g of staticClosure(i.path)) if (!hi.has(g)) low.add(g);
+  hi.delete(mainOut);
+  return { high: [...hi].map(pub), low: [...low].map(pub) };
+};
+const PRELOAD = Object.fromEntries(['home', 'services', 'service', 'process', 'results', 'project', 'company', 'contact', 'notfound'].map((p) => [p, preloadFor(p)]));
+
 const css = await build({
   entryPoints: { site: join(HERE, 'css/site.css') }, bundle: true, minify: true, outdir: join(OUT, 'css'), entryNames: '[name].[hash]',
   external: ['*.woff2'], metafile: true,
@@ -70,19 +94,19 @@ const routes = [
 ];
 
 const write = (rel, html) => { const p = join(OUT, rel); mkdirSync(dirname(p), { recursive: true }); writeFileSync(p, html); };
-const opts = (extra = {}) => ({ css: cssFile, js: jsFile, noindex: NOINDEX, ...extra });
+const opts = (page, extra = {}) => ({ css: cssFile, js: jsFile, noindex: NOINDEX, preload: PRELOAD[page] ?? { high: [], low: [] }, ...extra });
 
 for (const { route, mod } of routes) {
   const ctx = makeCtx(route, LINK_INDEX);
   const r = mod(ctx);
-  write(join(route, 'index.html'), renderPage({ ctx, ...r, ...opts() }));
-  if (route === '') write('artifact.html', renderPage({ ctx, ...r, ...opts({ fragment: true }), title: 'NGD prototipi' }));
+  write(join(route, 'index.html'), renderPage({ ctx, ...r, ...opts(r.page) }));
+  if (route === '') write('artifact.html', renderPage({ ctx, ...r, ...opts(r.page, { fragment: true }), title: 'NGD prototipi' }));
 }
 // 404: mutlaq yo'llar (istalgan chuqurlikdan ochiladi)
 {
   const ctx = { route: '404', depth: 0, up: BASE, href: (to = '') => BASE + (to ? to.replace(/\/?$/, '/') : ''), asset: (f) => BASE + f };
   const r = notFound(ctx);
-  write('404.html', renderPage({ ctx, ...r, ...opts({ noindex: true }) }));
+  write('404.html', renderPage({ ctx, ...r, ...opts(r.page, { noindex: true }) }));
 }
 
 // Qidiruv tizimlari uchun (faqat ochiq nashrda)
