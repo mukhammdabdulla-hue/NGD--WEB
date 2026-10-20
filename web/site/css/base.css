@@ -225,6 +225,7 @@ a.ft-h:hover { color: #fff; }
 .soc { display: flex; gap: 10px; }
 .soc a { width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--line-d); display: grid; place-items: center; color: rgba(255,255,255,.86); transition: background .5s var(--ease), color .5s var(--ease), border-color .5s var(--ease), transform .6s var(--ease); }
 .soc a::after { display: none !important; }
+.ft-col .soc a:not(.ft-h) { width: 42px; display: grid; gap: 0; }
 .soc a:hover, .soc a:focus-visible { background: #fff; color: var(--brand); border-color: #fff; transform: translateY(-3px); }
 .soc .ic { width: 18px; height: 18px; }
 .soc-l a { border-color: var(--line); color: var(--ink); }
