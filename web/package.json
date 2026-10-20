@@ -8,7 +8,8 @@
     "build": "node build.mjs",
     "preview": "node build.mjs --preview",
     "serve": "node serve.mjs",
-    "proto": "node build-proto.mjs"
+    "site": "node site/build.mjs",
+    "site:preview": "node site/build.mjs --preview"
   },
   "engines": {
     "node": ">=20"
