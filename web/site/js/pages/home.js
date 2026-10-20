@@ -1,5 +1,5 @@
 // Bosh sahifa: hero (3D oqim: skroll bilan "xaosdan tartibga"), yashirin imkoniyatlar qopqog'i, jonli ishlab chiqarish liniyasi.
-import { gsap, $, root, reduce, mobile, registerPin, splitIn, yieldNow } from '../core.js';
+import { gsap, ScrollTrigger, $, root, reduce, mobile, registerPin, splitIn, yieldNow } from '../core.js';
 import { setupModel } from '../parts/model.js';
 
 export default async function init() {
@@ -20,13 +20,16 @@ export default async function init() {
   };
 
   // ---------------------------------------------------------------- WebGL sahna (kechiktirib)
+  // Sahna kodi kichik (kutubxonasiz): WebGL2 yo'q bo'lsa createFlow o'zi xato beradi va oddiy gradient fon qoladi.
+  let covered = false; // "Yashirin imkoniyatlar" qopqog'i hero'ni to'liq yopganda sahna hisoblashni to'xtatadi
   const flowReady = (async () => {
     try {
       if (navigator.connection?.saveData) throw new Error('trafik tejash yoqilgan');
-      if (!document.createElement('canvas').getContext('webgl2')) throw new Error('webgl2 yo\'q');
       const { createFlow } = await import('../scenes/flow.js');
-      flow = createFlow(canvas, { mobile: mobile(), reduce });
+      flow = await createFlow(canvas, { mobile: mobile(), reduce });
+      canvas.addEventListener('flowlost', () => root.classList.replace('gl-on', 'no-gl'));
       root.classList.add('gl-on');
+      if (covered) flow.hold('cover', true);
       if (!reduce) { flow.reveal = 0; if (entered) revealFlow(); }
     } catch (e) {
       console.warn('WebGL ishga tushmadi:', e);
@@ -55,6 +58,8 @@ export default async function init() {
     tl.to({}, { duration: 1 }, 0);
     // qopqoq: "Yashirin imkoniyatlar" bo'limi hero ustidan suriladi
     gsap.to(heroIn, { '--dim': 0.62, scale: 0.94, ease: 'none', scrollTrigger: { trigger: '.hid', start: 'top bottom', end: 'top top', scrub: true } });
+    // qopqoq hero'ni to'liq yopgach (burchaklari ham) ostidagi sahna ko'rinmaydi: GPU bo'sh turadi
+    ScrollTrigger.create({ trigger: '.hid', start: 'top top-=40', end: 'max', onToggle: (self) => { covered = self.isActive; flow?.hold('cover', covered); } });
   }
 
   // Tetiklagichlar sahifadagi tartibida yaratiladi; ishning qismlari orasida asosiy oqim bo'shatiladi

@@ -67,7 +67,7 @@ function initHeader() {
 }
 
 // ---------------------------------------------------------------- Menyu
-let menuOpen = false, menuBusy = false;
+let menuOpen = false, menuBusy = false, menuHold = 0;
 function setMenu(open) {
   if (menuBusy || open === menuOpen) return;
   menuBusy = true; menuOpen = open;
@@ -79,6 +79,7 @@ function setMenu(open) {
   const inn = $$('.menu-nav .in', menu), foot = $('.menu-foot', menu);
   if (open) {
     root.classList.add('menu-open'); lenis?.stop();
+    menuHold = setTimeout(() => page?.flow?.hold('menu', true), 1000); // menyu to'liq ochilgach orqadagi 3D sahna to'xtaydi
     gsap.set(menu, { visibility: 'visible' });
     $('.menu-nav a', menu)?.focus({ preventScroll: true });
     gsap.set(inn, { yPercent: 115, visibility: 'visible' });
@@ -88,6 +89,7 @@ function setMenu(open) {
       .to(inn, { yPercent: 0, duration: 1.2, ease: 'q', stagger: 0.07 }, 0.3)
       .to(foot, { opacity: 1, y: 0, duration: 1, ease: 'q' }, 0.6);
   } else {
+    clearTimeout(menuHold); page?.flow?.hold('menu', false);
     if (menu.contains(document.activeElement)) burger.focus({ preventScroll: true });
     gsap.timeline({ onComplete: () => { menuBusy = false; root.classList.remove('menu-open'); gsap.set(menu, { visibility: 'hidden' }); lenis?.start(); } })
       .to(menu, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.8, ease: 'qio' }, 0)
